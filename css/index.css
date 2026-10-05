@@ -1,0 +1,405 @@
+/* ==========================================================================
+   1. BANNER PRINCIPAL (Hero Section)
+   ========================================================================== */
+.banner-hero {
+    background: linear-gradient(135deg, rgba(168, 197, 218, 0.72) 0%, rgba(212, 197, 226, 0.62) 50%, rgba(245, 213, 213, 0.55) 100%), 
+                url('../assets/img/banners/portada-hero.jpg') no-repeat center center/cover;
+    height: 75vh;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    color: var(--azul-profundo);
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-hero::before {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245, 213, 213, 0.35) 0%, transparent 70%);
+    top: -180px;
+    right: -120px;
+    pointer-events: none;
+}
+
+.banner-hero::after {
+    content: '';
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(168, 197, 218, 0.40) 0%, transparent 70%);
+    bottom: -120px;
+    left: -80px;
+    pointer-events: none;
+}
+
+.contenido-hero {
+    max-width: 720px;
+    animation: fadeIn 1.2s ease-out;
+    position: relative;
+    z-index: 1;
+}
+
+.subtitulo-hero {
+    font-family: var(--fuente-titulos);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--lavanda-hover);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.70);
+    backdrop-filter: blur(8px);
+    padding: 7px 20px;
+    border-radius: var(--radio-pill);
+    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.25);
+}
+
+.titulo-hero {
+    font-family: var(--fuente-titulos);
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.18;
+    margin-bottom: 22px;
+    color: var(--azul-profundo);
+    text-shadow: 0 2px 12px rgba(255, 255, 255, 0.35);
+}
+
+.descripcion-hero {
+    font-size: 1.08rem;
+    font-weight: 400;
+    margin-bottom: 38px;
+    color: var(--texto-mutado);
+    line-height: 1.75;
+    background-color: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(6px);
+    padding: 14px 22px;
+    border-radius: var(--radio-lg);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+/* Botones del Hero */
+.botones-hero {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* ==========================================================================
+   2. SECCIÓN PRODUCTOS DESTACADOS
+   ========================================================================== */
+.seccion-productos {
+    padding: 70px 0;
+    background: var(--gradiente-seccion);
+}
+
+.titulo-seccion {
+    font-family: var(--fuente-titulos);
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 8px;
+    background: var(--gradiente-texto);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+.subtitulo-seccion {
+    text-align: center;
+    color: var(--texto-mutado);
+    font-size: 1rem;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   3. SECCIÓN SOBRE NOSOTROS
+   ========================================================================== */
+.sobre-nosotros {
+    padding: 80px 0;
+    background-color: var(--blanco-puro);
+    border-top: 1px solid var(--borde-suave);
+}
+
+/* Grid 2 columnas: imagen izquierda, texto derecha */
+.sobre-nosotros__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: center;
+}
+
+/* ── COLUMNA IMAGEN ── */
+.sobre-nosotros__imagen-wrap {
+    position: relative;
+    border-radius: var(--radio-xl);
+    overflow: hidden;
+    box-shadow: var(--sombra-media);
+    border: 3px solid var(--blanco-puro);
+}
+
+.sobre-nosotros__imagen {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: var(--radio-xl);
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.sobre-nosotros__imagen-wrap:hover .sobre-nosotros__imagen {
+    transform: scale(1.04);
+}
+
+/* Badge "Desde 2018" sobre la imagen */
+.sobre-nosotros__badge {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: linear-gradient(135deg, var(--rosado-acento) 0%, var(--lavanda-suave) 100%);
+    color: var(--azul-profundo);
+    font-family: var(--fuente-titulos);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 9px 18px;
+    border-radius: var(--radio-pill);
+    letter-spacing: 0.04em;
+    box-shadow: 0 6px 18px rgba(245, 213, 213, 0.45);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+}
+
+/* ── COLUMNA TEXTO ── */
+.sobre-nosotros__contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.sobre-nosotros__etiqueta {
+    display: inline-block;
+    font-family: var(--fuente-titulos);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--azul-principal-hover);
+}
+
+.sobre-nosotros__titulo {
+    font-family: var(--fuente-titulos);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--texto-oscuro);
+    line-height: 1.25;
+}
+
+.sobre-nosotros__texto {
+    font-size: 0.97rem;
+    color: var(--texto-mutado);
+    line-height: 1.85;
+}
+
+/* Tres valores en fila */
+.sobre-nosotros__valores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.valor-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--fondo-blanco-calido) 0%, rgba(245, 213, 213, 0.20) 100%);
+    border: 1px solid var(--borde-acento);
+    border-radius: var(--radio-pill);
+    padding: 8px 18px;
+    font-family: var(--fuente-titulos);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--texto-oscuro);
+    transition: var(--transicion);
+}
+
+.valor-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-acento);
+    border-color: var(--rosado-hover);
+}
+
+.valor-item i {
+    color: var(--azul-principal-hover);
+    font-size: 0.85rem;
+}
+
+/* Botón CTA */
+.sobre-nosotros__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    align-self: flex-start;
+    margin-top: 6px;
+}
+
+.sobre-nosotros__cta i {
+    font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   4. SECCIÓN UBICACIÓN Y VIDEO
+   ========================================================================== */
+.seccion-ubicacion-video {
+    background: linear-gradient(180deg, var(--fondo-blanco-calido) 0%, rgba(212, 197, 226, 0.08) 100%);
+    padding: 70px 0;
+    border-top: 1px solid var(--borde-suave);
+}
+
+/* Grid de 2 columnas: mapa a la izquierda, video a la derecha */
+.grid-ubicacion-video {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+}
+
+.bloque-ubicacion-video {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.bloque-ubicacion-video .titulo-seccion {
+    text-align: left;
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+    -webkit-text-fill-color: initial;
+    background: none;
+    color: var(--texto-oscuro);
+}
+
+.bloque-ubicacion-video .subtitulo-seccion {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+/* Lista de datos (dirección, horario, teléfono) */
+.info-ubicacion {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.info-ubicacion li {
+    font-size: 0.95rem;
+    color: var(--texto-oscuro);
+    padding: 12px 16px;
+    background-color: var(--blanco-puro);
+    border-radius: var(--radio-md);
+    box-shadow: var(--sombra-xs);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--borde-suave);
+    transition: var(--transicion);
+}
+
+.info-ubicacion li:hover {
+    border-color: var(--rosado-acento);
+    transform: translateX(4px);
+    box-shadow: var(--sombra-suave);
+}
+
+/* Icono dentro de cada item de la lista */
+.info-ubicacion__icono {
+    font-size: 1.15rem;
+    color: var(--azul-principal-hover);
+    flex-shrink: 0;
+    transition: var(--transicion);
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--rosado-acento) 0%, var(--lavanda-suave) 100%);
+    border-radius: 10px;
+}
+
+.info-ubicacion li:hover .info-ubicacion__icono {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, var(--lavanda-suave) 0%, var(--azul-principal) 100%);
+}
+
+/* ==========================================================================
+   5. ANIMACIONES Y RESPONSIVE
+   ========================================================================== */
+/* Nota: @keyframes fadeIn, fadeInDown y fadeInUp viven en global.css */
+
+/* Adaptación para pantallas medianas y pequeñas */
+@media (max-width: 768px) {
+    .titulo-hero {
+        font-size: 2.2rem;
+    }
+
+    .botones-hero {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    /* Sobre nosotros: imagen arriba, texto abajo */
+    .sobre-nosotros__grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+
+    .sobre-nosotros__imagen {
+        height: 280px;
+    }
+
+    .sobre-nosotros__titulo {
+        font-size: 1.75rem;
+    }
+
+    .sobre-nosotros__cta {
+        align-self: stretch;
+        justify-content: center;
+    }
+
+    .grid-ubicacion-video {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .bloque-ubicacion-video .titulo-seccion,
+    .bloque-ubicacion-video .subtitulo-seccion {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .sobre-nosotros {
+        padding: 50px 0;
+    }
+
+    .sobre-nosotros__titulo {
+        font-size: 1.5rem;
+    }
+
+    .sobre-nosotros__valores {
+        gap: 8px;
+    }
+}

@@ -1,0 +1,49 @@
+/* css/variables.css */
+:root {
+    /* ── PALETA DE COLORES PASTEL — Soft Pastel UI ────────── */
+    --azul-principal:     #A8C5DA;   /* Azul pastel sereno — Botones, elementos destacados, navegación */
+    --azul-principal-hover:#8FB3CC;  /* Azul pastel hover — Estados interactivos */
+    --azul-profundo:      #2C3E50;   /* Azul pizarra oscuro — Textos principales, footer */
+    --rosado-acento:      #F5D5D5;   /* Rosado pastel blush — Secundario, tarjetas, hover, detalles */
+    --rosado-hover:       #EBC4C4;   /* Rosado hover — Estados interactivos secundarios */
+    --lavanda-suave:      #D4C5E2;   /* Lavanda muy suave — Complemento, acentos decorativos */
+    --lavanda-hover:      #C4B1D6;   /* Lavanda hover — Detalles interactivos */
+    --fondo-blanco-calido:#FAFAF7;   /* Fondo cálido muy suave — Base de la página */
+    --blanco-puro:        #FFFFFF;   /* Blanco limpio — Tarjetas, secciones, elementos elevados */
+    --texto-oscuro:       #2C3E50;   /* Azul pizarra — Texto principal (lectura cómoda) */
+    --texto-mutado:       #7C8A9C;   /* Gris azulado claro — Textos secundarios, categorías */
+    --borde-suave:        #E8EAF0;   /* Borde gris perla — Inputs, separadores, líneas finas */
+    --borde-acento:       #D4DDE8;   /* Borde azulado suave — Elementos que necesitan presencia */
+
+    /* Gradientes pastel sutiles */
+    --gradiente-hero:     linear-gradient(135deg, #B8D4E8 0%, #D4C5E2 100%);
+    --gradiente-cta:      linear-gradient(135deg, #A8C5DA 0%, #F5D5D5 100%);
+    --gradiente-seccion:  linear-gradient(180deg, #FAFAF7 0%, #F0F4F8 100%);
+    --gradiente-texto:    linear-gradient(135deg, #8FB3CC 0%, #B89FD6 100%);
+
+    /* ── TIPOGRAFÍAS ───────────────────────────────────────── */
+    --fuente-titulos: 'Poppins', sans-serif;
+    --fuente-cuerpo:  'Inter', sans-serif;
+
+    /* ── SOMBRAS SUAVES Y ELEGANTES ────────────────────────── */
+    --sombra-xs:    0 2px 8px  rgba(168, 197, 218, 0.08);
+    --sombra-suave: 0 4px 15px rgba(168, 197, 218, 0.10);
+    --sombra-media: 0 8px 25px rgba(168, 197, 218, 0.14);
+    --sombra-alta:  0 12px 40px rgba(168, 197, 218, 0.18);
+    --sombra-acento:0 6px 20px rgba(245, 213, 213, 0.25);
+
+    /* ── BORDER RADIUS ─────────────────────────────────────── */
+    --radio-sm:      4px;
+    --radio-md:      8px;
+    --radio-lg:      16px;
+    --radio-xl:      20px;
+    --radio-pill:    50px;
+    --radio-circulo: 50%;
+
+    /* ── ESPACIADOS DE SECCIÓN ─────────────────────────────── */
+    --padding-seccion:    70px 0;
+    --padding-seccion-sm: 50px 0;
+
+    /* ── TRANSICIÓN ────────────────────────────────────────── */
+    --transicion: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

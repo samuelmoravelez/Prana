@@ -1,0 +1,452 @@
+/* ==========================================================================
+   contacto.css — Estilos exclusivos de contacto.html
+   Los estilos compartidos (header, footer, botones, hero-seccion)
+   están en global.css
+   ========================================================================== */
+
+/* ==========================================================================
+   1. HERO DE SECCIÓN
+   El bloque base vive en global.css como .hero-seccion.
+   Aquí solo van los alias de clase que el HTML usa actualmente.
+   ========================================================================== */
+.contacto-hero              { }
+.contacto-hero__contenido   { }
+.contacto-hero__etiqueta    { }
+.contacto-hero__titulo      { }
+.contacto-hero__descripcion { }
+
+/* ==========================================================================
+   2. LAYOUT PRINCIPAL — GRID FORMULARIO + INFO
+   ========================================================================== */
+.contacto-principal {
+    padding: 70px 0 80px;
+    background: var(--gradiente-seccion);
+}
+
+.contacto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+}
+
+/* ==========================================================================
+   3. COLUMNA IZQUIERDA — FORMULARIO
+   ========================================================================== */
+.contacto-form-bloque {
+    background-color: var(--blanco-puro);
+    border-radius: var(--radio-xl);
+    padding: 40px;
+    box-shadow: var(--sombra-suave);
+    animation: fadeInUp 0.7s ease-out both;
+    border: 1px solid var(--borde-suave);
+    position: relative;
+    overflow: hidden;
+}
+
+.contacto-form-bloque::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradiente-cta);
+}
+
+.contacto-form-bloque__titulo {
+    font-family: var(--fuente-titulos);
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: var(--texto-oscuro);
+    margin-bottom: 6px;
+    background: var(--gradiente-texto);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.contacto-form-bloque__subtitulo {
+    font-size: 0.92rem;
+    color: var(--texto-mutado);
+    margin-bottom: 30px;
+    line-height: 1.65;
+}
+
+/* Grupo de campo: label + input apilados */
+.form-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 22px;
+}
+
+.form-grupo label {
+    font-family: var(--fuente-titulos);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--texto-oscuro);
+    letter-spacing: 0.03em;
+}
+
+/* Estilo base para input, select y textarea */
+.form-grupo input,
+.form-grupo select,
+.form-grupo textarea {
+    width: 100%;
+    padding: 13px 17px;
+    border: 1.5px solid var(--borde-suave);
+    border-radius: var(--radio-md);
+    font-family: var(--fuente-cuerpo);
+    font-size: 0.92rem;
+    color: var(--texto-oscuro);
+    background-color: var(--fondo-blanco-calido);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    outline: none;
+    appearance: none;
+}
+
+.form-grupo input::placeholder,
+.form-grupo textarea::placeholder {
+    color: #AAB5C2;
+}
+
+.form-grupo input:focus,
+.form-grupo select:focus,
+.form-grupo textarea:focus {
+    border-color: var(--azul-principal);
+    box-shadow: 0 0 0 3px rgba(168, 197, 218, 0.18);
+    background-color: var(--blanco-puro);
+}
+
+.form-grupo textarea {
+    resize: vertical;
+    min-height: 135px;
+}
+
+/* Fila de dos columnas dentro del formulario */
+.form-fila {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* Botón de envío */
+.btn-form {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-principal-hover) 100%);
+    color: var(--blanco-puro);
+    border: none;
+    border-radius: var(--radio-md);
+    font-family: var(--fuente-titulos);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background 0.3s ease,
+                transform 0.2s ease,
+                box-shadow 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 5px 16px rgba(168, 197, 218, 0.40);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-form:hover {
+    background: linear-gradient(135deg, var(--azul-principal-hover) 0%, var(--azul-principal) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 26px rgba(168, 197, 218, 0.52);
+}
+
+.btn-form:hover::before {
+    left: 100%;
+}
+
+.btn-form:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(168, 197, 218, 0.38);
+}
+
+/* ==========================================================================
+   4. COLUMNA DERECHA — INFORMACIÓN DE CONTACTO
+   ========================================================================== */
+.contacto-info-bloque {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: fadeInUp 0.7s ease-out 0.15s both;
+}
+
+/* Tarjeta de dato de contacto */
+.info-tarjeta {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    background-color: var(--blanco-puro);
+    border-radius: var(--radio-lg);
+    padding: 22px 24px;
+    box-shadow: var(--sombra-xs);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    border: 1px solid var(--borde-suave);
+}
+
+.info-tarjeta:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-media);
+    border-color: var(--rosado-acento);
+}
+
+/* Icono de la tarjeta */
+.info-tarjeta__icono {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--rosado-acento) 0%, var(--lavanda-suave) 100%);
+    color: var(--azul-profundo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    flex-shrink: 0;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 3px 10px rgba(245, 213, 213, 0.35);
+}
+
+.info-tarjeta:hover .info-tarjeta__icono {
+    background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-principal-hover) 100%);
+    color: var(--blanco-puro);
+    transform: scale(1.08) rotate(-3deg);
+    box-shadow: 0 5px 16px rgba(168, 197, 218, 0.45);
+}
+
+.info-tarjeta__cuerpo {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.info-tarjeta__etiqueta {
+    font-family: var(--fuente-titulos);
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--lavanda-hover);
+}
+
+.info-tarjeta__valor {
+    font-family: var(--fuente-cuerpo);
+    font-size: 0.96rem;
+    color: var(--texto-oscuro);
+    font-weight: 450;
+    line-height: 1.55;
+}
+
+.info-tarjeta__valor a {
+    color: var(--azul-principal-hover);
+    font-weight: 650;
+    transition: color 0.25s ease;
+}
+
+.info-tarjeta__valor a:hover {
+    color: var(--lavanda-hover);
+}
+
+/* ==========================================================================
+   5. CANALES DIRECTOS — TARJETAS DE REDES SOCIALES
+   ========================================================================== */
+.contacto-canales {
+    padding: 10px 0 80px;
+}
+
+.contacto-canales__titulo {
+    font-family: var(--fuente-titulos);
+    font-size: 1.65rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--texto-oscuro);
+    margin-bottom: 8px;
+    background: var(--gradiente-texto);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.contacto-canales__subtitulo {
+    text-align: center;
+    color: var(--texto-mutado);
+    font-size: 0.96rem;
+    margin-bottom: 36px;
+    line-height: 1.6;
+}
+
+.canales-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 22px;
+}
+
+/* Tarjeta de canal */
+.canal-tarjeta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 34px 22px;
+    border-radius: var(--radio-xl);
+    background-color: var(--blanco-puro);
+    box-shadow: var(--sombra-xs);
+    text-align: center;
+    text-decoration: none;
+    color: var(--texto-oscuro);
+    border: 2px solid var(--borde-suave);
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease,
+                background-color 0.3s ease;
+}
+
+.canal-tarjeta:hover {
+    transform: translateY(-7px);
+    box-shadow: var(--sombra-media);
+    background: linear-gradient(180deg, var(--blanco-puro) 0%, rgba(245, 213, 213, 0.10) 100%);
+}
+
+.canal-tarjeta__icono {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.65rem;
+    color: var(--blanco-puro);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.canal-tarjeta:hover .canal-tarjeta__icono {
+    transform: scale(1.15);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+}
+
+/* Color de fondo por red social */
+.canal-tarjeta--whatsapp .canal-tarjeta__icono  { background: linear-gradient(135deg, #25D366 0%, #1FB956 100%); }
+.canal-tarjeta--instagram .canal-tarjeta__icono {
+    background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCAF45 100%);
+}
+.canal-tarjeta--tiktok .canal-tarjeta__icono    { background: linear-gradient(135deg, #010101 0%, #1a1a2e 100%); }
+
+/* Borde de hover por red social */
+.canal-tarjeta--whatsapp:hover  { border-color: #25D366; }
+.canal-tarjeta--instagram:hover { border-color: #E4405F; }
+.canal-tarjeta--tiktok:hover    { border-color: #69C9D0; }
+
+.canal-tarjeta__nombre {
+    font-family: var(--fuente-titulos);
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--texto-oscuro);
+}
+
+.canal-tarjeta__accion {
+    font-size: 0.83rem;
+    color: var(--texto-mutado);
+    font-weight: 450;
+}
+
+/* ==========================================================================
+   6. SECCIÓN MAPA STANDALONE
+   ========================================================================== */
+.contacto-mapa {
+    padding: 0 0 80px;
+}
+
+.contacto-mapa__titulo {
+    font-family: var(--fuente-titulos);
+    font-size: 1.65rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--texto-oscuro);
+    margin-bottom: 8px;
+    background: var(--gradiente-texto);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.contacto-mapa__subtitulo {
+    text-align: center;
+    color: var(--texto-mutado);
+    font-size: 0.96rem;
+    margin-bottom: 28px;
+}
+
+/* ==========================================================================
+   7. KEYFRAMES
+   Eliminados — viven en global.css como fadeInDown y fadeInUp.
+   Los nombres contactoFadeDown/contactoFadeUp han sido unificados
+   con las animaciones genéricas de global.css.
+   ========================================================================== */
+
+/* ==========================================================================
+   8. RESPONSIVE
+   ========================================================================== */
+@media (max-width: 900px) {
+    .contacto-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contacto-hero__titulo {
+        font-size: 1.9rem;
+    }
+
+    .contacto-form-bloque {
+        padding: 28px 22px;
+    }
+
+    .form-fila {
+        grid-template-columns: 1fr;
+    }
+
+    .canales-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .contacto-mapa__titulo,
+    .contacto-canales__titulo {
+        font-size: 1.35rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contacto-hero {
+        padding: 50px 16px;
+    }
+
+    .contacto-hero__titulo {
+        font-size: 1.6rem;
+    }
+
+    .canales-grid {
+        grid-template-columns: 1fr;
+    }
+}
