@@ -7,11 +7,11 @@
          ========================================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos | Maye Mundo Belleza</title>
-    <meta name="description" content="Explora nuestra selección de productos de belleza: cuidado capilar, maquillaje, uñas y más. Envíos a todo Colombia desde Maye Mundo Belleza.">
+    <title>Catálogo Fitness | Suplementos, Indumentaria y Equipamiento Gym</title>
+    <meta name="description" content="Explora nuestro catálogo fitness: proteínas, creatina, ropa deportiva, accesorios y equipamiento gym. Envíos a todo Colombia desde nuestra tienda en Medellín.">
 
     <!-- Favicon -->
-    <link rel="icon" href="https://res.cloudinary.com/ocnnxclz/image/upload/v1784219028/333_mvofgw.png" type="image/png">
+    <link rel="icon" href="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" type="image/png">
 
     <!-- Font Awesome — Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -25,7 +25,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Hojas de estilo del proyecto -->
     <link rel="stylesheet" href="../css/variables.css">
@@ -40,7 +40,7 @@
          BARRA DE ANUNCIO SUPERIOR
          ========================================================================== -->
     <div class="barra-anuncio bg-success text-white text-center py-2">
-        <p class="mb-0"><i class="ri-sparkling-fill me-2"></i> ¡Envíos a todo el país! Escríbenos directamente a nuestro WhatsApp <i class="ri-sparkling-fill ms-2"></i></p>
+        <p class="mb-0"><i class="ri-flashlight-fill me-2"></i> ¡Envíos gratis a todo el país desde $150.000! Escríbenos directamente a nuestro WhatsApp <i class="ri-flashlight-fill ms-2"></i></p>
     </div>
 
     <!-- ==========================================================================
@@ -51,8 +51,7 @@
         <div class="container">
             <!-- Logo -->
             <a class="navbar-brand fw-bold" href="../index.html">
-                <img src="https://res.cloudinary.com/ocnnxclz/image/upload/v1784219028/333_mvofgw.png" alt="Logo Maye Mundo Belleza" width="40" height="40" class="d-inline-block align-text-top me-2">
-                <span class="text-success">Maye</span><span class="text-dark">Mundo Belleza</span>
+                <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" alt="Logo de la marca fitness" width="44" height="44" class="logo-imagen d-inline-block align-text-top me-2">
             </a>
             <!-- Botón hamburguesa móvil -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,7 +85,7 @@
                         <a class="nav-link" href="#" aria-label="Buscar"><i class="ri-search-line fs-5"></i></a>
                     </li>
                     <li class="nav-item position-relative">
-                        <a class="nav-link" href="#" aria-label="Carrito"><i class="ri-shopping-cart-fill fs-5"></i> 
+                        <a class="nav-link" href="#" aria-label="Carrito"><i class="ri-shopping-cart-fill fs-5"></i>
                             <span class="badge bg-danger position-absolute top-0 start-100 translate-middle contador-carrito">0</span>
                         </a>
                     </li>
@@ -102,14 +101,15 @@
     <main id="contenido-principal">
 
         <!-- SECCIÓN 1: HERO DE PRODUCTOS -->
-        <section class="bg-light py-5">
+        <section class="hero-seccion py-5">
             <div class="container">
                 <div class="text-center">
-                    <span class="badge bg-success mb-3 d-inline-block">Nuestro Catálogo</span>
-                    <h1 class="display-4 fw-bold mb-3">Encuentra tu <strong>producto ideal</strong></h1>
-                    <p class="lead text-muted mx-auto" style="max-width: 600px;">
-                        Más de 30 productos seleccionados para realzar tu belleza natural.
-                        <em>Cuidado capilar, maquillaje, uñas y mucho más</em>.
+                    <span class="badge bg-success mb-3 d-inline-block">CATÁLOGO COMPLETO</span>
+                    <h1 class="display-4 fw-bold mb-3">Todo para tu <strong>rendimiento deportivo</strong></h1>
+                    <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                        Más de 100 referencias de suplementos premium, indumentaria técnica,
+                        accesorios gym y equipamiento profesional.
+                        <em>Fuerza · Resistencia · Estilo</em>.
                     </p>
                 </div>
             </div>
@@ -120,33 +120,43 @@
             <div class="container">
                 <div class="row g-3 g-md-4 justify-content-center">
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                        <label for="filtro-todos" class="card border-0 text-center cursor-pointer h-100 d-flex flex-column justify-content-center align-items-center p-3 shadow-sm transition hover-bg-success">
-                            <i class="ri-apps-2-fill display-5 text-success mb-2"></i>
+                        <label for="filtro-todos" class="categoria-card card border-0 text-center cursor-pointer h-100 d-flex flex-column justify-content-center align-items-center p-3 shadow-sm transition">
+                            <div class="categoria-card__icono d-flex align-items-center justify-content-center mb-2">
+                                <i class="ri-apps-2-fill text-white"></i>
+                            </div>
                             <span class="fw-bold small">Todos</span>
                         </label>
                     </div>
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                        <label for="filtro-capilar" class="card border-0 text-center cursor-pointer h-100 d-flex flex-column justify-content-center align-items-center p-3 shadow-sm transition hover-bg-success">
-                            <i class="ri-scissors-2-fill display-5 text-success mb-2"></i>
-                            <span class="fw-bold small">Capilar</span>
+                        <label for="filtro-suplementos" class="categoria-card card border-0 text-center cursor-pointer h-100 d-flex flex-column justify-content-center align-items-center p-3 shadow-sm transition">
+                            <div class="categoria-card__icono d-flex align-items-center justify-content-center mb-2">
+                                <i class="ri-capsule-fill text-white"></i>
+                            </div>
+                            <span class="fw-bold small">Suplementos</span>
                         </label>
                     </div>
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                        <label for="filtro-maquillaje" class="card border-0 text-center cursor-pointer h-100 d-flex flex-column justify-content-center align-items-center p-3 shadow-sm transition hover-bg-success">
-                            <i class="ri-palette-fill display-5 text-success mb-2"></i>
-                            <span class="fw-bold small">Maquillaje</span>
+                        <label for="filtro-indumentaria" class="categoria-card card border-0 text-center cursor-pointer h-100 d-flex flex-column justify-content-center align-items-center p-3 shadow-sm transition">
+                            <div class="categoria-card__icono d-flex align-items-center justify-content-center mb-2">
+                                <i class="ri-t-shirt-fill text-white"></i>
+                            </div>
+                            <span class="fw-bold small">Indumentaria</span>
                         </label>
                     </div>
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                        <label for="filtro-unas" class="card border-0 text-center cursor-pointer h-100 d-flex flex-column justify-content-center align-items-center p-3 shadow-sm transition hover-bg-success">
-                            <i class="ri-sparkling-fill display-5 text-success mb-2"></i>
-                            <span class="fw-bold small">Uñas</span>
+                        <label for="filtro-accesorios" class="categoria-card card border-0 text-center cursor-pointer h-100 d-flex flex-column justify-content-center align-items-center p-3 shadow-sm transition">
+                            <div class="categoria-card__icono d-flex align-items-center justify-content-center mb-2">
+                                <i class="ri-dumbbell-fill text-white"></i>
+                            </div>
+                            <span class="fw-bold small">Accesorios</span>
                         </label>
                     </div>
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                        <label for="filtro-skincare" class="card border-0 text-center cursor-pointer h-100 d-flex flex-column justify-content-center align-items-center p-3 shadow-sm transition hover-bg-success">
-                            <i class="ri-leaf-fill display-5 text-success mb-2"></i>
-                            <span class="fw-bold small">Skincare</span>
+                        <label for="filtro-equipamiento" class="categoria-card card border-0 text-center cursor-pointer h-100 d-flex flex-column justify-content-center align-items-center p-3 shadow-sm transition">
+                            <div class="categoria-card__icono d-flex align-items-center justify-content-center mb-2">
+                                <i class="ri-weight-fill text-white"></i>
+                            </div>
+                            <span class="fw-bold small">Equipamiento</span>
                         </label>
                     </div>
                 </div>
@@ -160,184 +170,184 @@
                 <!-- Alerta de Bootstrap (componente obligatorio) -->
                 <div class="alert alert-success mb-5" role="alert">
                     <i class="fas fa-truck me-2"></i>
-                    <strong>¡Envío gratis</strong> en compras superiores a $150.000 COP! 
+                    <strong>¡Envío gratis</strong> en compras superiores a $150.000 COP!
                     <em>Promoción válida para todo el país.</em>
                 </div>
 
-                <!-- Filtros de categoría (radio buttons ocultos) -->
+                <!-- Filtros de categoría (radio buttons ocultos) — IDs sincronizados con productos.css -->
                 <div role="group" aria-label="Filtrar por categoría" class="mb-4">
-                    <input type="radio" name="filtro" id="filtro-todos"     class="filtro-input" checked hidden>
-                    <input type="radio" name="filtro" id="filtro-capilar"   class="filtro-input" hidden>
-                    <input type="radio" name="filtro" id="filtro-maquillaje" class="filtro-input" hidden>
-                    <input type="radio" name="filtro" id="filtro-unas"      class="filtro-input" hidden>
-                    <input type="radio" name="filtro" id="filtro-skincare"  class="filtro-input" hidden>
+                    <input type="radio" name="filtro" id="filtro-todos"        class="filtro-input" checked hidden>
+                    <input type="radio" name="filtro" id="filtro-suplementos"  class="filtro-input" hidden>
+                    <input type="radio" name="filtro" id="filtro-indumentaria" class="filtro-input" hidden>
+                    <input type="radio" name="filtro" id="filtro-accesorios"   class="filtro-input" hidden>
+                    <input type="radio" name="filtro" id="filtro-equipamiento" class="filtro-input" hidden>
                 </div>
 
-                <!-- Grilla de productos: Bootstrap Grid -->
-                <div class="row g-4">
+                <!-- Grilla de productos: Bootstrap Grid + clases filtro-* para CSS -->
+                <div class="productos-grid row g-4">
 
-                    <!-- Producto 1 — Capilar (etiqueta ARTICLE semántica) -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
+                    <!-- P1: Whey Protein (Suplementos) -->
+                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="suplementos">
+                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
                             <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/ocnnxclz/image/upload/v1784217237/22_w4x1qk.png" alt="Tratamiento Hidratante Premium" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                                <span class="badge bg-success position-absolute top-3 start-3">Nuevo</span>
+                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791239384/1111111.png" alt="Whey Protein Premium 2kg - Proteína concentrada de suero lácteo" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
+                                <span class="etiqueta-producto badge bg-success position-absolute top-3 start-3">Nuevo</span>
                             </div>
                             <div class="card-body">
-                                <span class="badge bg-light text-success mb-2 d-inline-block">Cuidado Capilar</span>
-                                <h2 class="card-title h5 fw-bold">Tratamiento Hidratante Premium</h2>
-                                <p class="card-text text-muted small">Hidrata profundamente tu cabello con ingredientes naturales.</p>
+                                <span class="badge bg-light text-success mb-2 d-inline-block">Suplementos</span>
+                                <h2 class="card-title h5 fw-bold">Whey Protein Premium 2kg</h2>
+                                <p class="card-text text-muted small">25g de proteína por porción. Bajo en grasa, ideal para volumen y recuperación.</p>
+                                <h3 class="text-success fw-bold mb-3">$189.000 <small class="text-muted fw-normal">COP</small></h3>
+                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Whey%20Protein%20Premium%202kg" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
+                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- P2: Creatina (Suplementos) -->
+                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="suplementos">
+                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
+                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
+                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791237388/22.png" alt="Creatina Monohidratada 500g - Fuerza y potencia" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
+                                <span class="etiqueta-producto badge bg-danger position-absolute top-3 start-3">Popular</span>
+                            </div>
+                            <div class="card-body">
+                                <span class="badge bg-light text-danger mb-2 d-inline-block">Suplementos</span>
+                                <h2 class="card-title h5 fw-bold">Creatina Monohidratada 500g</h2>
+                                <p class="card-text text-muted small">Creatina micronizada pura. Aumenta fuerza, potencia y volumen muscular.</p>
+                                <h3 class="text-success fw-bold mb-3">$95.000 <small class="text-muted fw-normal">COP</small></h3>
+                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Creatina%20Monohidratada%20500g" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
+                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- P3: Barras Proteicas (Suplementos) -->
+                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="suplementos">
+                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
+                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
+                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791239559/222222-removebg-preview.png" alt="Barras Proteicas Pack x12 - Snack alto en proteína" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
+                                <span class="etiqueta-producto badge bg-info position-absolute top-3 start-3">Destacado</span>
+                            </div>
+                            <div class="card-body">
+                                <span class="badge bg-light text-info mb-2 d-inline-block">Suplementos</span>
+                                <h2 class="card-title h5 fw-bold">Barras Proteicas Pack x12</h2>
+                                <p class="card-text text-muted small">20g de proteína por barra. Snack ideal pre/post entrenamiento y entre comidas.</p>
+                                <h3 class="text-success fw-bold mb-3">$82.000 <small class="text-muted fw-normal">COP</small></h3>
+                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Barras%20Proteicas%20Pack%20x12" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
+                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- P4: Leggings Compresión (Indumentaria) -->
+                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="indumentaria">
+                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
+                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
+                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791239646/sdd.png" alt="Leggings Compresión High-Waist - Control abdomen" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
+                            </div>
+                            <div class="card-body">
+                                <span class="badge bg-light text-success mb-2 d-inline-block">Indumentaria</span>
+                                <h2 class="card-title h5 fw-bold">Leggings Compresión High-Waist</h2>
+                                <p class="card-text text-muted small">Tejido técnico con control de abdomen y efecto lifting. Tallas XS–XL.</p>
+                                <h3 class="text-success fw-bold mb-3">$115.000 <small class="text-muted fw-normal">COP</small></h3>
+                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Leggings%20Compresión%20High-Waist" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
+                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- P5: Sports Bra (Indumentaria) -->
+                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="indumentaria">
+                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
+                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
+                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791239713/rrrr.png" alt="Sports Bra Soporte Alto - Top deportivo entrenamiento intensidad alta" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
+                                <span class="etiqueta-producto badge bg-success position-absolute top-3 start-3">Nuevo</span>
+                            </div>
+                            <div class="card-body">
+                                <span class="badge bg-light text-danger mb-2 d-inline-block">Indumentaria</span>
+                                <h2 class="card-title h5 fw-bold">Sports Bra Soporte Alto</h2>
+                                <p class="card-text text-muted small">Top deportivo con soporte alto. Ideal para HIIT, crossfit y running.</p>
+                                <h3 class="text-success fw-bold mb-3">$89.000 <small class="text-muted fw-normal">COP</small></h3>
+                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Sports%20Bra%20Soporte%20Alto" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
+                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- P6: Sneakers Training (Indumentaria) -->
+                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="indumentaria">
+                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
+                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
+                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791237492/33.png" alt="Sneakers Training Pro - Zapatillas entrenamiento gym" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
+                                <span class="etiqueta-producto badge bg-danger position-absolute top-3 start-3">Popular</span>
+                            </div>
+                            <div class="card-body">
+                                <span class="badge bg-light text-info mb-2 d-inline-block">Indumentaria</span>
+                                <h2 class="card-title h5 fw-bold">Sneakers Training Pro</h2>
+                                <p class="card-text text-muted small">Suela antideslizante + soporte lateral. Perfectas para levantamiento y cross.</p>
+                                <h3 class="text-success fw-bold mb-3">$260.000 <small class="text-muted fw-normal">COP</small></h3>
+                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Sneakers%20Training%20Pro" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
+                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- P7: Mancuernas Ajustables (Equipamiento) -->
+                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="equipamiento">
+                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
+                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
+                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791239824/ee-removebg-preview.png" alt="Mancuernas Ajustables 20kg x2 - Kit pesas hogar gym" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
+                            </div>
+                            <div class="card-body">
+                                <span class="badge bg-light text-info mb-2 d-inline-block">Equipamiento</span>
+                                <h2 class="card-title h5 fw-bold">Mancuernas Ajustables 20kg (par)</h2>
+                                <p class="card-text text-muted small">Kit de pesas ajustables de 2,5 a 20 kg. Perfectas para entrenar en casa.</p>
+                                <h3 class="text-success fw-bold mb-3">$489.000 <small class="text-muted fw-normal">COP</small></h3>
+                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Mancuernas%20Ajustables%2020kg" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
+                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- P8: Bandas Elásticas (Accesorios) -->
+                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="accesorios">
+                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
+                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
+                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791239903/eqw.png" alt="Bandas Elásticas Set x5 - Resistencias variadas entrenamiento" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
+                            </div>
+                            <div class="card-body">
+                                <span class="badge bg-light text-success mb-2 d-inline-block">Accesorios</span>
+                                <h2 class="card-title h5 fw-bold">Bandas Elásticas Set x5 Niveles</h2>
+                                <p class="card-text text-muted small">5 niveles de resistencia. Ideal para activación, glúteos, piernas y movilidad.</p>
                                 <h3 class="text-success fw-bold mb-3">$45.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20el%20Tratamiento%20Hidratante%20Premium" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
+                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Bandas%20Elásticas%20Set%20x5" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
                                     <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
                                 </a>
                             </div>
                         </div>
                     </article>
 
-                    <!-- Producto 2 — Maquillaje -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
+                    <!-- P9: Shaker Mezclador (Accesorios) -->
+                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="accesorios">
+                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
                             <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/ocnnxclz/image/upload/v1784217490/33_oldm9d.png" alt="Labial Mate Larga Duración" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                                <span class="badge bg-danger position-absolute top-3 start-3">Popular</span>
+                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791239962/fre.png" alt="Shaker Mezclador Pro 700ml - Vaso batidor proteína" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
+                                <span class="etiqueta-producto badge bg-success position-absolute top-3 start-3">Nuevo</span>
                             </div>
                             <div class="card-body">
-                                <span class="badge bg-light text-danger mb-2 d-inline-block">Maquillaje</span>
-                                <h2 class="card-title h5 fw-bold">Labial Mate Larga Duración</h2>
-                                <p class="card-text text-muted small">Colores vibrantes que duran todo el día.</p>
-                                <h3 class="text-success fw-bold mb-3">$28.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20el%20Labial%20Mate" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
-                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Producto 3 — Uñas -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
-                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/ocnnxclz/image/upload/v1784217905/profesional_fs469j.png" alt="Esmalte Efecto Gel Profesional" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                                <span class="badge bg-info position-absolute top-3 start-3">Destacado</span>
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-light text-info mb-2 d-inline-block">Uñas</span>
-                                <h2 class="card-title h5 fw-bold">Esmalte Efecto Gel Profesional</h2>
-                                <p class="card-text text-muted small">Acabado profesional sin necesidad de lámpara UV.</p>
-                                <h3 class="text-success fw-bold mb-3">$12.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20el%20Esmalte%20Efecto%20Gel" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
-                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Producto 4 — Capilar -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
-                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/ocnnxclz/image/upload/v1784239074/30005606_MASCARILLA-CAPILARMASC-NUTRI-500ml-AGRADO_zojmhp.webp" alt="Mascarilla Nutritiva Intensiva" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-light text-success mb-2 d-inline-block">Cuidado Capilar</span>
-                                <h2 class="card-title h5 fw-bold">Mascarilla Nutritiva Intensiva</h2>
-                                <p class="card-text text-muted small">Nutrición profunda para cabello seco y dañado.</p>
-                                <h3 class="text-success fw-bold mb-3">$38.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20la%20Mascarilla%20Nutritiva%20Intensiva" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
-                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Producto 5 — Maquillaje -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
-                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/ocnnxclz/image/upload/v1784239303/base-de-maquillaje-cobertura-loreal-removebg-preview_k6y4sa.png" alt="Base de Maquillaje Cobertura Total" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                                <span class="badge bg-success position-absolute top-3 start-3">Nuevo</span>
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-light text-danger mb-2 d-inline-block">Maquillaje</span>
-                                <h2 class="card-title h5 fw-bold">Base Cobertura Total</h2>
-                                <p class="card-text text-muted small">Cobertura completa y acabado mate duradero.</p>
-                                <h3 class="text-success fw-bold mb-3">$55.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20la%20Base%20Cobertura%20Total" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
-                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Producto 6 — Skincare -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
-                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/ocnnxclz/image/upload/v1784239451/1111_kmnrrq.png" alt="Sérum Vitamina C" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                                <span class="badge bg-danger position-absolute top-3 start-3">Popular</span>
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-light text-info mb-2 d-inline-block">Skincare</span>
-                                <h2 class="card-title h5 fw-bold">Sérum Vitamina C Iluminador</h2>
-                                <p class="card-text text-muted small">Ilumina y unifica el tono de tu piel.</p>
-                                <h3 class="text-success fw-bold mb-3">$62.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20el%20Sérum%20Vitamina%20C" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
-                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Producto 7 — Uñas -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
-                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/ocnnxclz/image/upload/v1784239754/222221_ojuxo5.png" alt="Kit Manicure Completo" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-light text-info mb-2 d-inline-block">Uñas</span>
-                                <h2 class="card-title h5 fw-bold">Kit Manicure Profesional Completo</h2>
-                                <p class="card-text text-muted small">Todo lo necesario para un manicure profesional.</p>
-                                <h3 class="text-success fw-bold mb-3">$35.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20el%20Kit%20Manicure" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
-                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Producto 8 — Capilar -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
-                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/ocnnxclz/image/upload/v1784239871/1111_ja46bu.png" alt="Aceite Argan Puro" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-light text-success mb-2 d-inline-block">Cuidado Capilar</span>
-                                <h2 class="card-title h5 fw-bold">Aceite de Argán Puro</h2>
-                                <p class="card-text text-muted small">Aceite puro para cabello y piel.</p>
-                                <h3 class="text-success fw-bold mb-3">$48.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20el%20Aceite%20de%20Argán" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
-                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Producto 9 — Skincare -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
-                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/ocnnxclz/image/upload/v1784239933/19._facial_moisturising_lotion_am_cp3oxt.png" alt="Crema Hidratante Facial" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                                <span class="badge bg-success position-absolute top-3 start-3">Nuevo</span>
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-light text-info mb-2 d-inline-block">Skincare</span>
-                                <h2 class="card-title h5 fw-bold">Crema Hidratante Facial SPF 30</h2>
-                                <p class="card-text text-muted small">Hidratación y protección solar SPF 30.</p>
-                                <h3 class="text-success fw-bold mb-3">$42.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20la%20Crema%20Hidratante" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
+                                <span class="badge bg-light text-info mb-2 d-inline-block">Accesorios</span>
+                                <h2 class="card-title h5 fw-bold">Shaker Mezclador Pro 700ml</h2>
+                                <p class="card-text text-muted small">Batidor anti-derrames con bola mezcladora. Libre de BPA, apto lavavajillas.</p>
+                                <h3 class="text-success fw-bold mb-3">$32.000 <small class="text-muted fw-normal">COP</small></h3>
+                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Shaker%20Mezclador%20Pro%20700ml" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
                                     <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
                                 </a>
                             </div>
@@ -352,8 +362,8 @@
         <section class="py-5 bg-light">
             <div class="container">
                 <div class="text-center mb-5">
-                    <h2 class="display-5 fw-bold mb-2">Comparativa de Productos</h2>
-                    <p class="lead text-muted">Encuentra rápidamente lo que necesitas con esta guía práctica</p>
+                    <h2 class="display-5 fw-bold mb-2">Comparativa Fitness Rápida</h2>
+                    <p class="lead text-muted">Encuentra el producto ideal según tu deporte y frecuencia de uso</p>
                 </div>
 
                 <!-- Tabla responsive Bootstrap: 4 columnas x 6 filas (mínimo) -->
@@ -362,47 +372,47 @@
                         <thead class="table-success">
                             <tr>
                                 <th scope="col">Producto</th>
-                                <th scope="col">Tipo de Piel/Cabello</th>
+                                <th scope="col">Tipo Deportivo / Uso</th>
                                 <th scope="col">Frecuencia de Uso</th>
                                 <th scope="col">Precio</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <th scope="row"><strong>Tratamiento Hidratante Premium</strong></th>
-                                <td>Todo tipo de cabello, especialmente seco</td>
-                                <td>2-3 veces por semana</td>
+                                <th scope="row"><strong>Whey Protein Premium 2kg</strong></th>
+                                <td>Hipertrofia, Volumen, Recuperación muscular</td>
+                                <td>Diario (1-2 porciones)</td>
+                                <td class="text-success fw-bold">$189.000</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Creatina Monohidratada 500g</th>
+                                <td>Fuerza, Potencia, Crossfit, Halterofilia</td>
+                                <td>Diaria (3–5 g al día)</td>
+                                <td class="text-success fw-bold">$95.000</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Sneakers Training Pro</th>
+                                <td>Gimnasio general, Levantamiento, Crossfit</td>
+                                <td><em>Cada entrenamiento</em> (5–6 días/sem)</td>
+                                <td class="text-success fw-bold">$260.000</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Leggings Compresión High-Waist</th>
+                                <td>Running, HIIT, Gimnasio, Yoga</td>
+                                <td>Diario deportivo</td>
+                                <td class="text-success fw-bold">$115.000</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Bandas Elásticas Set x5</th>
+                                <td>Activación, Glúteos, Rehabilitación, Hogar</td>
+                                <td>3–6 veces por semana</td>
                                 <td class="text-success fw-bold">$45.000</td>
                             </tr>
                             <tr>
-                                <th scope="row">Mascarilla Nutritiva Intensiva</th>
-                                <td>Cabello muy dañado, teñido o con procesos químicos</td>
-                                <td>1 vez por semana</td>
-                                <td class="text-success fw-bold">$38.000</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Sérum Vitamina C Iluminador</th>
-                                <td>Piel opaca, con manchas o tono desigual</td>
-                                <td><em>Diariamente</em> en la mañana</td>
-                                <td class="text-success fw-bold">$62.000</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Crema Hidratante SPF 30</th>
-                                <td>Todo tipo de piel</td>
-                                <td>Diariamente AM + PM</td>
-                                <td class="text-success fw-bold">$42.000</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Base Cobertura Total</th>
-                                <td>Piel normal a grasa, 12 tonos disponibles</td>
-                                <td>Según necesidad</td>
-                                <td class="text-success fw-bold">$55.000</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Aceite de Argán Puro</th>
-                                <td><strong>Multiusos:</strong> cabello, piel y uñas</td>
-                                <td>Diario o según necesidad</td>
-                                <td class="text-success fw-bold">$48.000</td>
+                                <th scope="row">Mancuernas Ajustables 20kg (par)</th>
+                                <td><strong>Full body gym en casa:</strong> brazos, pecho, espalda, piernas</td>
+                                <td>3–5 veces por semana</td>
+                                <td class="text-success fw-bold">$489.000</td>
                             </tr>
                         </tbody>
                     </table>
@@ -417,22 +427,22 @@
                     <!-- Lista ordenada ol (obligatoria) -->
                     <div class="col-lg-6">
                         <div class="card border-0 shadow-sm rounded-3 p-5 h-100">
-                            <h2 class="h3 fw-bold mb-4 text-success"><i class="fas fa-list-ol me-2"></i>Cómo elegir tu producto ideal</h2>
+                            <h2 class="h3 fw-bold mb-4 text-success"><i class="fas fa-list-ol me-2"></i>Cómo elegir tu artículo fitness ideal</h2>
                             <ol class="list-group list-group-numbered list-group-flush">
                                 <li class="list-group-item ps-0 border-0 py-3">
-                                    <strong>Identifica tu necesidad principal:</strong> hidratación, color, anti-edad, etc.
+                                    <strong>Define tu objetivo principal:</strong> hipertrofia, fuerza, definición, pérdida de grasa o resistencia.
                                 </li>
                                 <li class="list-group-item ps-0 border-0 py-3">
-                                    Considera tu tipo de cabello (seco, graso, mixto) o piel (normal, seca, grasa).
+                                    Considera tu nivel (principiante / intermedio / avanzado) y deporte principal (gym, cross, running).
                                 </li>
                                 <li class="list-group-item ps-0 border-0 py-3">
-                                    Revisa los ingredientes y evita aquellos a los que seas <em>alérgico/a</em>.
+                                    Revisa porciones, gramos, tallas y materiales. Evita productos a los que seas <em>alérgico/a</em>.
                                 </li>
                                 <li class="list-group-item ps-0 border-0 py-3">
-                                    Si tienes dudas, solicita nuestra asesoría personalizada gratuita.
+                                    Si tienes dudas, solicita asesoría personalizada gratuita con nuestros coaches.
                                 </li>
                                 <li class="list-group-item ps-0 border-0 py-3">
-                                    ¡Realiza tu pedido y recíbelo en la puerta de tu casa!
+                                    ¡Realiza tu pedido y convierte tu rutina en resultados reales!
                                 </li>
                             </ol>
                         </div>
@@ -444,15 +454,15 @@
                             <ul class="list-unstyled">
                                 <li class="mb-3 d-flex align-items-start">
                                     <i class="fas fa-check-circle me-3 mt-1"></i>
-                                    <div><strong>Productos 100% originales</strong> con garantía de autenticidad.</div>
+                                    <div><strong>Suplementos 100% originales</strong> con lote y vencimiento visibles.</div>
                                 </li>
                                 <li class="mb-3 d-flex align-items-start">
                                     <i class="fas fa-check-circle me-3 mt-1"></i>
-                                    <div>Envíos a <em>todo el país</em> con cobertura nacional.</div>
+                                    <div>Envíos a <em>todo el país</em> con cobertura nacional + envío gratis desde $150K.</div>
                                 </li>
                                 <li class="mb-3 d-flex align-items-start">
                                     <i class="fas fa-check-circle me-3 mt-1"></i>
-                                    <div>Asesoría personalizada presencial y virtual.</div>
+                                    <div>Asesoría personalizada por coaches y nutricionistas.</div>
                                 </li>
                                 <li class="mb-3 d-flex align-items-start">
                                     <i class="fas fa-check-circle me-3 mt-1"></i>
@@ -460,7 +470,7 @@
                                 </li>
                                 <li class="d-flex align-items-start">
                                     <i class="fas fa-check-circle me-3 mt-1"></i>
-                                    <div><strong>Pagos seguros</strong> por múltiples canales.</div>
+                                    <div><strong>Pagos seguros</strong> por múltiples canales (contraentrega, transferencia, bancos).</div>
                                 </li>
                             </ul>
                         </div>
@@ -470,19 +480,19 @@
         </section>
 
         <!-- SECCIÓN 6: CTA — ASESORÍA PERSONALIZADA -->
-        <section class="bg-success text-white py-5">
+        <section class="productos-cta bg-success text-white py-5">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-7">
-                        <h2 class="display-5 fw-bold mb-3">¿No encuentras lo que buscas?</h2>
+                        <h2 class="display-5 fw-bold mb-3">¿No sabes por dónde empezar?</h2>
                         <p class="lead mb-0">
-                            Nuestras asesoras están listas para ayudarte a elegir el producto
-                            perfecto para tu tipo de cabello y piel.
+                            Nuestros coaches fitness y nutricionistas te ayudan a armar el stack
+                            de suplementos, la ropa y el equipo ideal para tu objetivo.
                         </p>
                     </div>
                     <div class="col-lg-5 text-end mt-4 mt-lg-0">
-                        <a href="https://wa.me/573003091641?text=Hola!%20Quiero%20asesoría%20personalizada%20sobre%20productos" class="btn btn-light btn-lg px-5 fw-bold" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-whatsapp me-2"></i>Recibir asesoría gratis
+                        <a href="https://wa.me/573003091641?text=Hola!%20Quiero%20asesoría%20fitness%20personalizada" class="btn btn-cta-blanco btn-light btn-lg px-5 fw-bold" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp me-2"></i>Asesoría gratuita
                         </a>
                     </div>
                 </div>
@@ -499,15 +509,16 @@
             <div class="row g-4 mb-4">
                 <!-- Marca -->
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3">
-                        <span class="text-success">Maye</span>Mundo Belleza
-                    </h5>
-                    <p class="text-muted small">Tu tienda de belleza de confianza en Medellín.</p>
+                    <a href="../index.html" class="d-flex align-items-center text-decoration-none mb-3">
+                        <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" alt="Logo de la marca fitness" width="40" height="40" class="logo-imagen me-2">
+                        <h4 class="fw-bold mb-0 text-light">Prana</h4>
+                    </a>
+                    <p class="text-muted small">Tu tienda fitness de confianza en Medellín. Suplementos, ropa y equipamiento profesional.</p>
                     <div class="d-flex gap-3 mt-3">
-                        <a href="https://www.instagram.com/mayemundo_belleza1" target="_blank" aria-label="Instagram" class="text-light text-decoration-none fs-5 hover-text-success transition">
+                        <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" class="text-light text-decoration-none fs-5 hover-text-success transition">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://www.tiktok.com/@mundo.belleza.bello" target="_blank" aria-label="TikTok" class="text-light text-decoration-none fs-5 hover-text-success transition">
+                        <a href="https://www.tiktok.com/" target="_blank" aria-label="TikTok" class="text-light text-decoration-none fs-5 hover-text-success transition">
                             <i class="fab fa-tiktok"></i>
                         </a>
                         <a href="https://wa.me/573003091641" target="_blank" aria-label="WhatsApp" class="text-light text-decoration-none fs-5 hover-text-success transition">
@@ -533,14 +544,14 @@
                     <ul class="list-unstyled">
                         <li class="mb-2"><i class="ri-map-pin-fill text-success me-2"></i><span class="text-muted small">Medellín, Colombia</span></li>
                         <li class="mb-2"><i class="ri-phone-fill text-success me-2"></i><a href="tel:+573003091641" class="text-light text-decoration-none hover-text-success transition small">+57 300 309 1641</a></li>
-                        <li class="mb-2"><i class="ri-mail-fill text-success me-2"></i><a href="mailto:mayemundobelleza@gmail.com" class="text-light text-decoration-none hover-text-success transition small">mayemundobelleza@gmail.com</a></li>
-                        <li><i class="ri-time-fill text-success me-2"></i><span class="text-muted small">Lun–Sáb: 9am – 7pm</span></li>
+                        <li class="mb-2"><i class="ri-mail-fill text-success me-2"></i><a href="mailto:contacto@marcafitness.co" class="text-light text-decoration-none hover-text-success transition small">contacto@marcafitness.co</a></li>
+                        <li><i class="ri-time-fill text-success me-2"></i><span class="text-muted small">Lun–Sáb: 8am – 8pm</span></li>
                     </ul>
                 </div>
                 <!-- Newsletter -->
                 <div class="col-lg-3 col-md-6">
                     <h5 class="fw-bold mb-3 text-success">Newsletter</h5>
-                    <p class="text-muted small mb-3">Suscríbete para recibir promociones y novedades.</p>
+                    <p class="text-muted small mb-3">Suscríbete para tips, lanzamientos y descuentos exclusivos.</p>
                     <div class="input-group mb-2">
                         <input type="email" class="form-control" placeholder="Tu email" aria-label="Tu email">
                         <button class="btn btn-success" type="button"><i class="ri-send-plane-fill"></i></button>
@@ -551,19 +562,19 @@
             <!-- Copyright y año -->
             <div class="row text-center text-md-start">
                 <div class="col-md-6 mb-2 mb-md-0">
-                    <p class="text-muted small mb-0">© 2025 Maye Mundo Belleza. Todos los derechos reservados.</p>
+                    <p class="text-muted small mb-0">© 2026 De Prana. Todos los derechos reservados.</p>
                 </div>
                 <div class="col-md-6">
-                    <p class="text-muted small mb-0">Hecho con <i class="ri-heart-fill text-danger"></i> en Medellín — Año 2025</p>
+                    <p class="text-muted small mb-0">Hecho con <i class="ri-heart-fill text-danger"></i> en Medellín — Año 2026</p>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- Botón flotante WhatsApp -->
-    <a href="https://wa.me/573003091641?text=Hola!%20Tengo%20una%20consulta%20sobre%20productos"
+    <a href="https://wa.me/573003091641?text=Hola!%20Tengo%20una%20consulta%20sobre%20productos%20fitness"
        class="whatsapp-flotante" target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Maye Mundo Belleza">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Tienda Fitness">
     </a>
 
     <!-- ==========================================================================

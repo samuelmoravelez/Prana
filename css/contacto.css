@@ -1,14 +1,8 @@
 /* ==========================================================================
    contacto.css — Estilos exclusivos de contacto.html
-   Los estilos compartidos (header, footer, botones, hero-seccion)
-   están en global.css
+   Sistema FITNESS TRICOLOR: Vinotinto · Plateado · Blanco
    ========================================================================== */
 
-/* ==========================================================================
-   1. HERO DE SECCIÓN
-   El bloque base vive en global.css como .hero-seccion.
-   Aquí solo van los alias de clase que el HTML usa actualmente.
-   ========================================================================== */
 .contacto-hero              { }
 .contacto-hero__contenido   { }
 .contacto-hero__etiqueta    { }
@@ -19,8 +13,8 @@
    2. LAYOUT PRINCIPAL — GRID FORMULARIO + INFO
    ========================================================================== */
 .contacto-principal {
-    padding: 70px 0 80px;
-    background: var(--gradiente-seccion);
+    padding: 70px 0 90px;
+    background: linear-gradient(180deg, rgba(192, 192, 192, 0.04) 0%, var(--fondo-blanco-calido) 100%);
 }
 
 .contacto-grid {
@@ -39,7 +33,7 @@
     padding: 40px;
     box-shadow: var(--sombra-suave);
     animation: fadeInUp 0.7s ease-out both;
-    border: 1px solid var(--borde-suave);
+    border: 1.5px solid var(--borde-suave);
     position: relative;
     overflow: hidden;
 }
@@ -51,19 +45,15 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: var(--gradiente-cta);
+    background: linear-gradient(90deg, var(--vinotinto), var(--plateado), var(--vinotinto-claro));
 }
 
 .contacto-form-bloque__titulo {
     font-family: var(--fuente-titulos);
-    font-size: 1.55rem;
-    font-weight: 700;
-    color: var(--texto-oscuro);
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: var(--vinotinto);
     margin-bottom: 6px;
-    background: var(--gradiente-texto);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .contacto-form-bloque__subtitulo {
@@ -73,7 +63,6 @@
     line-height: 1.65;
 }
 
-/* Grupo de campo: label + input apilados */
 .form-grupo {
     display: flex;
     flex-direction: column;
@@ -84,17 +73,17 @@
 .form-grupo label {
     font-family: var(--fuente-titulos);
     font-size: 0.82rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--texto-oscuro);
-    letter-spacing: 0.03em;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
-/* Estilo base para input, select y textarea */
 .form-grupo input,
 .form-grupo select,
 .form-grupo textarea {
     width: 100%;
-    padding: 13px 17px;
+    padding: 14px 18px;
     border: 1.5px solid var(--borde-suave);
     border-radius: var(--radio-md);
     font-family: var(--fuente-cuerpo);
@@ -108,40 +97,38 @@
 
 .form-grupo input::placeholder,
 .form-grupo textarea::placeholder {
-    color: #AAB5C2;
+    color: #A0A0A0;
 }
 
 .form-grupo input:focus,
 .form-grupo select:focus,
 .form-grupo textarea:focus {
-    border-color: var(--azul-principal);
-    box-shadow: 0 0 0 3px rgba(168, 197, 218, 0.18);
+    border-color: var(--vinotinto);
+    box-shadow: 0 0 0 4px rgba(92, 10, 27, 0.10);
     background-color: var(--blanco-puro);
 }
 
 .form-grupo textarea {
     resize: vertical;
-    min-height: 135px;
+    min-height: 140px;
 }
 
-/* Fila de dos columnas dentro del formulario */
 .form-fila {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
 }
 
-/* Botón de envío */
 .btn-form {
     width: 100%;
-    padding: 15px;
-    background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-principal-hover) 100%);
+    padding: 16px;
+    background: var(--gradiente-vinotinto);
     color: var(--blanco-puro);
-    border: none;
+    border: 1.5px solid var(--plateado);
     border-radius: var(--radio-md);
     font-family: var(--fuente-titulos);
     font-size: 0.95rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -151,9 +138,11 @@
                 transform 0.2s ease,
                 box-shadow 0.3s ease;
     margin-top: 10px;
-    box-shadow: 0 5px 16px rgba(168, 197, 218, 0.40);
+    box-shadow: var(--sombra-vinotinto);
     position: relative;
     overflow: hidden;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
 
 .btn-form::before {
@@ -163,14 +152,15 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    background: linear-gradient(90deg, transparent, rgba(192, 192, 192, 0.35), transparent);
     transition: left 0.5s ease;
 }
 
 .btn-form:hover {
-    background: linear-gradient(135deg, var(--azul-principal-hover) 0%, var(--azul-principal) 100%);
+    background: var(--gradiente-cta);
     transform: translateY(-3px);
-    box-shadow: 0 10px 26px rgba(168, 197, 218, 0.52);
+    box-shadow: var(--sombra-neon);
+    border-color: var(--plateado-claro);
 }
 
 .btn-form:hover::before {
@@ -179,7 +169,7 @@
 
 .btn-form:active {
     transform: translateY(-1px);
-    box-shadow: 0 5px 14px rgba(168, 197, 218, 0.38);
+    box-shadow: var(--sombra-vinotinto);
 }
 
 /* ==========================================================================
@@ -192,7 +182,6 @@
     animation: fadeInUp 0.7s ease-out 0.15s both;
 }
 
-/* Tarjeta de dato de contacto */
 .info-tarjeta {
     display: flex;
     align-items: flex-start;
@@ -202,36 +191,37 @@
     padding: 22px 24px;
     box-shadow: var(--sombra-xs);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    border: 1px solid var(--borde-suave);
+    border: 1.5px solid var(--borde-suave);
 }
 
 .info-tarjeta:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--sombra-media);
-    border-color: var(--rosado-acento);
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-vinotinto);
+    border-color: var(--vinotinto);
 }
 
-/* Icono de la tarjeta */
 .info-tarjeta__icono {
-    width: 48px;
-    height: 48px;
+    width: 50px;
+    height: 50px;
     border-radius: 14px;
-    background: linear-gradient(135deg, var(--rosado-acento) 0%, var(--lavanda-suave) 100%);
-    color: var(--azul-profundo);
+    background: var(--gradiente-vinotinto);
+    color: var(--blanco-puro);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     flex-shrink: 0;
     transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 3px 10px rgba(245, 213, 213, 0.35);
+    box-shadow: var(--sombra-xs);
+    border: 1.5px solid var(--plateado);
 }
 
 .info-tarjeta:hover .info-tarjeta__icono {
-    background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-principal-hover) 100%);
-    color: var(--blanco-puro);
-    transform: scale(1.08) rotate(-3deg);
-    box-shadow: 0 5px 16px rgba(168, 197, 218, 0.45);
+    background: linear-gradient(135deg, var(--plateado-oscuro) 0%, var(--plateado) 100%);
+    color: var(--vinotinto-oscuro);
+    transform: scale(1.1) rotate(-5deg);
+    box-shadow: var(--sombra-plateada);
+    border-color: var(--vinotinto);
 }
 
 .info-tarjeta__cuerpo {
@@ -243,10 +233,10 @@
 .info-tarjeta__etiqueta {
     font-family: var(--fuente-titulos);
     font-size: 0.73rem;
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--lavanda-hover);
+    letter-spacing: 0.12em;
+    color: var(--vinotinto);
 }
 
 .info-tarjeta__valor {
@@ -258,33 +248,29 @@
 }
 
 .info-tarjeta__valor a {
-    color: var(--azul-principal-hover);
-    font-weight: 650;
+    color: var(--vinotinto);
+    font-weight: 700;
     transition: color 0.25s ease;
 }
 
 .info-tarjeta__valor a:hover {
-    color: var(--lavanda-hover);
+    color: var(--vinotinto-claro);
 }
 
 /* ==========================================================================
    5. CANALES DIRECTOS — TARJETAS DE REDES SOCIALES
    ========================================================================== */
 .contacto-canales {
-    padding: 10px 0 80px;
+    padding: 10px 0 90px;
 }
 
 .contacto-canales__titulo {
     font-family: var(--fuente-titulos);
-    font-size: 1.65rem;
-    font-weight: 700;
+    font-size: 1.85rem;
+    font-weight: 800;
     text-align: center;
-    color: var(--texto-oscuro);
+    color: var(--vinotinto);
     margin-bottom: 8px;
-    background: var(--gradiente-texto);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .contacto-canales__subtitulo {
@@ -293,6 +279,9 @@
     font-size: 0.96rem;
     margin-bottom: 36px;
     line-height: 1.6;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .canales-grid {
@@ -301,13 +290,12 @@
     gap: 22px;
 }
 
-/* Tarjeta de canal */
 .canal-tarjeta {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 14px;
-    padding: 34px 22px;
+    padding: 36px 24px;
     border-radius: var(--radio-xl);
     background-color: var(--blanco-puro);
     box-shadow: var(--sombra-xs);
@@ -322,72 +310,70 @@
 }
 
 .canal-tarjeta:hover {
-    transform: translateY(-7px);
+    transform: translateY(-10px);
     box-shadow: var(--sombra-media);
-    background: linear-gradient(180deg, var(--blanco-puro) 0%, rgba(245, 213, 213, 0.10) 100%);
+    background: linear-gradient(180deg, var(--blanco-puro) 0%, rgba(92, 10, 27, 0.05) 100%);
 }
 
 .canal-tarjeta__icono {
-    width: 64px;
-    height: 64px;
+    width: 68px;
+    height: 68px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.65rem;
+    font-size: 1.7rem;
     color: var(--blanco-puro);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    border: 2.5px solid var(--blanco-puro);
+    outline: 2px solid var(--plateado);
+    outline-offset: 2px;
 }
 
 .canal-tarjeta:hover .canal-tarjeta__icono {
-    transform: scale(1.15);
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+    transform: scale(1.18) rotate(-6deg);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
 }
 
-/* Color de fondo por red social */
 .canal-tarjeta--whatsapp .canal-tarjeta__icono  { background: linear-gradient(135deg, #25D366 0%, #1FB956 100%); }
 .canal-tarjeta--instagram .canal-tarjeta__icono {
     background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCAF45 100%);
 }
 .canal-tarjeta--tiktok .canal-tarjeta__icono    { background: linear-gradient(135deg, #010101 0%, #1a1a2e 100%); }
 
-/* Borde de hover por red social */
 .canal-tarjeta--whatsapp:hover  { border-color: #25D366; }
 .canal-tarjeta--instagram:hover { border-color: #E4405F; }
 .canal-tarjeta--tiktok:hover    { border-color: #69C9D0; }
 
 .canal-tarjeta__nombre {
     font-family: var(--fuente-titulos);
-    font-size: 1.02rem;
-    font-weight: 700;
+    font-size: 1.05rem;
+    font-weight: 800;
     color: var(--texto-oscuro);
+    letter-spacing: 0.03em;
 }
 
 .canal-tarjeta__accion {
     font-size: 0.83rem;
     color: var(--texto-mutado);
-    font-weight: 450;
+    font-weight: 500;
 }
 
 /* ==========================================================================
    6. SECCIÓN MAPA STANDALONE
    ========================================================================== */
 .contacto-mapa {
-    padding: 0 0 80px;
+    padding: 0 0 90px;
 }
 
 .contacto-mapa__titulo {
     font-family: var(--fuente-titulos);
-    font-size: 1.65rem;
-    font-weight: 700;
+    font-size: 1.85rem;
+    font-weight: 800;
     text-align: center;
-    color: var(--texto-oscuro);
+    color: var(--vinotinto);
     margin-bottom: 8px;
-    background: var(--gradiente-texto);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .contacto-mapa__subtitulo {
@@ -395,14 +381,10 @@
     color: var(--texto-mutado);
     font-size: 0.96rem;
     margin-bottom: 28px;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
 }
-
-/* ==========================================================================
-   7. KEYFRAMES
-   Eliminados — viven en global.css como fadeInDown y fadeInUp.
-   Los nombres contactoFadeDown/contactoFadeUp han sido unificados
-   con las animaciones genéricas de global.css.
-   ========================================================================== */
 
 /* ==========================================================================
    8. RESPONSIVE
@@ -433,7 +415,7 @@
 
     .contacto-mapa__titulo,
     .contacto-canales__titulo {
-        font-size: 1.35rem;
+        font-size: 1.45rem;
     }
 }
 
@@ -448,5 +430,15 @@
 
     .canales-grid {
         grid-template-columns: 1fr;
+    }
+
+    .info-tarjeta {
+        padding: 18px 18px;
+    }
+
+    .info-tarjeta__icono {
+        width: 44px;
+        height: 44px;
+        font-size: 1.05rem;
     }
 }

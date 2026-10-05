@@ -1,17 +1,9 @@
 /* ==========================================================================
    productos.css — Estilos exclusivos de productos.html
-   Los estilos compartidos (header, footer, botones, tarjetas, hero-seccion)
-   están en global.css
+   Sistema FITNESS TRICOLOR: Vinotinto · Plateado · Blanco
    ========================================================================== */
 
-/* ==========================================================================
-   1. HERO DE SECCIÓN
-   El bloque base (.hero-seccion, ::before/after, __contenido, __etiqueta,
-   __titulo, __descripcion) vive en global.css.
-   Aquí solo van los alias de clase que el HTML usa actualmente,
-   delegando al componente compartido.
-   ========================================================================== */
-.productos-hero              { }   /* hereda todo de .hero-seccion */
+.productos-hero              { }
 .productos-hero__contenido   { }
 .productos-hero__etiqueta    { }
 .productos-hero__titulo      { }
@@ -23,17 +15,15 @@
 .categorias-visuales {
     background-color: var(--blanco-puro);
     padding: 36px 0 0;
-    border-bottom: 1px solid var(--borde-suave);
+    border-bottom: 1.5px solid var(--borde-suave);
 }
 
-/* Grid de 5 columnas (una por categoría) */
 .categorias-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 0;
 }
 
-/* Tarjeta de categoría */
 .categoria-card {
     display: flex;
     flex-direction: column;
@@ -44,93 +34,95 @@
     position: relative;
     border-bottom: 3px solid transparent;
     transition: background-color 0.25s ease,
-                border-color 0.25s ease;
+                border-color 0.25s ease,
+                transform 0.25s ease;
     user-select: none;
 }
 
 .categoria-card:hover {
-    background: linear-gradient(180deg, var(--fondo-blanco-calido) 0%, rgba(245, 213, 213, 0.12) 100%);
-    border-bottom-color: var(--rosado-hover);
+    background: linear-gradient(180deg, var(--fondo-blanco-calido) 0%, rgba(92, 10, 27, 0.06) 100%);
+    border-bottom-color: var(--vinotinto);
 }
 
-/* Icono Remix Icons */
 .categoria-card__icono {
     font-size: 2rem;
     line-height: 1;
-    transition: transform 0.25s ease, color 0.25s ease;
-    color: var(--azul-principal-hover);
+    transition: transform 0.25s ease, color 0.25s ease, background 0.25s ease;
+    color: var(--blanco-puro);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 56px;
-    height: 56px;
-    background: linear-gradient(135deg, var(--fondo-blanco-calido) 0%, var(--rosado-acento) 100%);
-    border-radius: 18px;
+    width: 58px;
+    height: 58px;
+    background: var(--gradiente-vinotinto);
+    border-radius: 16px;
     box-shadow: var(--sombra-xs);
+    border: 1.5px solid var(--plateado);
 }
 
 .categoria-card:hover .categoria-card__icono {
-    transform: scale(1.15) translateY(-3px);
-    color: var(--lavanda-hover);
-    background: linear-gradient(135deg, var(--lavanda-suave) 0%, var(--azul-principal) 100%);
-    box-shadow: var(--sombra-acento);
+    transform: scale(1.15) translateY(-4px);
+    background: linear-gradient(135deg, var(--vinotinto-hover) 0%, var(--vinotinto-claro) 100%);
+    box-shadow: var(--sombra-vinotinto);
+    border-color: var(--plateado-claro);
 }
 
-/* Nombre de la categoría */
 .categoria-card__nombre {
     font-family: var(--fuente-titulos);
     font-size: 0.82rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--texto-mutado);
     transition: color 0.25s ease;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
 }
 
 .categoria-card:hover .categoria-card__nombre {
-    color: var(--azul-principal-hover);
+    color: var(--vinotinto);
+    font-weight: 800;
 }
 
-/* Estado activo */
+/* Estados activos */
 #filtro-todos:checked     ~ * .categoria-card[for="filtro-todos"],
-#filtro-capilar:checked   ~ * .categoria-card[for="filtro-capilar"],
-#filtro-maquillaje:checked ~ * .categoria-card[for="filtro-maquillaje"],
-#filtro-unas:checked      ~ * .categoria-card[for="filtro-unas"],
-#filtro-skincare:checked  ~ * .categoria-card[for="filtro-skincare"] {
-    border-bottom-color: var(--azul-principal-hover);
-    background: linear-gradient(180deg, var(--fondo-blanco-calido) 0%, rgba(168, 197, 218, 0.12) 100%);
+#filtro-suplementos:checked ~ * .categoria-card[for="filtro-suplementos"],
+#filtro-indumentaria:checked ~ * .categoria-card[for="filtro-indumentaria"],
+#filtro-accesorios:checked ~ * .categoria-card[for="filtro-accesorios"],
+#filtro-equipamiento:checked ~ * .categoria-card[for="filtro-equipamiento"] {
+    border-bottom-color: var(--vinotinto);
+    background: linear-gradient(180deg, var(--fondo-blanco-calido) 0%, rgba(92, 10, 27, 0.08) 100%);
 }
 
 #filtro-todos:checked     ~ * .categoria-card[for="filtro-todos"] .categoria-card__icono,
-#filtro-capilar:checked   ~ * .categoria-card[for="filtro-capilar"] .categoria-card__icono,
-#filtro-maquillaje:checked ~ * .categoria-card[for="filtro-maquillaje"] .categoria-card__icono,
-#filtro-unas:checked      ~ * .categoria-card[for="filtro-unas"] .categoria-card__icono,
-#filtro-skincare:checked  ~ * .categoria-card[for="filtro-skincare"] .categoria-card__icono {
-    background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-principal-hover) 100%);
-    color: var(--blanco-puro);
-    box-shadow: 0 6px 18px rgba(168, 197, 218, 0.45);
+#filtro-suplementos:checked ~ * .categoria-card[for="filtro-suplementos"] .categoria-card__icono,
+#filtro-indumentaria:checked ~ * .categoria-card[for="filtro-indumentaria"] .categoria-card__icono,
+#filtro-accesorios:checked ~ * .categoria-card[for="filtro-accesorios"] .categoria-card__icono,
+#filtro-equipamiento:checked ~ * .categoria-card[for="filtro-equipamiento"] .categoria-card__icono {
+    background: linear-gradient(135deg, var(--plateado-oscuro) 0%, var(--plateado) 100%);
+    color: var(--vinotinto-oscuro);
+    box-shadow: var(--sombra-plateada);
+    border-color: var(--vinotinto);
 }
 
 #filtro-todos:checked     ~ * .categoria-card[for="filtro-todos"] .categoria-card__nombre,
-#filtro-capilar:checked   ~ * .categoria-card[for="filtro-capilar"] .categoria-card__nombre,
-#filtro-maquillaje:checked ~ * .categoria-card[for="filtro-maquillaje"] .categoria-card__nombre,
-#filtro-unas:checked      ~ * .categoria-card[for="filtro-unas"] .categoria-card__nombre,
-#filtro-skincare:checked  ~ * .categoria-card[for="filtro-skincare"] .categoria-card__nombre {
-    color: var(--azul-principal-hover);
-    font-weight: 700;
+#filtro-suplementos:checked ~ * .categoria-card[for="filtro-suplementos"] .categoria-card__nombre,
+#filtro-indumentaria:checked ~ * .categoria-card[for="filtro-indumentaria"] .categoria-card__nombre,
+#filtro-accesorios:checked ~ * .categoria-card[for="filtro-accesorios"] .categoria-card__nombre,
+#filtro-equipamiento:checked ~ * .categoria-card[for="filtro-equipamiento"] .categoria-card__nombre {
+    color: var(--vinotinto);
+    font-weight: 800;
 }
 
 /* ==========================================================================
    3. CATÁLOGO — ÁREA PRINCIPAL
    ========================================================================== */
 .productos-catalogo {
-    padding: 60px 0 80px;
-    background: var(--gradiente-seccion);
+    padding: 60px 0 90px;
+    background: linear-gradient(180deg, rgba(192, 192, 192, 0.04) 0%, var(--fondo-blanco-calido) 100%);
 }
 
 /* ==========================================================================
-   3. FILTROS DE CATEGORÍA (CSS puro con radio buttons ocultos)
+   3. FILTROS DE CATEGORÍA
    ========================================================================== */
-
-/* Ocultar los inputs radio del DOM visual pero mantenerlos funcionales */
 .filtro-input {
     position: absolute;
     opacity: 0;
@@ -150,17 +142,16 @@
     justify-content: center;
 }
 
-/* Pill base */
 .filtro-pill {
     display: inline-block;
-    padding: 9px 22px;
+    padding: 10px 24px;
     border-radius: var(--radio-pill);
     font-family: var(--fuente-titulos);
     font-size: 0.85rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    border: 1.5px solid var(--borde-acento);
-    color: var(--texto-mutado);
+    border: 1.5px solid var(--vinotinto);
+    color: var(--vinotinto);
     background-color: var(--blanco-puro);
     transition: background-color 0.25s ease,
                 color 0.25s ease,
@@ -168,33 +159,33 @@
                 box-shadow 0.25s ease,
                 transform 0.2s ease;
     user-select: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
 }
 
 .filtro-pill:hover {
-    border-color: var(--rosado-hover);
-    color: var(--azul-profundo);
-    background-color: var(--rosado-acento);
-    transform: translateY(-2px);
-    box-shadow: var(--sombra-acento);
+    border-color: var(--vinotinto-hover);
+    color: var(--blanco-puro);
+    background: var(--gradiente-vinotinto);
+    transform: translateY(-3px);
+    box-shadow: var(--sombra-vinotinto);
 }
 
 /* Pill activo */
 #filtro-todos:checked     ~ .filtros-pills label[for="filtro-todos"],
-#filtro-capilar:checked   ~ .filtros-pills label[for="filtro-capilar"],
-#filtro-maquillaje:checked ~ .filtros-pills label[for="filtro-maquillaje"],
-#filtro-unas:checked      ~ .filtros-pills label[for="filtro-unas"],
-#filtro-skincare:checked  ~ .filtros-pills label[for="filtro-skincare"] {
-    background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-principal-hover) 100%);
+#filtro-suplementos:checked ~ .filtros-pills label[for="filtro-suplementos"],
+#filtro-indumentaria:checked ~ .filtros-pills label[for="filtro-indumentaria"],
+#filtro-accesorios:checked ~ .filtros-pills label[for="filtro-accesorios"],
+#filtro-equipamiento:checked ~ .filtros-pills label[for="filtro-equipamiento"] {
+    background: var(--gradiente-vinotinto);
     color: var(--blanco-puro);
-    border-color: transparent;
-    box-shadow: 0 6px 18px rgba(168, 197, 218, 0.45);
-    transform: translateY(-2px);
+    border-color: var(--plateado);
+    box-shadow: var(--sombra-neon);
+    transform: translateY(-3px);
 }
 
 /* ==========================================================================
    4. ANIMACIÓN DE ENTRADA DE LAS TARJETAS
-   Cada tarjeta aparece con un ligero fade + subida al cargar la página.
-   El retardo escalonado (nth-child) da un efecto en cascada.
    ========================================================================== */
 .tarjeta-animada {
     animation: fadeInUp 0.55s ease-out both;
@@ -211,46 +202,39 @@
 .tarjeta-animada:nth-child(9) { animation-delay: 0.61s; }
 
 /* ==========================================================================
-   5. BOTÓN "PEDIR POR WHATSAPP" EN TARJETA
-   El estilo base de .btn-comprar-tarjeta vive en global.css.
-   productos.css no necesita sobreescribirlo — el display:block
-   y text-align:center ya están definidos en el componente compartido.
-   ========================================================================== */
-
-/* ==========================================================================
    6. BANNER CTA
    ========================================================================== */
 .productos-cta {
-    background: var(--gradiente-cta);
-    padding: 65px 20px;
+    background: var(--gradiente-vinotinto);
+    padding: 70px 24px;
     margin-top: 20px;
     position: relative;
     overflow: hidden;
-    border-top: 1px solid var(--borde-suave);
-    border-bottom: 1px solid var(--borde-suave);
+    border-top: 2px solid var(--plateado);
+    border-bottom: 2px solid var(--plateado);
 }
 
 .productos-cta::before {
     content: '';
     position: absolute;
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.45) 0%, transparent 70%);
-    top: -200px;
-    right: -100px;
+    background: radial-gradient(circle, rgba(192, 192, 192, 0.14) 0%, transparent 70%);
+    top: -240px;
+    right: -120px;
     pointer-events: none;
 }
 
 .productos-cta::after {
     content: '';
     position: absolute;
-    width: 300px;
-    height: 300px;
+    width: 360px;
+    height: 360px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(212, 197, 226, 0.50) 0%, transparent 70%);
-    bottom: -150px;
-    left: -80px;
+    background: radial-gradient(circle, rgba(154, 31, 56, 0.35) 0%, transparent 70%);
+    bottom: -180px;
+    left: -90px;
     pointer-events: none;
 }
 
@@ -271,45 +255,47 @@
 
 .productos-cta__titulo {
     font-family: var(--fuente-titulos);
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--azul-profundo);
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--blanco-puro);
     margin-bottom: 10px;
-    line-height: 1.3;
+    line-height: 1.25;
 }
 
 .productos-cta__descripcion {
     font-size: 0.98rem;
-    color: var(--texto-mutado);
+    color: var(--plateado-claro);
     line-height: 1.65;
     font-weight: 450;
+    opacity: 0.92;
 }
 
-/* Botón blanco exclusivo del CTA */
 .btn-cta-blanco {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 15px 32px;
-    background-color: var(--blanco-puro);
-    color: var(--azul-profundo);
+    padding: 16px 36px;
+    background: linear-gradient(135deg, var(--plateado) 0%, var(--plateado-claro) 100%);
+    color: var(--vinotinto-oscuro);
     font-family: var(--fuente-titulos);
-    font-weight: 700;
+    font-weight: 800;
     font-size: 0.95rem;
     border-radius: var(--radio-md);
     white-space: nowrap;
     transition: var(--transicion);
     flex-shrink: 0;
-    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.55), 0 4px 14px rgba(168, 197, 218, 0.25);
-    border: 2px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+    border: 2px solid var(--blanco-puro);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
 .btn-cta-blanco:hover {
-    background: linear-gradient(135deg, var(--lavanda-suave) 0%, var(--azul-principal) 100%);
-    color: var(--blanco-puro);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 28px rgba(168, 197, 218, 0.50);
-    border-color: transparent;
+    background: linear-gradient(135deg, var(--plateado-claro) 0%, #FFFFFF 100%);
+    color: var(--vinotinto);
+    transform: translateY(-4px);
+    box-shadow: 0 14px 38px rgba(0, 0, 0, 0.45);
+    border-color: var(--plateado-claro);
 }
 
 .btn-cta-blanco i {
@@ -317,15 +303,9 @@
 }
 
 /* ==========================================================================
-   7. KEYFRAMES
-   Eliminados — viven en global.css como fadeInDown y fadeInUp.
-   ========================================================================== */
-
-/* ==========================================================================
    8. RESPONSIVE
    ========================================================================== */
 @media (max-width: 768px) {
-    /* Categorías: 5 columnas → 3 en tablet */
     .categorias-grid {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -336,6 +316,8 @@
 
     .categoria-card__icono {
         font-size: 1.5rem;
+        width: 50px;
+        height: 50px;
     }
 
     .filtros-pills {
@@ -344,7 +326,7 @@
 
     .filtro-pill {
         padding: 8px 16px;
-        font-size: 0.8rem;
+        font-size: 0.78rem;
     }
 
     .productos-cta__contenido {
@@ -353,7 +335,7 @@
     }
 
     .productos-cta__titulo {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
     }
 
     .btn-cta-blanco {
@@ -363,9 +345,9 @@
 }
 
 @media (max-width: 480px) {
-    /* Categorías: 3 columnas → 3 en móvil pequeño (mantener) */
     .categoria-card__nombre {
-        font-size: 0.74rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.01em;
     }
 
     .productos-hero__titulo {

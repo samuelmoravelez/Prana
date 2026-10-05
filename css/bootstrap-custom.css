@@ -1,989 +1,649 @@
 /* ========================================================================
-   PERSONALIZACIONES DE BOOTSTRAP PARA MAYE MUNDO BELLEZA
-   Paleta Pastel — Soft UI
+   BOOTSTRAP CUSTOM — PALETA FITNESS VINOTINTO + PLATEADO
+   Sobrescribe todas las variables y clases de Bootstrap.
    ======================================================================== */
 
-/* ── COLORES BOOTSTRAP PERSONALIZADOS ── */
+/* ── VARIABLES BOOTSTRAP MAPEADAS A FITNESS ── */
 :root {
-    --bs-primary: #A8C5DA;
-    --bs-secondary: #F5D5D5;
-    --bs-success: #A8C5DA;
-    --bs-danger: #E8A0A0;
-    --bs-warning: #F5E6A8;
-    --bs-info: #D4C5E2;
-    --bs-light: #FAFAF7;
-    --bs-dark: #2C3E50;
+    --bs-primary:   #5C0A1B;   /* Vinotinto como color principal (success → primary) */
+    --bs-secondary: #C0C0C0;   /* Plateado como secundario */
+    --bs-success:   #5C0A1B;   /* Vinotinto (antiguo "success" = CTAs principales) */
+    --bs-danger:    #7A1429;   /* Vinotinto hover para alertas/badges rojos */
+    --bs-warning:   #8A8A8A;   /* Plata oscuro para advertencias */
+    --bs-info:      #4A4A4A;   /* Gris metal para info */
+    --bs-light:     #F5F5F5;   /* Blanco suave */
+    --bs-dark:      #1A1A1A;   /* Negro profundo + acentos plateados */
+    --bs-white:     #FFFFFF;
+    --bs-gray:      #8A8A8A;
+    --bs-gray-dark: #2C2C2C;
 }
 
 /* ── TIPOGRAFÍA BOOTSTRAP ── */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--fondo-blanco-calido);
+    background-color: var(--fondo-general);
     color: var(--texto-oscuro);
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
+    color: var(--texto-oscuro);
 }
 
 .display-1, .display-2, .display-3, .display-4, .display-5 {
-    font-weight: 700;
+    font-weight: 800;
+    letter-spacing: -0.01em;
 }
 
-/* ── BOTONES PERSONALIZADOS ── */
+/* ── BOTONES BOOTSTRAP: ESTÉTICA FITNESS ── */
 .btn {
     font-family: 'Poppins', sans-serif;
-    font-weight: 600;
+    font-weight: 700;
     border-radius: var(--radio-md);
     transition: var(--transicion);
     border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 0.88rem;
 }
 
+/* Botón VINOTINTO (Success / Primary) — CTA PRINCIPAL */
 .btn-success {
-    background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-principal-hover) 100%);
-    border-color: var(--azul-principal);
-    color: var(--blanco-puro);
-    box-shadow: 0 4px 14px rgba(168, 197, 218, 0.40);
+    background: linear-gradient(135deg, #5C0A1B 0%, #7A1429 100%) !important;
+    border-color: transparent !important;
+    color: var(--blanco-puro) !important;
+    box-shadow: 0 4px 14px rgba(92, 10, 27, 0.40) !important;
+    position: relative;
+    overflow: hidden;
 }
-
+.btn-success::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    transition: left 0.5s ease;
+}
 .btn-success:hover {
-    background: linear-gradient(135deg, var(--azul-principal-hover) 0%, var(--azul-principal) 100%);
-    border-color: var(--azul-principal-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(168, 197, 218, 0.50);
+    background: linear-gradient(135deg, #7A1429 0%, #9A1F38 100%) !important;
+    color: var(--blanco-puro) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 28px rgba(92, 10, 27, 0.55), 0 0 0 1px rgba(192,192,192,0.3) inset !important;
 }
+.btn-success:hover::before { left: 100%; }
+.btn-success:active { transform: translateY(-1px) !important; }
 
+/* Botón VINOTINTO OUTLINE */
 .btn-outline-success {
-    color: var(--azul-principal-hover);
-    border-color: var(--azul-principal);
+    color: #5C0A1B !important;
+    border: 2px solid #5C0A1B !important;
+    background-color: transparent !important;
+    transition: var(--transicion) !important;
 }
-
 .btn-outline-success:hover {
-    background: linear-gradient(135deg, var(--rosado-acento) 0%, var(--lavanda-suave) 100%);
-    border-color: transparent;
-    color: var(--azul-profundo);
+    background: linear-gradient(135deg, #5C0A1B 0%, #7A1429 100%) !important;
+    border-color: transparent !important;
+    color: var(--blanco-puro) !important;
+    box-shadow: 0 6px 20px rgba(92,10,27,0.40) !important;
+    transform: translateY(-3px) !important;
 }
 
-/* ── CARDS PERSONALIZADAS ── */
+/* Botón DANGER — Vinotinto medio */
+.btn-danger {
+    background: linear-gradient(135deg, #7A1429 0%, #9A1F38 100%) !important;
+    border-color: transparent !important;
+    color: var(--blanco-puro) !important;
+    box-shadow: 0 4px 14px rgba(122, 20, 41, 0.40) !important;
+    transition: var(--transicion) !important;
+}
+.btn-danger:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 28px rgba(122, 20, 41, 0.55) !important;
+}
+
+/* Botón INFO — Gris metálico */
+.btn-info {
+    background: linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 100%) !important;
+    border-color: transparent !important;
+    color: var(--blanco-puro) !important;
+    box-shadow: 0 4px 14px rgba(44, 44, 44, 0.30) !important;
+    transition: var(--transicion) !important;
+}
+.btn-info:hover {
+    background: linear-gradient(135deg, #4A4A4A 0%, #2C2C2C 100%) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 28px rgba(44,44,44,0.45) !important;
+}
+.btn-outline-info {
+    color: #4A4A4A !important;
+    border-color: #4A4A4A !important;
+}
+.btn-outline-info:hover {
+    background-color: #2C2C2C !important;
+    color: var(--blanco-puro) !important;
+    border-color: transparent !important;
+}
+
+/* Botón WARNING — Plateado */
+.btn-warning {
+    background: linear-gradient(135deg, #C0C0C0 0%, #E0E0E0 100%) !important;
+    border-color: transparent !important;
+    color: #1A1A1A !important;
+    transition: var(--transicion) !important;
+}
+.btn-warning:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 28px rgba(192,192,192,0.45) !important;
+}
+
+/* Botón DARK — Fondo ultra oscuro */
+.btn-dark {
+    background: linear-gradient(135deg, #1A1A1A 0%, #2C2C2C 100%) !important;
+    border-color: transparent !important;
+    color: var(--blanco-puro) !important;
+    box-shadow: 0 4px 14px rgba(26,26,26,0.35) !important;
+    transition: var(--transicion) !important;
+}
+.btn-dark:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 28px rgba(26,26,26,0.55), 0 0 0 1px rgba(192,192,192,0.25) inset !important;
+}
+.btn-outline-dark {
+    color: #1A1A1A !important;
+    border-color: #1A1A1A !important;
+}
+.btn-outline-dark:hover {
+    background: linear-gradient(135deg, #1A1A1A 0%, #2C2C2C 100%) !important;
+    color: var(--blanco-puro) !important;
+    border-color: transparent !important;
+}
+
+/* Botón LIGHT — Blanco + borde plateado */
+.btn-light {
+    background-color: var(--blanco-puro) !important;
+    border: 2px solid var(--borde-plateado) !important;
+    color: var(--texto-oscuro) !important;
+    transition: var(--transicion) !important;
+}
+.btn-light:hover {
+    background: linear-gradient(135deg, #5C0A1B 0%, #7A1429 100%) !important;
+    border-color: transparent !important;
+    color: var(--blanco-puro) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 28px rgba(92,10,27,0.40) !important;
+}
+.btn-outline-light {
+    color: var(--blanco-puro) !important;
+    border-color: rgba(255,255,255,0.85) !important;
+}
+.btn-outline-light:hover {
+    background-color: var(--blanco-puro) !important;
+    color: #5C0A1B !important;
+    border-color: transparent !important;
+}
+
+/* Botón SECONDARY — Plateado */
+.btn-secondary {
+    background-color: var(--plateado-claro) !important;
+    border: 2px solid var(--borde-plateado) !important;
+    color: var(--texto-oscuro) !important;
+    transition: var(--transicion) !important;
+}
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #5C0A1B 0%, #7A1429 100%) !important;
+    color: var(--blanco-puro) !important;
+    border-color: transparent !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 28px rgba(92,10,27,0.40) !important;
+}
+
+/* Botón LINK */
+.btn-link {
+    color: #5C0A1B !important;
+    font-weight: 600;
+}
+.btn-link:hover {
+    color: #7A1429 !important;
+}
+
+/* ── CARDS FITNESS ── */
 .card {
     transition: var(--transicion);
     border-radius: var(--radio-lg) !important;
     border: 1px solid var(--borde-suave);
+    background-color: var(--blanco-puro);
 }
-
 .card:hover {
     transform: translateY(-6px);
-    box-shadow: var(--sombra-media) !important;
-    border-color: var(--rosado-acento);
+    box-shadow: 0 14px 36px rgba(92,10,27,0.18) !important;
+    border-color: var(--vinotinto);
 }
-
 .card-body {
     padding: 1.5rem;
 }
-
 .card-title {
     font-family: 'Poppins', sans-serif;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 0.75rem;
     color: var(--texto-oscuro);
 }
-
 .card-text {
     font-size: 0.95rem;
     line-height: 1.6;
-    color: var(--texto-mutado);
+    color: var(--texto-plateado);
 }
 
-/* ── BADGES PERSONALIZADOS ── */
+/* ── BADGES FITNESS ── */
 .badge {
     font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
+    font-weight: 700;
+    padding: 0.4rem 0.9rem;
     border-radius: var(--radio-pill);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+}
+.badge.bg-success {
+    background: linear-gradient(135deg, #5C0A1B 0%, #7A1429 100%) !important;
+    color: var(--blanco-puro) !important;
+    box-shadow: 0 2px 8px rgba(92,10,27,0.30);
+}
+.badge.bg-danger {
+    background: linear-gradient(135deg, #7A1429 0%, #9A1F38 100%) !important;
+    color: var(--blanco-puro) !important;
+}
+.badge.bg-info {
+    background: linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 100%) !important;
+    color: var(--blanco-puro) !important;
+}
+.badge.bg-warning {
+    background: linear-gradient(135deg, #C0C0C0 0%, #E0E0E0 100%) !important;
+    color: #1A1A1A !important;
+}
+.badge.bg-dark {
+    background: linear-gradient(135deg, #1A1A1A 0%, #2C2C2C 100%) !important;
+    color: var(--blanco-puro) !important;
+    border: 1px solid rgba(192,192,192,0.2);
+}
+.badge.bg-light {
+    background-color: var(--blanco-humo) !important;
+    color: var(--texto-oscuro) !important;
+    border: 1px solid var(--borde-plateado);
+}
+.badge.bg-secondary {
+    background-color: var(--plateado-claro) !important;
+    color: var(--texto-oscuro) !important;
+}
+/* Badges sutiles (tipo -subtle o bg-light.text-*) */
+.badge.bg-success-subtle,
+.badge.bg-light.text-success {
+    background: linear-gradient(135deg, rgba(92,10,27,0.10) 0%, rgba(122,20,41,0.08) 100%) !important;
+    color: #5C0A1B !important;
+    border: 1px solid rgba(92,10,27,0.18);
+}
+.badge.bg-danger-subtle,
+.badge.bg-light.text-danger {
+    background: linear-gradient(135deg, rgba(122,20,41,0.12) 0%, rgba(154,31,56,0.08) 100%) !important;
+    color: #7A1429 !important;
+    border: 1px solid rgba(122,20,41,0.18);
+}
+.badge.bg-info-subtle,
+.badge.bg-light.text-info {
+    background: linear-gradient(135deg, rgba(44,44,44,0.10) 0%, rgba(74,74,74,0.08) 100%) !important;
+    color: #4A4A4A !important;
+    border: 1px solid rgba(44,44,44,0.18);
+}
+.badge.bg-warning-subtle,
+.badge.bg-light.text-warning {
+    background: linear-gradient(135deg, rgba(192,192,192,0.22) 0%, rgba(224,224,224,0.18) 100%) !important;
+    color: #6B6B6B !important;
+    border: 1px solid rgba(192,192,192,0.35);
 }
 
-.badge-success {
-    background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-principal-hover) 100%) !important;
-    color: var(--blanco-puro);
-}
-
-/* ── NAVBAR PERSONALIZADO ── */
+/* ── NAVBAR FITNESS — Vinotinto dominante ── */
 .navbar {
-    padding: 0.75rem 0;
+    padding: 0.8rem 0;
     transition: var(--transicion);
-    background-color: var(--blanco-puro);
+    background: linear-gradient(135deg, #3D0712 0%, #5C0A1B 60%, #7A1429 100%) !important;
+    border-bottom: 2px solid rgba(192,192,192,0.25);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.25);
 }
-
 .navbar-brand {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    background: var(--gradiente-texto);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--blanco-puro) !important;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
 }
-
+.navbar-brand img {
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
+}
 .nav-link {
     font-family: 'Poppins', sans-serif;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 0.9rem;
     transition: var(--transicion);
-    color: var(--texto-oscuro) !important;
-    margin: 0 0.5rem;
+    color: rgba(255,255,255,0.88) !important;
+    margin: 0 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
 }
-
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2.5px;
+    bottom: 2px;
+    left: 0.5rem;
+    background: linear-gradient(90deg, #C0C0C0, #E0E0E0);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
 .nav-link:hover,
 .nav-link.active {
-    color: var(--azul-principal-hover) !important;
+    color: var(--blanco-puro) !important;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: calc(100% - 1rem);
+}
+/* Navbar light → forzamos vinotinto */
+.navbar-light {
+    background: linear-gradient(135deg, #3D0712 0%, #5C0A1B 60%, #7A1429 100%) !important;
+    border-bottom: 2px solid rgba(192,192,192,0.25);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+}
+/* BLINDAJE DE CONTRASTE NAVBAR: máxima especificidad para vencer Bootstrap 5
+   Cualquier link del navbar, su texto, iconos y dropdowns se fuerzan a blanco */
+.navbar-light .navbar-nav .nav-link,
+.navbar-dark  .navbar-nav .nav-link,
+.navbar       .navbar-nav .nav-link,
+.navbar .nav-link,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar .nav-link i,
+.navbar .navbar-brand,
+.navbar .navbar-brand span,
+.navbar .btn-link,
+.navbar .dropdown-item:not(:hover) {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+}
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar       .navbar-nav .nav-link:hover,
+.navbar .nav-link:hover,
+.navbar .nav-link:hover i,
+.navbar .navbar-brand:hover {
+    color: #E8E8E8 !important;
+    -webkit-text-fill-color: #E8E8E8 !important;
+}
+.navbar-light .navbar-nav .nav-link.active,
+.navbar       .navbar-nav .nav-link.active {
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+}
+.navbar-light .navbar-toggler {
+    border-color: rgba(255,255,255,0.35) !important;
+    color: var(--blanco-puro);
+}
+.navbar-light .navbar-toggler-icon {
+    filter: invert(1) brightness(1.2);
+}
+.navbar-toggler {
+    border: 2px solid rgba(255,255,255,0.35) !important;
+    border-radius: var(--radio-md) !important;
+    padding: 0.45rem 0.7rem !important;
+    transition: var(--transicion) !important;
+}
+.navbar-toggler:hover {
+    background: rgba(192,192,192,0.15);
+    border-color: rgba(192,192,192,0.55) !important;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
 }
 
-/* ── FORMULARIOS PERSONALIZADOS ── */
-.form-control,
-.form-select {
-    border-radius: var(--radio-md);
-    border: 1.5px solid var(--borde-suave);
-    font-family: 'Inter', sans-serif;
-    transition: var(--transicion);
-    background-color: var(--fondo-blanco-calido);
-}
-
-.form-control:focus,
-.form-select:focus {
-    border-color: var(--azul-principal);
-    box-shadow: 0 0 0 0.25rem rgba(168, 197, 218, 0.25);
-    background-color: var(--blanco-puro);
-}
-
-.form-label {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    color: var(--texto-oscuro);
-}
-
-/* ── SECCIONES CON FONDO ── */
+/* ── GRADIENTES BG (bg-gradient, bg-light, bg-dark...) ── */
 .bg-gradient {
-    background: linear-gradient(135deg, var(--fondo-blanco-calido) 0%, rgba(212, 197, 226, 0.12) 100%);
+    background: linear-gradient(135deg, rgba(92,10,27,0.04) 0%, rgba(192,192,192,0.08) 100%);
 }
+.min-vh-75 { min-height: 75vh; }
 
-/* ── ESPACIADOS ADICIONALES ── */
-.min-vh-75 {
-    min-height: 75vh;
-}
-
-/* ── EFECTOS HOVER PERSONALIZADOS ── */
+/* ── HOVER SOMBRAS Y EFECTOS ── */
 .hover-shadow {
     transition: var(--transicion);
 }
-
 .hover-shadow:hover {
-    box-shadow: var(--sombra-media) !important;
+    box-shadow: 0 14px 36px rgba(92,10,27,0.18) !important;
 }
-
 .hover-bg-success:hover {
-    background-color: rgba(168, 197, 218, 0.12);
+    background: linear-gradient(135deg, rgba(92,10,27,0.10) 0%, rgba(122,20,41,0.08) 100%) !important;
 }
-
 .hover-text-success:hover {
-    color: var(--azul-principal-hover) !important;
+    color: #5C0A1B !important;
 }
+.transition { transition: var(--transicion); }
+.cursor-pointer { cursor: pointer; }
+.object-fit-contain { object-fit: contain; }
+.min-h-100 { min-height: 100px; }
 
-.transition {
+/* ── FORMULARIOS FITNESS ── */
+.form-control,
+.form-select {
+    border-radius: var(--radio-md);
+    border: 1.8px solid var(--borde-suave);
+    font-family: 'Inter', sans-serif;
     transition: var(--transicion);
+    background-color: var(--blanco-humo);
+    color: var(--texto-oscuro);
+}
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--vinotinto);
+    box-shadow: 0 0 0 0.25rem rgba(92,10,27,0.15);
+    background-color: var(--blanco-puro);
+}
+.form-label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--texto-oscuro);
+    font-size: 0.88rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
 }
 
-.cursor-pointer {
-    cursor: pointer;
-}
-
-/* ── OBJETO-FIT PARA IMÁGENES ── */
-.object-fit-contain {
-    object-fit: contain;
-}
-
-/* ── ALTURA DE MÍNIMO ── */
-.min-h-100 {
-    min-height: 100px;
-}
-
-/* ── ESTILOS RESPONSIVE ── */
-@media (max-width: 768px) {
-    .navbar-brand {
-        font-size: 1.25rem;
-    }
-
-    .display-4 {
-        font-size: 2.5rem;
-    }
-
-    .display-5 {
-        font-size: 2rem;
-    }
-
-    .card-body {
-        padding: 1.25rem;
-    }
-}
-
-/* ── ALERTAS PERSONALIZADAS ── */
+/* ── ALERTAS FITNESS ── */
 .alert {
     border-radius: var(--radio-lg);
     border: none;
-    padding: 1.25rem;
+    padding: 1.25rem 1.5rem;
     font-family: 'Inter', sans-serif;
 }
-
 .alert-success {
-    background: linear-gradient(90deg, rgba(168, 197, 218, 0.18) 0%, rgba(168, 197, 218, 0.08) 100%);
-    color: var(--azul-profundo);
-    border-left: 4px solid var(--azul-principal-hover);
+    background: linear-gradient(90deg, rgba(92,10,27,0.10) 0%, rgba(122,20,41,0.06) 100%);
+    color: #5C0A1B;
+    border-left: 4px solid var(--vinotinto);
 }
-
 .alert-warning {
-    background: linear-gradient(90deg, rgba(245, 230, 168, 0.25) 0%, rgba(245, 230, 168, 0.10) 100%);
-    color: #8A7235;
-    border-left: 4px solid #E8C860;
+    background: linear-gradient(90deg, rgba(192,192,192,0.22) 0%, rgba(224,224,224,0.12) 100%);
+    color: #4A4A4A;
+    border-left: 4px solid var(--plateado-oscuro);
 }
-
 .alert-danger {
-    background: linear-gradient(90deg, rgba(232, 160, 160, 0.20) 0%, rgba(232, 160, 160, 0.08) 100%);
-    color: #8A4040;
-    border-left: 4px solid #E8A0A0;
+    background: linear-gradient(90deg, rgba(122,20,41,0.12) 0%, rgba(154,31,56,0.08) 100%);
+    color: #7A1429;
+    border-left: 4px solid var(--vinotinto-hover);
+}
+.alert-info {
+    background: linear-gradient(90deg, rgba(44,44,44,0.10) 0%, rgba(74,74,74,0.06) 100%);
+    color: #2C2C2C;
+    border-left: 4px solid var(--gris-metal);
 }
 
-/* ── TABLAS RESPONSIVAS ── */
+/* ── TABLAS FITNESS ── */
 .table {
     font-family: 'Inter', sans-serif;
 }
-
 .table thead {
-    background: linear-gradient(90deg, rgba(168, 197, 218, 0.18) 0%, rgba(245, 213, 213, 0.18) 100%);
+    background: linear-gradient(90deg, #3D0712 0%, #5C0A1B 50%, #7A1429 100%);
     font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    color: var(--azul-profundo);
+    font-weight: 700;
+    color: var(--blanco-puro);
 }
-
+.table thead th {
+    color: var(--blanco-puro);
+    border-color: rgba(192,192,192,0.2);
+}
 .table tbody tr:hover {
-    background-color: rgba(245, 213, 213, 0.10);
+    background-color: rgba(92,10,27,0.06);
+}
+.table-success > :not(caption) > * > * {
+    background-color: transparent !important;
+    color: var(--blanco-puro) !important;
+}
+.table-bordered,
+.table-bordered > :not(caption) > * > * {
+    border-color: var(--borde-plateado) !important;
+}
+.table-hover > tbody > tr:hover > * {
+    background-color: rgba(92,10,27,0.08) !important;
 }
 
-/* ── LISTA DE ESTILOS ── */
-.list-unstyled li {
-    font-family: 'Inter', sans-serif;
+/* ── NAV-PILLS / TABS ── */
+.nav-pills .nav-link.active {
+    background: linear-gradient(135deg, #5C0A1B 0%, #7A1429 100%) !important;
+    color: var(--blanco-puro) !important;
+    box-shadow: 0 4px 14px rgba(92,10,27,0.40) !important;
+}
+.nav-pills .nav-link:not(.active) {
+    color: var(--texto-plateado) !important;
+    border: 1.8px solid var(--borde-suave);
+    transition: var(--transicion);
+    background-color: var(--blanco-puro);
+}
+.nav-pills .nav-link:not(.active):hover {
+    background: linear-gradient(135deg, rgba(92,10,27,0.08) 0%, rgba(192,192,192,0.12) 100%) !important;
+    color: #5C0A1B !important;
+    border-color: var(--vinotinto);
+    transform: translateY(-2px);
 }
 
-/* ── ENCABEZADOS ESPECIALES ── */
+/* ── TEXTOS ESPECIALES ── */
 .text-gradient {
-    background: var(--gradiente-texto);
+    background: var(--gradiente-texto-energia);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-/* ── DIVISORES PERSONALIZADOS ── */
+/* ── HR / DIVISORES ── */
 hr {
-    border-color: var(--borde-suave);
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--borde-plateado), transparent) !important;
+    opacity: 1 !important;
     margin: 2rem 0;
 }
 
-/* ── BORDES REDONDEADOS GRANDES ── */
-.rounded-3 {
-    border-radius: var(--radio-lg) !important;
-}
+/* ── BORDES REDONDEADOS ── */
+.rounded-3 { border-radius: var(--radio-lg) !important; }
+.rounded-4 { border-radius: var(--radio-xl) !important; }
+.rounded-circle { border-radius: 50% !important; }
 
-.rounded-4 {
-    border-radius: var(--radio-xl) !important;
-}
+/* ── SOMBRAS ── */
+.shadow-xs { box-shadow: var(--sombra-xs); }
+.shadow-sm { box-shadow: var(--sombra-suave); }
+.shadow    { box-shadow: var(--sombra-media); }
+.shadow-lg { box-shadow: var(--sombra-alta); }
 
-.rounded-circle {
-    border-radius: 50% !important;
-}
-
-/* ── SOMBRAS PERSONALIZADAS ── */
-.shadow-xs {
-    box-shadow: var(--sombra-xs);
-}
-
-.shadow-sm {
-    box-shadow: var(--sombra-suave);
-}
-
-.shadow {
-    box-shadow: var(--sombra-media);
-}
-
-.shadow-lg {
-    box-shadow: var(--sombra-alta);
-}
-
-/* ── BACKGROUND COLORS ── */
-.bg-success-subtle {
-    background: linear-gradient(135deg, rgba(168, 197, 218, 0.15) 0%, rgba(245, 213, 213, 0.10) 100%) !important;
-}
-
-.bg-light {
-    background-color: var(--fondo-blanco-calido) !important;
-}
-
-/* ── POSICIÓN Y LAYOUT ── */
-.sticky-top {
-    top: 0;
-    z-index: 1030;
-}
-
-/* ── CARRUSEL BOOTSTRAP ── */
-.carousel {
-    border-radius: var(--radio-lg);
-    overflow: hidden;
-    box-shadow: var(--sombra-suave);
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-    background: linear-gradient(135deg, rgba(168, 197, 218, 0.80) 0%, rgba(245, 213, 213, 0.80) 100%);
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    opacity: 0;
-    transition: var(--transicion);
-    backdrop-filter: blur(6px);
-}
-
-.carousel:hover .carousel-control-prev,
-.carousel:hover .carousel-control-next {
-    opacity: 1;
-}
-
-.carousel-indicators button.active {
-    background: var(--gradiente-cta);
-}
-
-/* ── VALIDACIÓN DE FORMULARIOS ── */
-.was-validated .form-control:valid {
-    border-color: var(--azul-principal);
-}
-
-.was-validated .form-control:valid:focus {
-    box-shadow: 0 0 0 0.25rem rgba(168, 197, 218, 0.25);
-}
-
-.invalid-feedback {
-    font-size: 0.875rem;
-    color: #D48080;
-}
-
-.valid-feedback {
-    font-size: 0.875rem;
-    color: var(--azul-principal-hover);
-}
-
-/* ── OFFCANVAS ── */
-.offcanvas {
-    background-color: var(--fondo-blanco-calido);
-}
-
-.offcanvas-header {
-    border-bottom: 1px solid var(--borde-suave);
-}
-
-/* ── MODALES ── */
-.modal-content {
-    border: none;
-    border-radius: var(--radio-lg);
-    box-shadow: var(--sombra-alta);
-    background-color: var(--blanco-puro);
-}
-
-.modal-header {
-    border-bottom: 1px solid var(--borde-suave);
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    background: linear-gradient(180deg, rgba(245, 213, 213, 0.10) 0%, transparent 100%);
-}
-
-.modal-title {
-    font-weight: 600;
-    background: var(--gradiente-texto);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* ── TOOLTIPS Y POPOVERS ── */
-.tooltip-inner {
-    background: linear-gradient(135deg, var(--azul-principal-hover) 0%, var(--azul-principal) 100%);
-    font-family: 'Inter', sans-serif;
-    border-radius: var(--radio-md);
-}
-
-.popover {
-    border: 1px solid var(--borde-suave);
-    border-radius: var(--radio-lg);
-    box-shadow: var(--sombra-alta);
-}
-
-.popover-header {
-    background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-principal-hover) 100%);
-    color: var(--blanco-puro);
-    border: none;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    border-radius: var(--radio-lg) var(--radio-lg) 0 0;
-}
-
-/* ── PAGINACIÓN ── */
-.pagination .page-link {
-    border-radius: var(--radio-md);
-    margin: 0 0.25rem;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    color: var(--texto-mutado);
-    border-color: var(--borde-suave);
-}
-
-.pagination .page-link:hover {
-    background: linear-gradient(135deg, var(--rosado-acento) 0%, var(--lavanda-suave) 100%);
-    border-color: transparent;
-    color: var(--azul-profundo);
-    transform: translateY(-2px);
-    box-shadow: var(--sombra-acento);
-}
-
-.pagination .page-link.active {
-    background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-principal-hover) 100%);
-    border-color: transparent;
-    color: var(--blanco-puro);
-    box-shadow: 0 4px 14px rgba(168, 197, 218, 0.40);
-}
-
-/* ── BREADCRUMB ── */
-.breadcrumb {
-    background-color: transparent;
-    padding: 0;
-}
-
-.breadcrumb-item.active {
-    color: var(--azul-principal-hover);
-    font-weight: 600;
-}
-
-.breadcrumb-item a {
-    color: var(--lavanda-hover);
-    text-decoration: none;
-}
-
-.breadcrumb-item a:hover {
-    color: var(--azul-principal-hover);
-    text-decoration: none;
-}
-
-/* ── ANIMACIONES ADICIONALES ── */
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.animate-slide-up {
-    animation: slideUp 0.6s ease-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.animate-fade-in {
-    animation: fadeIn 0.6s ease-out;
-}
-
-/* ── UTILIDADES DE TEXTO ── */
-.text-truncate-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.text-truncate-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-/* ── UTILIDADES DE DISPLAY ── */
-.d-flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* ── UTILIDADES DE OPACIDAD ── */
-.opacity-75 {
-    opacity: 0.75;
-}
-
-.opacity-50 {
-    opacity: 0.5;
-}
-
-.opacity-25 {
-    opacity: 0.25;
-}
-
-/* ==========================================================================
-   SOBRESCRITURA GLOBAL DE UTILIDADES BOOTSTRAP — PALETA PASTEL MAYE
-   (Se aplica para todas las páginas al cargar bootstrap-custom.css)
-   ========================================================================== */
-
-/* ── COLORES DE FONDO (bg-*) ──────────────────────────────────────── */
+/* ── BACKGROUND COLORS (clases utilitarias Bootstrap) ── */
 .bg-success {
-    background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-principal-hover) 100%) !important;
+    background: linear-gradient(135deg, #3D0712 0%, #5C0A1B 50%, #7A1429 100%) !important;
     color: var(--blanco-puro) !important;
+    border: 1px solid rgba(192,192,192,0.18);
 }
-
 .bg-success-subtle {
-    background: linear-gradient(135deg, rgba(168, 197, 218, 0.22) 0%, rgba(212, 197, 226, 0.18) 100%) !important;
-    color: var(--azul-profundo) !important;
+    background: linear-gradient(135deg, rgba(92,10,27,0.14) 0%, rgba(122,20,41,0.09) 100%) !important;
+    color: #5C0A1B !important;
 }
-
 .bg-danger {
-    background: linear-gradient(135deg, var(--rosado-acento) 0%, var(--rosado-hover) 100%) !important;
-    color: var(--azul-profundo) !important;
-}
-
-.bg-danger-subtle {
-    background: linear-gradient(135deg, rgba(245, 213, 213, 0.35) 0%, rgba(235, 196, 196, 0.18) 100%) !important;
-    color: #A86464 !important;
-}
-
-.bg-info {
-    background: linear-gradient(135deg, var(--lavanda-suave) 0%, var(--lavanda-hover) 100%) !important;
-    color: var(--azul-profundo) !important;
-}
-
-.bg-info-subtle {
-    background: linear-gradient(135deg, rgba(212, 197, 226, 0.35) 0%, rgba(196, 177, 214, 0.18) 100%) !important;
-    color: #7D6496 !important;
-}
-
-.bg-warning {
-    background: linear-gradient(135deg, #F5E6C8 0%, #EDD9A0 100%) !important;
-    color: #7A5A24 !important;
-}
-
-.bg-warning-subtle {
-    background: linear-gradient(135deg, rgba(245, 230, 168, 0.35) 0%, rgba(237, 217, 160, 0.20) 100%) !important;
-    color: #8A7235 !important;
-}
-
-.bg-dark {
-    background: linear-gradient(135deg, var(--azul-profundo) 0%, #3A4F66 100%) !important;
+    background: linear-gradient(135deg, #7A1429 0%, #9A1F38 100%) !important;
     color: var(--blanco-puro) !important;
 }
-
+.bg-danger-subtle {
+    background: linear-gradient(135deg, rgba(122,20,41,0.20) 0%, rgba(154,31,56,0.10) 100%) !important;
+    color: #7A1429 !important;
+}
+.bg-info {
+    background: linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 100%) !important;
+    color: var(--blanco-puro) !important;
+}
+.bg-info-subtle {
+    background: linear-gradient(135deg, rgba(44,44,44,0.18) 0%, rgba(74,74,74,0.10) 100%) !important;
+    color: #2C2C2C !important;
+}
+.bg-warning {
+    background: linear-gradient(135deg, #C0C0C0 0%, #E0E0E0 100%) !important;
+    color: #1A1A1A !important;
+}
+.bg-warning-subtle {
+    background: linear-gradient(135deg, rgba(192,192,192,0.25) 0%, rgba(224,224,224,0.12) 100%) !important;
+    color: #4A4A4A !important;
+}
+.bg-dark {
+    background: linear-gradient(135deg, #1A1A1A 0%, #2C2C2C 100%) !important;
+    color: var(--blanco-puro) !important;
+    border-top: 3px solid var(--vinotinto);
+}
 .bg-light {
-    background-color: var(--fondo-blanco-calido) !important;
+    background-color: var(--fondo-general) !important;
 }
-
 .bg-secondary {
-    background-color: var(--borde-acento) !important;
-    color: var(--azul-profundo) !important;
+    background-color: var(--plateado-claro) !important;
+    color: var(--texto-oscuro) !important;
 }
-
 .bg-white {
     background-color: var(--blanco-puro) !important;
 }
 
-/* ── COLORES DE TEXTO (text-*) ──────────────────────────────────────── */
-.text-success {
-    color: var(--azul-principal-hover) !important;
-}
-
-.text-danger {
-    color: #D48E8E !important;
-}
-
-.text-info {
-    color: var(--lavanda-hover) !important;
-}
-
-.text-warning {
-    color: #B89750 !important;
-}
-
-.text-dark {
-    color: var(--azul-profundo) !important;
-}
-
-.text-light {
-    color: rgba(255, 255, 255, 0.88) !important;
-}
-
-.text-muted {
-    color: var(--texto-mutado) !important;
-}
-
-.text-white {
-    color: var(--blanco-puro) !important;
-}
-
-.text-secondary {
-    color: var(--texto-mutado) !important;
-}
-
+/* ── TEXT COLORS ── */
+.text-success { color: #5C0A1B !important; }
+.text-danger  { color: #7A1429 !important; }
+.text-info    { color: #4A4A4A !important; }
+.text-warning { color: #6B6B6B !important; }
+.text-dark    { color: var(--texto-oscuro) !important; }
+.text-light   { color: rgba(255,255,255,0.90) !important; }
+.text-muted   { color: var(--texto-plateado) !important; }
+.text-white   { color: var(--blanco-puro) !important; }
+.text-secondary { color: var(--texto-plateado) !important; }
 .text-black-50,
-.text-body-secondary {
-    color: var(--texto-mutado) !important;
-}
+.text-body-secondary { color: var(--texto-plateado) !important; }
 
-/* ── COLORES DE BORDE (border-*) ──────────────────────────────────────── */
-.border-success {
-    border-color: var(--azul-principal) !important;
-}
-.border-danger {
-    border-color: var(--rosado-hover) !important;
-}
-.border-info {
-    border-color: var(--lavanda-hover) !important;
-}
-.border-warning {
-    border-color: #E8C860 !important;
-}
-.border-dark {
-    border-color: var(--azul-profundo) !important;
-}
-.border-light {
-    border-color: var(--borde-suave) !important;
-}
-.border-secondary {
-    border-color: var(--borde-acento) !important;
-}
-.border-white {
-    border-color: var(--blanco-puro) !important;
-}
-.border {
-    border-color: var(--borde-suave) !important;
-}
+/* ── BORDER COLORS ── */
+.border-success  { border-color: var(--vinotinto) !important; }
+.border-danger   { border-color: var(--vinotinto-claro) !important; }
+.border-info     { border-color: var(--gris-metal-claro) !important; }
+.border-warning  { border-color: var(--plateado) !important; }
+.border-dark     { border-color: var(--gris-metal) !important; }
+.border-light    { border-color: var(--borde-suave) !important; }
+.border-secondary{ border-color: var(--plateado-claro) !important; }
+.border-white    { border-color: var(--blanco-puro) !important; }
+.border          { border-color: var(--borde-suave) !important; }
 
-/* ── ESTADOS FOCUS INPUTS CON COLORES PASTEL ─────────────────────────── */
+/* ── FOCUS STATES INPUTS ── */
 .border-success:focus {
-    box-shadow: 0 0 0 0.25rem rgba(168, 197, 218, 0.3) !important;
+    box-shadow: 0 0 0 0.25rem rgba(92,10,27,0.20) !important;
 }
 .border-danger:focus {
-    box-shadow: 0 0 0 0.25rem rgba(245, 213, 213, 0.35) !important;
+    box-shadow: 0 0 0 0.25rem rgba(122,20,41,0.22) !important;
 }
 
-/* ── BOTONES (btn-*) ─────────────────────────────────────────────────── */
-
-/* Botón Success (verde → azul pastel) */
-.btn-success {
-    background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-principal-hover) 100%) !important;
-    border-color: transparent !important;
-    color: var(--blanco-puro) !important;
-    box-shadow: 0 4px 14px rgba(168, 197, 218, 0.40) !important;
-    transition: var(--transicion) !important;
-    position: relative;
-    overflow: hidden;
-}
-.btn-success:hover {
-    background: linear-gradient(135deg, var(--azul-principal-hover) 0%, var(--azul-principal) 100%) !important;
-    color: var(--blanco-puro) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 22px rgba(168, 197, 218, 0.50) !important;
-}
-.btn-success:active {
-    transform: translateY(0) !important;
-}
-.btn-success:focus-visible {
-    box-shadow: 0 0 0 0.25rem rgba(168, 197, 218, 0.35), 0 4px 14px rgba(168, 197, 218, 0.40) !important;
-}
-
-/* Botón Outline Success */
-.btn-outline-success {
-    color: var(--azul-principal-hover) !important;
-    border-color: var(--azul-principal) !important;
-    background-color: transparent !important;
-    transition: var(--transicion) !important;
-}
-.btn-outline-success:hover {
-    background: linear-gradient(135deg, var(--rosado-acento) 0%, var(--lavanda-suave) 100%) !important;
-    border-color: transparent !important;
-    color: var(--azul-profundo) !important;
-    box-shadow: var(--sombra-acento) !important;
-    transform: translateY(-2px) !important;
-}
-
-/* Botón Danger (rojo → rosado) */
-.btn-danger {
-    background: linear-gradient(135deg, var(--rosado-acento) 0%, var(--rosado-hover) 100%) !important;
-    border-color: transparent !important;
-    color: var(--azul-profundo) !important;
-    box-shadow: 0 4px 14px rgba(245, 213, 213, 0.40) !important;
-    transition: var(--transicion) !important;
-}
-.btn-danger:hover {
-    background: linear-gradient(135deg, var(--rosado-hover) 0%, var(--rosado-acento) 100%) !important;
-    color: var(--azul-profundo) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 22px rgba(245, 213, 213, 0.50) !important;
-}
-.btn-outline-danger {
-    color: var(--rosado-hover) !important;
-    border-color: var(--rosado-hover) !important;
-}
-.btn-outline-danger:hover {
-    background-color: var(--rosado-acento) !important;
-    color: var(--azul-profundo) !important;
-    border-color: transparent !important;
-}
-
-/* Botón Info (azul fuerte → lavanda) */
-.btn-info {
-    background: linear-gradient(135deg, var(--lavanda-suave) 0%, var(--lavanda-hover) 100%) !important;
-    border-color: transparent !important;
-    color: var(--azul-profundo) !important;
-    box-shadow: 0 4px 14px rgba(212, 197, 226, 0.40) !important;
-    transition: var(--transicion) !important;
-}
-.btn-info:hover {
-    background: linear-gradient(135deg, var(--lavanda-hover) 0%, var(--lavanda-suave) 100%) !important;
-    color: var(--azul-profundo) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 22px rgba(212, 197, 226, 0.50) !important;
-}
-.btn-outline-info {
-    color: var(--lavanda-hover) !important;
-    border-color: var(--lavanda-hover) !important;
-}
-.btn-outline-info:hover {
-    background-color: var(--lavanda-suave) !important;
-    color: var(--azul-profundo) !important;
-    border-color: transparent !important;
-}
-
-/* Botón Warning (amarillo) */
-.btn-warning {
-    background: linear-gradient(135deg, #F5E6C8 0%, #EDD9A0 100%) !important;
-    border-color: transparent !important;
-    color: #7A5A24 !important;
-    transition: var(--transicion) !important;
-}
-.btn-warning:hover {
-    background: linear-gradient(135deg, #EDD9A0 0%, #F5E6C8 100%) !important;
-    color: #7A5A24 !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 22px rgba(237, 217, 160, 0.45) !important;
-}
-.btn-outline-warning {
-    color: #B89750 !important;
-    border-color: #E8C860 !important;
-}
-.btn-outline-warning:hover {
-    background-color: #F5E6C8 !important;
-    color: #7A5A24 !important;
-    border-color: transparent !important;
-}
-
-/* Botón Dark (negro → azul pizarra pastel) */
-.btn-dark {
-    background: linear-gradient(135deg, var(--azul-profundo) 0%, #3A4F66 100%) !important;
-    border-color: transparent !important;
-    color: var(--blanco-puro) !important;
-    transition: var(--transicion) !important;
-    box-shadow: 0 4px 14px rgba(44, 62, 80, 0.30) !important;
-}
-.btn-dark:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 22px rgba(44, 62, 80, 0.40) !important;
-}
-.btn-outline-dark {
-    color: var(--azul-profundo) !important;
-    border-color: var(--azul-profundo) !important;
-}
-.btn-outline-dark:hover {
-    background-color: var(--azul-profundo) !important;
-    color: var(--blanco-puro) !important;
-    border-color: transparent !important;
-}
-
-/* Botón Light (blanco → rosado suave con borde) */
-.btn-light {
-    background-color: var(--blanco-puro) !important;
-    border-color: var(--borde-acento) !important;
-    color: var(--azul-profundo) !important;
-    transition: var(--transicion) !important;
-}
-.btn-light:hover {
-    background: linear-gradient(135deg, var(--rosado-acento) 0%, var(--lavanda-suave) 100%) !important;
-    border-color: transparent !important;
-    color: var(--azul-profundo) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: var(--sombra-acento) !important;
-}
-.btn-outline-light {
-    color: var(--blanco-puro) !important;
-    border-color: rgba(255, 255, 255, 0.85) !important;
-}
-.btn-outline-light:hover {
-    background-color: var(--rosado-acento) !important;
-    color: var(--azul-profundo) !important;
-    border-color: transparent !important;
-    box-shadow: var(--sombra-acento) !important;
-}
-
-/* Botón Secondary (gris → borde pastel) */
-.btn-secondary {
-    background-color: var(--borde-acento) !important;
-    border-color: transparent !important;
-    color: var(--azul-profundo) !important;
-    transition: var(--transicion) !important;
-}
-.btn-secondary:hover {
-    background-color: var(--rosado-acento) !important;
-    color: var(--azul-profundo) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: var(--sombra-acento) !important;
-}
-
-/* Botón Link */
-.btn-link {
-    color: var(--azul-principal-hover) !important;
-}
-.btn-link:hover {
-    color: var(--lavanda-hover) !important;
-}
-
-/* ── BADGES (badge.bg-*) ──────────────────────────────────────────── */
-.badge.bg-success {
-    background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-principal-hover) 100%) !important;
-    color: var(--blanco-puro) !important;
-}
-.badge.bg-success-subtle,
-.badge.bg-light.text-success {
-    background: linear-gradient(135deg, rgba(168, 197, 218, 0.22) 0%, rgba(212, 197, 226, 0.18) 100%) !important;
-    color: var(--azul-principal-hover) !important;
-}
-.badge.bg-danger {
-    background: linear-gradient(135deg, var(--rosado-acento) 0%, var(--rosado-hover) 100%) !important;
-    color: var(--azul-profundo) !important;
-}
-.badge.bg-danger-subtle,
-.badge.bg-light.text-danger {
-    background: linear-gradient(135deg, rgba(245, 213, 213, 0.30) 0%, rgba(235, 196, 196, 0.18) 100%) !important;
-    color: #C47070 !important;
-}
-.badge.bg-info {
-    background: linear-gradient(135deg, var(--lavanda-suave) 0%, var(--lavanda-hover) 100%) !important;
-    color: var(--azul-profundo) !important;
-}
-.badge.bg-info-subtle,
-.badge.bg-light.text-info {
-    background: linear-gradient(135deg, rgba(212, 197, 226, 0.30) 0%, rgba(196, 177, 214, 0.18) 100%) !important;
-    color: var(--lavanda-hover) !important;
-}
-.badge.bg-warning {
-    background: linear-gradient(135deg, #F5E6C8 0%, #EDD9A0 100%) !important;
-    color: #7A5A24 !important;
-}
-.badge.bg-warning-subtle,
-.badge.bg-light.text-warning {
-    background: linear-gradient(135deg, rgba(245, 230, 168, 0.30) 0%, rgba(237, 217, 160, 0.18) 100%) !important;
-    color: #B89750 !important;
-}
-.badge.bg-dark {
-    background: linear-gradient(135deg, var(--azul-profundo) 0%, #3A4F66 100%) !important;
-    color: var(--blanco-puro) !important;
-}
-.badge.bg-secondary {
-    background-color: var(--borde-acento) !important;
-    color: var(--azul-profundo) !important;
-}
-.badge.bg-light {
-    background-color: var(--fondo-blanco-calido) !important;
-    color: var(--texto-oscuro) !important;
-    border: 1px solid var(--borde-suave);
-}
-
-/* ── TABLAS (table-*) ─────────────────────────────────────────────── */
-.table-success {
-    --bs-table-bg: linear-gradient(90deg, rgba(168, 197, 218, 0.22) 0%, rgba(245, 213, 213, 0.18) 100%) !important;
-    background: var(--bs-table-bg) !important;
-    color: var(--azul-profundo) !important;
-    border-color: var(--borde-acento) !important;
-}
-.table-success > :not(caption) > * > * {
-    background-color: transparent !important;
-    color: var(--azul-profundo) !important;
-}
-
-.table-bordered,
-.table-bordered > :not(caption) > * > * {
-    border-color: var(--borde-suave) !important;
-}
-
-.table-hover > tbody > tr:hover > * {
-    background-color: rgba(245, 213, 213, 0.12) !important;
-}
-
-/* ── NAVBAR (navbar-light, bg-light nav) ──────────────────────────── */
-.navbar-light {
-    background-color: var(--blanco-puro) !important;
-    border-bottom: 1px solid var(--borde-suave);
-    box-shadow: var(--sombra-xs);
-}
-.navbar-light .navbar-toggler {
-    border-color: var(--borde-suave) !important;
-    color: var(--azul-profundo);
-}
-.navbar-light .navbar-toggler-icon {
-    filter: sepia(1) saturate(3) hue-rotate(180deg);
-}
-.navbar-toggler {
-    border: 1.5px solid var(--borde-acento) !important;
-    border-radius: var(--radio-md) !important;
-    padding: 0.4rem 0.65rem !important;
-    transition: var(--transicion) !important;
-}
-.navbar-toggler:hover {
-    background: linear-gradient(135deg, var(--rosado-acento) 0%, var(--lavanda-suave) 100%);
-    box-shadow: var(--sombra-acento);
-    border-color: transparent !important;
-}
-
-/* ── NAV-PILLS ACTIVE (blog categorías) ──────────────────────────────── */
-.nav-pills .nav-link.active {
-    background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-principal-hover) 100%) !important;
-    color: var(--blanco-puro) !important;
-    box-shadow: 0 4px 14px rgba(168, 197, 218, 0.40) !important;
-}
-.nav-pills .nav-link:not(.active) {
-    color: var(--texto-mutado) !important;
-    border: 1.5px solid var(--borde-suave);
-    transition: var(--transicion);
-}
-.nav-pills .nav-link:not(.active):hover {
-    background-color: var(--rosado-acento) !important;
-    color: var(--azul-profundo) !important;
-    border-color: transparent;
-}
-.nav-link.active.bg-success {
-    background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-principal-hover) 100%) !important;
-    color: var(--blanco-puro) !important;
-}
-
-/* ── ALERTAS FINALES DE COLORES DE TEXTO EN BOTONES ESPECIALES ────── */
+/* ── ICONOS EN BOTONES: heredar color ── */
 .btn-success i,
 .btn-outline-success i,
 .btn-danger i,
@@ -995,86 +655,223 @@ hr {
     color: inherit !important;
 }
 
-/* Corazón footer text-danger */
+/* ── CORAZÓN DEL FOOTER ── */
 .ri-heart-fill.text-danger {
-    color: var(--rosado-hover) !important;
+    color: #9A1F38 !important;
 }
 
-/* Íconos light en footer bg-dark (redes sociales) - hover pastel */
+/* ── HOVER REDES SOCIALES FOOTER ── */
 footer.bg-dark a.text-light:hover {
-    color: var(--rosado-acento) !important;
+    color: var(--plateado) !important;
+    transform: translateY(-2px) scale(1.08);
 }
 footer.bg-dark a.text-light {
     transition: var(--transicion) !important;
+    display: inline-block;
 }
 
-/* ── HOVER-TEXT-SUCCESS custom ────────────────────────────────────── */
+/* ── HOVER-TEXT-SUCCESS ── */
 .hover-text-success:hover {
-    color: var(--azul-principal-hover) !important;
+    color: #5C0A1B !important;
 }
 
-/* ── INPUT-GROUP DENTRO DEL FOOTER (newsletter) ────────────────────── */
+/* ── INPUT-GROUP NEWSLETTER EN FOOTER ── */
 footer.bg-dark .input-group .form-control {
-    background-color: rgba(255, 255, 255, 0.12) !important;
-    border: 1px solid rgba(212, 197, 226, 0.20) !important;
+    background-color: rgba(255,255,255,0.10) !important;
+    border: 1px solid rgba(192,192,192,0.25) !important;
     color: var(--blanco-puro) !important;
 }
 footer.bg-dark .input-group .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.55) !important;
+    color: rgba(255,255,255,0.55) !important;
 }
 footer.bg-dark .input-group .form-control:focus {
-    background-color: rgba(255, 255, 255, 0.18) !important;
-    border-color: var(--rosado-acento) !important;
-    box-shadow: 0 0 0 0.25rem rgba(245, 213, 213, 0.20) !important;
+    background-color: rgba(255,255,255,0.16) !important;
+    border-color: var(--vinotinto-claro) !important;
+    box-shadow: 0 0 0 0.25rem rgba(92,10,27,0.25) !important;
 }
 
-/* ── SEPARADORES HR EN FOOTER ──────────────────────────────────────── */
+/* ── HR EN FOOTER ── */
 footer.bg-dark hr.bg-secondary {
-    background-color: rgba(212, 197, 226, 0.18) !important;
+    background-color: rgba(192,192,192,0.18) !important;
     opacity: 1 !important;
     border: none !important;
     height: 1px !important;
 }
 
-/* ── LIST-GROUP (listas ordenadas con list-group-numbered) ───────── */
+/* ── LIST GROUP ── */
 .list-group-item {
     background-color: transparent !important;
     border-color: var(--borde-suave) !important;
     color: var(--texto-oscuro) !important;
 }
 .list-group-numbered .list-group-item::before {
-    color: var(--azul-principal-hover) !important;
-    font-weight: 700;
+    color: #5C0A1B !important;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* ── HR DIVISOR GENERAL ───────────────────────────────────────────── */
-hr:not([class]),
-hr {
-    border: none;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--borde-acento), transparent) !important;
-    opacity: 1 !important;
-}
-
-/* ── CARD HOVER BG-LIGHT (imagen-wrapper tarjeta producto) ──────── */
+/* ── CARD IMAGE WRAPPER bg-light → look fitness ── */
 .card .bg-light {
-    background: linear-gradient(135deg, #F8FBFD 0%, #FDF8F9 100%) !important;
+    background: linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%) !important;
+    border-bottom: 2px solid rgba(92,10,27,0.10);
 }
 
-/* ── INPUT CAMPOS EN bg-light ─────────────────────────────────────── */
+/* ── INPUTS EN bg-light ── */
 .bg-light .form-control,
 .bg-light .form-select {
     background-color: var(--blanco-puro) !important;
     border-color: var(--borde-suave) !important;
 }
 
-/* ── TEXTO NEGRITA STRONG/EM EN PÁRRAFOS ───────────────────────────── */
+/* ── STRONG / EM ── */
 strong {
-    color: var(--azul-profundo);
+    color: var(--vinotinto);
+    font-weight: 700;
 }
 
-/* ── CONTADOR DE CARRITO (badge.bg-danger) ESPECIAL ─────────────────── */
+/* ── CONTADOR CARRITO ── */
 .contador-carrito.badge.bg-danger {
-    background: linear-gradient(135deg, var(--rosado-acento) 0%, var(--rosado-hover) 100%) !important;
-    color: var(--azul-profundo) !important;
+    background: linear-gradient(135deg, #C0C0C0 0%, #E0E0E0 100%) !important;
+    color: #3D0712 !important;
+    border: 1.5px solid var(--blanco-puro);
+    font-weight: 800;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
+
+/* ── OFFCANVAS ── */
+.offcanvas {
+    background-color: var(--fondo-general);
+}
+.offcanvas-header {
+    border-bottom: 2px solid var(--vinotinto);
+    background: linear-gradient(135deg, #3D0712 0%, #5C0A1B 100%);
+    color: var(--blanco-puro);
+}
+.offcanvas-title {
+    color: var(--blanco-puro);
+    font-weight: 700;
+}
+
+/* ── MODALES FITNESS ── */
+.modal-content {
+    border: none;
+    border-radius: var(--radio-lg);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    background-color: var(--blanco-puro);
+}
+.modal-header {
+    border-bottom: 2px solid var(--vinotinto);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    background: linear-gradient(180deg, rgba(92,10,27,0.08) 0%, transparent 100%);
+}
+.modal-title {
+    font-weight: 800;
+    background: var(--gradiente-texto-energia);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ── TOOLTIPS / POPOVERS ── */
+.tooltip-inner {
+    background: linear-gradient(135deg, #5C0A1B 0%, #7A1429 100%);
+    font-family: 'Inter', sans-serif;
+    border-radius: var(--radio-md);
+    box-shadow: 0 4px 14px rgba(92,10,27,0.40);
+}
+.popover {
+    border: 1px solid var(--borde-plateado);
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra-alta);
+}
+.popover-header {
+    background: linear-gradient(135deg, #3D0712 0%, #5C0A1B 100%);
+    color: var(--blanco-puro);
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    border-radius: var(--radio-lg) var(--radio-lg) 0 0;
+}
+
+/* ── PAGINACIÓN ── */
+.pagination .page-link {
+    border-radius: var(--radio-md);
+    margin: 0 0.25rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: var(--texto-plateado);
+    border-color: var(--borde-suave);
+    background-color: var(--blanco-puro);
+}
+.pagination .page-link:hover {
+    background: linear-gradient(135deg, #5C0A1B 0%, #7A1429 100%);
+    border-color: transparent;
+    color: var(--blanco-puro);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(92,10,27,0.35);
+}
+.pagination .page-link.active {
+    background: linear-gradient(135deg, #5C0A1B 0%, #7A1429 100%);
+    border-color: transparent;
+    color: var(--blanco-puro);
+    box-shadow: 0 4px 14px rgba(92,10,27,0.40);
+}
+
+/* ── BREADCRUMB ── */
+.breadcrumb { background-color: transparent; padding: 0; }
+.breadcrumb-item.active {
+    color: #5C0A1B;
+    font-weight: 700;
+}
+.breadcrumb-item a {
+    color: var(--plateado-oscuro);
+    text-decoration: none;
+}
+.breadcrumb-item a:hover {
+    color: #5C0A1B;
+    text-decoration: none;
+}
+
+/* ── ANIMACIONES ADICIONALES ── */
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up { animation: slideUp 0.6s ease-out; }
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+.animate-fade-in { animation: fadeIn 0.6s ease-out; }
+
+@keyframes pulseFitness {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(154,31,56,0.4); }
+    50%      { box-shadow: 0 0 0 10px rgba(154,31,56,0); }
+}
+.animate-pulse-fitness { animation: pulseFitness 2s infinite; }
+
+/* ── TEXT TRUNCATE ── */
+.text-truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.text-truncate-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ── UTILIDADES ── */
+.d-flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.opacity-75 { opacity: 0.75; }
+.opacity-50 { opacity: 0.5; }
+.opacity-25 { opacity: 0.25; }

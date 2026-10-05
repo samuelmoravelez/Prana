@@ -4,7 +4,7 @@
 // La lógica exclusiva de cada página vive en js/pages/[pagina].js
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('¡Web de Maye Mundo Belleza cargada correctamente!');
+    console.log('¡Sitio Marca Fitness cargado correctamente!');
 
     iniciarMenu();     // js/components/menu.js
     iniciarCarrito();  // js/components/carrito.js

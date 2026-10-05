@@ -1,49 +1,77 @@
-/* css/variables.css */
+/* css/variables.css — PALETA FITNESS VINOTINTO + PLATEADO */
 :root {
-    /* ── PALETA DE COLORES PASTEL — Soft Pastel UI ────────── */
-    --azul-principal:     #A8C5DA;   /* Azul pastel sereno — Botones, elementos destacados, navegación */
-    --azul-principal-hover:#8FB3CC;  /* Azul pastel hover — Estados interactivos */
-    --azul-profundo:      #2C3E50;   /* Azul pizarra oscuro — Textos principales, footer */
-    --rosado-acento:      #F5D5D5;   /* Rosado pastel blush — Secundario, tarjetas, hover, detalles */
-    --rosado-hover:       #EBC4C4;   /* Rosado hover — Estados interactivos secundarios */
-    --lavanda-suave:      #D4C5E2;   /* Lavanda muy suave — Complemento, acentos decorativos */
-    --lavanda-hover:      #C4B1D6;   /* Lavanda hover — Detalles interactivos */
-    --fondo-blanco-calido:#FAFAF7;   /* Fondo cálido muy suave — Base de la página */
-    --blanco-puro:        #FFFFFF;   /* Blanco limpio — Tarjetas, secciones, elementos elevados */
-    --texto-oscuro:       #2C3E50;   /* Azul pizarra — Texto principal (lectura cómoda) */
-    --texto-mutado:       #7C8A9C;   /* Gris azulado claro — Textos secundarios, categorías */
-    --borde-suave:        #E8EAF0;   /* Borde gris perla — Inputs, separadores, líneas finas */
-    --borde-acento:       #D4DDE8;   /* Borde azulado suave — Elementos que necesitan presencia */
+    /* ── PALETA FITNESS TRICOLOR — Vinotinto / Plateado / Blanco ── */
 
-    /* Gradientes pastel sutiles */
-    --gradiente-hero:     linear-gradient(135deg, #B8D4E8 0%, #D4C5E2 100%);
-    --gradiente-cta:      linear-gradient(135deg, #A8C5DA 0%, #F5D5D5 100%);
-    --gradiente-seccion:  linear-gradient(180deg, #FAFAF7 0%, #F0F4F8 100%);
-    --gradiente-texto:    linear-gradient(135deg, #8FB3CC 0%, #B89FD6 100%);
+    /* VINOTINTO — Color dominante (fondos oscuros, navbar, CTAs principales) */
+    --vinotinto:          #5C0A1B;   /* Vinotinto profundo — máximo impacto */
+    --vinotinto-hover:    #7A1429;   /* Vinotinto un poco más claro — hover */
+    --vinotinto-claro:    #9A1F38;   /* Vinotinto medio — acentos intensos */
+    --vinotinto-oscuro:   #3D0712;   /* Vinotinto muy oscuro — contraste extremo */
+    --vinotinto-suave:    rgba(92, 10, 27, 0.08);
 
-    /* ── TIPOGRAFÍAS ───────────────────────────────────────── */
+    /* PLATEADO / GRIS METÁLICO — Color de estructura (bordes, textos secundarios, detalles) */
+    --plateado:           #C0C0C0;   /* Plata metálico clásico */
+    --plateado-claro:     #E0E0E0;   /* Plata claro — separadores y detalles finos */
+    --plateado-oscuro:    #8A8A8A;   /* Plata oscuro — textos secundarios */
+    --gris-metal:         #2C2C2C;   /* Gris grafito oscuro — fondo alternativo */
+    --gris-metal-claro:   #4A4A4A;   /* Grafito medio — tarjetas sobre fondo oscuro */
+    --borde-metalico:     #6B6B6B;   /* Borde metálico sutil */
+
+    /* BLANCO — Color de contraste (textos principales sobre vinotinto, títulos) */
+    --blanco-puro:        #FFFFFF;
+    --blanco-suave:       #F5F5F5;   /* Blanco ligeramente grisáceo — fondos amplios */
+    --blanco-humo:        #FAFAFA;   /* Blanco humo — tarjetas y secciones claras */
+
+    /* Fondo general — blanco suave con toque de contraste metal */
+    --fondo-general:      #F5F5F5;
+    --fondo-tarjeta:      #FFFFFF;
+    --fondo-alterno:      #1A1A1A;   /* Fondo ultra-oscuro con acentos plateados */
+
+    /* TEXTOS */
+    --texto-oscuro:       #1A1A1A;   /* Texto principal sobre fondos claros */
+    --texto-plateado:     #8A8A8A;   /* Texto secundario / mutado */
+    --texto-blanco:       #FFFFFF;   /* Texto sobre fondos vinotinto */
+
+    /* BORDES */
+    --borde-suave:        #D4D4D4;
+    --borde-vinotinto:    #5C0A1B;
+    --borde-plateado:     #C0C0C0;
+
+    /* ── GRADIENTES FITNESS ENERGÉTICOS ── */
+    --gradiente-vinotinto:      linear-gradient(135deg, #3D0712 0%, #5C0A1B 40%, #7A1429 100%);
+    --gradiente-vinotinto-suave:linear-gradient(135deg, rgba(92,10,27,0.92) 0%, rgba(122,20,41,0.85) 100%);
+    --gradiente-metal:          linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 50%, #2C2C2C 100%);
+    --gradiente-plateado:       linear-gradient(135deg, #C0C0C0 0%, #E0E0E0 50%, #8A8A8A 100%);
+    --gradiente-cta:            linear-gradient(135deg, #5C0A1B 0%, #7A1429 100%);
+    --gradiente-seccion:        linear-gradient(180deg, #FAFAFA 0%, #F0F0F0 100%);
+    --gradiente-texto-energia:  linear-gradient(135deg, #5C0A1B 0%, #9A1F38 100%);
+    --gradiente-texto-plateado: linear-gradient(135deg, #8A8A8A 0%, #C0C0C0 100%);
+
+    /* ── TIPOGRAFÍAS (se mantienen, son adecuadas) ── */
     --fuente-titulos: 'Poppins', sans-serif;
     --fuente-cuerpo:  'Inter', sans-serif;
 
-    /* ── SOMBRAS SUAVES Y ELEGANTES ────────────────────────── */
-    --sombra-xs:    0 2px 8px  rgba(168, 197, 218, 0.08);
-    --sombra-suave: 0 4px 15px rgba(168, 197, 218, 0.10);
-    --sombra-media: 0 8px 25px rgba(168, 197, 218, 0.14);
-    --sombra-alta:  0 12px 40px rgba(168, 197, 218, 0.18);
-    --sombra-acento:0 6px 20px rgba(245, 213, 213, 0.25);
+    /* ── SOMBRAS FITNESS (impacto + acento plateado/vinotinto) ── */
+    --sombra-xs:    0 2px 8px  rgba(92, 10, 27, 0.08);
+    --sombra-suave: 0 4px 15px rgba(92, 10, 27, 0.10);
+    --sombra-media: 0 8px 25px rgba(92, 10, 27, 0.14);
+    --sombra-alta:  0 12px 40px rgba(92, 10, 27, 0.20);
+    --sombra-vinotinto: 0 6px 24px rgba(92, 10, 27, 0.35);
+    --sombra-plateada:  0 6px 20px rgba(192, 192, 192, 0.30);
+    --sombra-neon:     0 0 20px rgba(154, 31, 56, 0.45);
 
-    /* ── BORDER RADIUS ─────────────────────────────────────── */
+    /* ── BORDER RADIUS (ángulos más marcados para look industrial/gym) ── */
     --radio-sm:      4px;
     --radio-md:      8px;
-    --radio-lg:      16px;
-    --radio-xl:      20px;
+    --radio-lg:      14px;
+    --radio-xl:      18px;
     --radio-pill:    50px;
     --radio-circulo: 50%;
 
-    /* ── ESPACIADOS DE SECCIÓN ─────────────────────────────── */
+    /* ── ESPACIADOS DE SECCIÓN ── */
     --padding-seccion:    70px 0;
     --padding-seccion-sm: 50px 0;
 
-    /* ── TRANSICIÓN ────────────────────────────────────────── */
-    --transicion: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* ── TRANSICIÓN RÁPIDA / ENERGÉTICA ── */
+    --transicion: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
