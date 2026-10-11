@@ -1,0 +1,766 @@
+/* ==========================================================================
+   css/login.css — Página de acceso INDEPENDIENTE (login.html)
+   Paleta FITNESS TRICOLOR: Vinotinto · Plateado · Blanco
+   Arquitectura: TOPBAR de retorno global + split-screen (branding / formulario)
+   ========================================================================== */
+
+/* ── Reset y base de página ──────────────────────────────────────────────── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: var(--fuente-cuerpo, 'Inter', sans-serif);
+    background: var(--fondo-general, #F5F5F5);
+    color: var(--texto-oscuro, #1A1A1A);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.25s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TOPBAR DE RETORNO — Visible en TODOS los dispositivos (desktop + móvil)
+   Siempre anclada en la parte superior de la página
+   ═══════════════════════════════════════════════════════════════════════════ */
+.login-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--gradiente-vinotinto,
+        linear-gradient(135deg, #3D0712 0%, #5C0A1B 50%, #7A1429 100%));
+    border-bottom: 1.5px solid rgba(192, 192, 192, 0.35);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 12px 0;
+}
+
+.login-topbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 28px;
+    gap: 16px;
+}
+
+/* Logo con nombre de marca en el topbar */
+.login-topbar__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: opacity 0.25s ease;
+}
+
+.login-topbar__logo:hover {
+    opacity: 0.85;
+}
+
+.login-topbar__logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1.5px solid rgba(192, 192, 192, 0.4);
+    padding: 5px;
+    flex-shrink: 0;
+}
+
+.login-topbar__marca {
+    font-family: var(--fuente-titulos, 'Poppins', sans-serif);
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+/* Botón principal "← Volver a la Tienda" */
+.login-topbar__volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1.5px solid rgba(192, 192, 192, 0.45);
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-family: var(--fuente-titulos, 'Poppins', sans-serif);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.login-topbar__volver i {
+    font-size: 1.05rem;
+    transition: transform 0.25s ease;
+}
+
+.login-topbar__volver:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #E0E0E0;
+    transform: translateX(-3px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.login-topbar__volver:hover i {
+    transform: translateX(-3px);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   WRAPPER PRINCIPAL — Layout split-screen
+   ═══════════════════════════════════════════════════════════════════════════ */
+.login-wrapper {
+    display: flex;
+    min-height: calc(100vh - 65px); /* descuenta la altura del topbar */
+    width: 100%;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PANEL IZQUIERDO — Branding (fondo vinotinto)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.login-brand {
+    position: relative;
+    flex: 0 0 48%;
+    background: var(--gradiente-vinotinto,
+        linear-gradient(135deg, #3D0712 0%, #5C0A1B 50%, #7A1429 100%));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 50px;
+    overflow: hidden;
+}
+
+/* Círculos decorativos difuminados (plateados) */
+.login-brand__decor {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.login-brand__decor--1 {
+    width: 460px;
+    height: 460px;
+    top: -150px;
+    right: -130px;
+    background: radial-gradient(circle,
+        rgba(192, 192, 192, 0.15) 0%,
+        transparent 65%);
+}
+
+.login-brand__decor--2 {
+    width: 340px;
+    height: 340px;
+    bottom: -110px;
+    left: -90px;
+    background: radial-gradient(circle,
+        rgba(192, 192, 192, 0.10) 0%,
+        transparent 65%);
+}
+
+.login-brand__decor--3 {
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle,
+        rgba(255, 255, 255, 0.04) 0%,
+        transparent 70%);
+}
+
+.login-brand__contenido {
+    position: relative;
+    z-index: 1;
+    max-width: 460px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+/* Logo grande clicable en el panel de marca */
+.login-brand__logo-link {
+    display: inline-block;
+    margin-bottom: 28px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 22px;
+}
+
+.login-brand__logo-link:hover {
+    transform: scale(1.06);
+}
+
+.login-brand__logo-link:focus-visible {
+    outline: 3px solid rgba(192, 192, 192, 0.7);
+    outline-offset: 4px;
+    border-radius: 24px;
+}
+
+.login-brand__logo {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(192, 192, 192, 0.45);
+    border-radius: 22px;
+    padding: 14px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35),
+                0 0 0 1px rgba(192, 192, 192, 0.1) inset;
+    filter: drop-shadow(0 4px 14px rgba(192, 192, 192, 0.2));
+}
+
+.login-brand__titulo {
+    font-family: var(--fuente-titulos, 'Poppins', sans-serif);
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 18px;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+}
+
+.login-brand__titulo strong {
+    background: linear-gradient(135deg, #E0E0E0 0%, #C0C0C0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.login-brand__subtitulo {
+    font-size: 0.98rem;
+    color: rgba(255, 255, 255, 0.78);
+    margin-bottom: 36px;
+    line-height: 1.75;
+}
+
+/* Lista de beneficios */
+.login-brand__beneficios {
+    list-style: none;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 36px;
+}
+
+.login-brand__beneficios li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.93rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+.login-brand__icono {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,
+        rgba(192, 192, 192, 0.22) 0%,
+        rgba(192, 192, 192, 0.08) 100%);
+    border: 1px solid rgba(192, 192, 192, 0.3);
+    border-radius: 10px;
+    font-size: 1.15rem;
+    color: #E0E0E0;
+    transition: all 0.25s ease;
+}
+
+.login-brand__beneficios li:hover .login-brand__icono {
+    background: rgba(192, 192, 192, 0.3);
+    border-color: rgba(192, 192, 192, 0.5);
+    transform: scale(1.08);
+}
+
+/* Botón "Explorar la Tienda" dentro del panel de marca */
+.login-brand__btn-inicio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1.5px solid rgba(192, 192, 192, 0.45);
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-family: var(--fuente-titulos, 'Poppins', sans-serif);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.28s ease;
+    text-decoration: none;
+}
+
+.login-brand__btn-inicio:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #E0E0E0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    color: #FFFFFF;
+}
+
+.login-brand__btn-inicio i {
+    font-size: 1.05rem;
+}
+
+/* Pie del panel de marca */
+.login-brand__footer {
+    position: absolute;
+    bottom: 22px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.45);
+    z-index: 2;
+}
+
+.login-brand__footer i {
+    color: #E0E0E0;
+    vertical-align: middle;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PANEL DERECHO — Formulario (fondo blanco/plateado suave)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.login-panel {
+    flex: 1 1 52%;
+    background: linear-gradient(160deg, #FFFFFF 0%, #F8F6F6 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 28px;
+    min-height: 100%;
+    position: relative;
+    overflow-y: auto;
+}
+
+/* Patrón sutil en el fondo del panel blanco */
+.login-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 1px 1px,
+        rgba(92, 10, 27, 0.04) 1px,
+        transparent 0);
+    background-size: 32px 32px;
+    pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TARJETA DE FORMULARIO — Adaptación de .auth-modal a tarjeta estática
+   Sobreescribe los estilos de overlay/modal para funcionar como tarjeta fija
+   ═══════════════════════════════════════════════════════════════════════════ */
+.login-card.auth-modal {
+    /* Fondo blanco puro con bordes plateados — como requiere el briefing */
+    background: #FFFFFF;
+    border: 1.5px solid var(--borde-plateado, #C0C0C0);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(92, 10, 27, 0.10),
+                0 4px 16px rgba(92, 10, 27, 0.06),
+                0 0 0 1px rgba(192, 192, 192, 0.12) inset;
+    width: 100%;
+    max-width: 468px;
+    max-height: none;
+    overflow: visible;
+    position: relative;
+    z-index: 1;
+    padding: 42px 38px 32px;
+    transform: none;
+    animation: loginCardIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes loginCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(28px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ── Logo en la tarjeta (link clicable) ────────────────────────────────── */
+.login-card__logo-link {
+    display: inline-block;
+    border-radius: 18px;
+    transition: transform 0.25s ease;
+}
+
+.login-card__logo-link:hover {
+    transform: scale(1.05);
+}
+
+.login-card__logo-link:focus-visible {
+    outline: 2px solid var(--vinotinto, #5C0A1B);
+    outline-offset: 4px;
+    border-radius: 18px;
+}
+
+/* ── Encabezado: ajustes para fondo blanco ─────────────────────────────── */
+.login-card .auth-header {
+    margin-bottom: 28px;
+}
+
+.login-card .auth-logo {
+    background: rgba(92, 10, 27, 0.05);
+    border: 1.5px solid rgba(92, 10, 27, 0.14);
+    filter: drop-shadow(0 4px 10px rgba(92, 10, 27, 0.12));
+    transition: transform 0.25s ease;
+}
+
+.login-card .auth-titulo {
+    color: var(--vinotinto, #5C0A1B);
+    font-size: 1.65rem;
+    margin-top: 4px;
+}
+
+.login-card .auth-subtitulo {
+    color: var(--texto-plateado, #8A8A8A);
+}
+
+/* ── Pestañas: vinotinto activo sobre fondo blanco ─────────────────────── */
+.login-card .auth-tabs {
+    background: rgba(92, 10, 27, 0.04);
+    border: 1.5px solid rgba(92, 10, 27, 0.10);
+    margin-bottom: 24px;
+}
+
+.login-card .auth-tab {
+    color: var(--texto-plateado, #8A8A8A);
+    gap: 7px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card .auth-tab i {
+    font-size: 1rem;
+}
+
+.login-card .auth-tab:hover {
+    color: var(--vinotinto, #5C0A1B);
+}
+
+/* Pestaña activa: VINOTINTO con texto blanco */
+.login-card .auth-tab--activo {
+    background: linear-gradient(135deg, #5C0A1B 0%, #7A1429 100%);
+    color: #FFFFFF;
+    box-shadow: 0 4px 14px rgba(92, 10, 27, 0.28);
+}
+
+/* ── Alertas: contraste óptimo sobre fondo blanco ──────────────────────── */
+.login-card .auth-alerta--error {
+    background: rgba(220, 53, 69, 0.07);
+    border: 1px solid rgba(220, 53, 69, 0.28);
+    color: #b02a37;
+}
+
+.login-card .auth-alerta--exito {
+    background: rgba(40, 167, 69, 0.07);
+    border: 1px solid rgba(40, 167, 69, 0.28);
+    color: #1a7a34;
+}
+
+.login-card .auth-alerta--info {
+    background: rgba(13, 110, 253, 0.07);
+    border: 1px solid rgba(13, 110, 253, 0.28);
+    color: #0a58ca;
+}
+
+/* ── Labels de los campos ──────────────────────────────────────────────── */
+.login-card .auth-campo label {
+    color: var(--vinotinto-oscuro, #3D0712);
+    font-weight: 700;
+}
+
+/* ── Inputs: fondo blanco, borde plateado, texto negro ─────────────────── */
+.login-card .auth-input-wrapper input {
+    background: #FFFFFF;
+    border: 1.5px solid var(--borde-plateado, #C0C0C0);
+    color: var(--texto-oscuro, #1A1A1A);
+}
+
+.login-card .auth-input-wrapper input::placeholder {
+    color: #ADADAD;
+}
+
+.login-card .auth-input-wrapper input:hover {
+    border-color: #AAAAAA;
+}
+
+.login-card .auth-input-wrapper input:focus {
+    border-color: var(--vinotinto, #5C0A1B);
+    box-shadow: 0 0 0 3px rgba(92, 10, 27, 0.10);
+    background: #FEFCFC;
+}
+
+.login-card .auth-input-wrapper input:focus ~ .auth-input-icono,
+.login-card .auth-input-wrapper:focus-within .auth-input-icono {
+    color: var(--vinotinto, #5C0A1B);
+}
+
+/* ── Errores de campo ──────────────────────────────────────────────────── */
+.login-card .auth-error {
+    color: #dc3545;
+}
+
+/* ── Toggle de contraseña ──────────────────────────────────────────────── */
+.login-card .auth-toggle-password {
+    color: #ADADAD;
+}
+
+.login-card .auth-toggle-password:hover {
+    color: var(--vinotinto, #5C0A1B);
+    background: rgba(92, 10, 27, 0.06);
+}
+
+/* ── Fila extra (recordar / olvidaste) ─────────────────────────────────── */
+.login-card .auth-recordar {
+    color: var(--texto-plateado, #8A8A8A);
+}
+
+.login-card .auth-recordar input[type="checkbox"] {
+    accent-color: var(--vinotinto, #5C0A1B);
+}
+
+.login-card .auth-link {
+    color: var(--vinotinto, #5C0A1B);
+}
+
+.login-card .auth-link:hover {
+    color: var(--vinotinto-claro, #9A1F38);
+    text-decoration: underline;
+}
+
+/* ── Botón CTA — VINOTINTO con texto blanco (requisito de branding) ────── */
+.login-card .auth-submit {
+    background: linear-gradient(135deg, #5C0A1B 0%, #7A1429 100%);
+    border: 1.5px solid rgba(192, 192, 192, 0.28);
+    color: #FFFFFF;
+    box-shadow: 0 6px 22px rgba(92, 10, 27, 0.28);
+    gap: 10px;
+}
+
+/* Efecto shimmer sobre vinotinto */
+.login-card .auth-submit::before {
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.28),
+        transparent);
+}
+
+.login-card .auth-submit:hover:not(:disabled) {
+    background: linear-gradient(135deg, #7A1429 0%, #9A1F38 100%);
+    border-color: var(--plateado, #C0C0C0);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(92, 10, 27, 0.42);
+    color: #FFFFFF;
+}
+
+.login-card .auth-submit:active:not(:disabled) {
+    transform: translateY(1px);
+    box-shadow: 0 4px 12px rgba(92, 10, 27, 0.25);
+}
+
+/* Spinner del botón (blanco sobre vinotinto) */
+.login-card .auth-spinner {
+    border-color: rgba(255, 255, 255, 0.28);
+    border-top-color: #FFFFFF;
+}
+
+/* ── Pie de la tarjeta ─────────────────────────────────────────────────── */
+.login-card .auth-footer {
+    border-top: 1px solid var(--borde-suave, #EBEBEB);
+    margin-top: 24px;
+    padding-top: 18px;
+}
+
+.login-card .auth-footer p {
+    color: var(--texto-plateado, #8A8A8A);
+}
+
+.login-card .auth-footer strong {
+    color: var(--vinotinto, #5C0A1B);
+    font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE — Tablet grande (992px)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 1100px) {
+    .login-brand {
+        flex: 0 0 45%;
+        padding: 50px 36px;
+    }
+
+    .login-brand__titulo {
+        font-size: 2.1rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .login-brand {
+        flex: 0 0 42%;
+        padding: 44px 28px;
+    }
+
+    .login-brand__titulo {
+        font-size: 1.9rem;
+    }
+
+    .login-brand__subtitulo {
+        font-size: 0.9rem;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE — Tablet y Móvil (≤ 768px)
+   Panel de marca se oculta; formulario ocupa toda la pantalla
+   Topbar siempre visible
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+    /* Topbar: compactar en móvil */
+    .login-topbar__inner {
+        padding: 0 16px;
+    }
+
+    .login-topbar__marca {
+        font-size: 1rem;
+    }
+
+    .login-topbar__volver span {
+        /* Ocultar texto "Volver a la Tienda" en pantallas muy pequeñas
+           pero mantener el ícono perfectamente clicable */
+        display: none;
+    }
+
+    .login-topbar__volver {
+        padding: 10px 14px;
+        border-radius: 8px;
+        min-width: 44px;   /* mínimo táctil de 44px */
+        min-height: 44px;
+        justify-content: center;
+    }
+
+    .login-topbar__volver i {
+        font-size: 1.2rem;
+    }
+
+    /* Panel de marca oculto en móvil */
+    .login-brand {
+        display: none;
+    }
+
+    /* Formulario ocupa el 100% */
+    .login-panel {
+        flex: 1 1 100%;
+        padding: 28px 16px 40px;
+        background: linear-gradient(160deg, #FFFFFF 0%, #F8F6F6 100%);
+        justify-content: flex-start;
+        padding-top: 32px;
+    }
+
+    .login-card.auth-modal {
+        padding: 32px 22px 26px;
+        border-radius: 16px;
+        box-shadow: 0 12px 40px rgba(92, 10, 27, 0.10);
+    }
+
+    .login-card .auth-titulo {
+        font-size: 1.45rem;
+    }
+
+    .login-card .auth-logo {
+        width: 58px;
+        height: 58px;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE — Móvil pequeño (≤ 480px)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+    .login-topbar__volver span {
+        display: none;
+    }
+
+    .login-card.auth-modal {
+        padding: 24px 16px 22px;
+    }
+
+    .login-card .auth-extra {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .login-card .auth-tabs {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .login-card .auth-tab {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ACCESIBILIDAD — Focus visible mejorado
+   ═══════════════════════════════════════════════════════════════════════════ */
+:focus-visible {
+    outline: 2px solid var(--vinotinto, #5C0A1B);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+.login-topbar__volver:focus-visible {
+    outline-color: #E0E0E0;
+    outline-offset: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANIMACIÓN EXTRA — fadeIn en la pestaña activa al cargar
+   ═══════════════════════════════════════════════════════════════════════════ */
+@keyframes loginCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(28px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes authAlertaIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

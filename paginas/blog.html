@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/bootstrap-custom.css">
     <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/auth.css">
 </head>
 <body>
 
@@ -85,6 +86,32 @@
                         <a class="nav-link" href="#" aria-label="Carrito"><i class="ri-shopping-cart-fill fs-5"></i>
                             <span class="badge bg-danger position-absolute top-0 start-100 translate-middle contador-carrito">0</span>
                         </a>
+                    </li>
+                </ul>
+
+                <!-- Acceso / Cuenta de usuario (Módulo de Autenticación) -->
+                <ul class="navbar-nav ms-3 align-items-center">
+                    <li class="nav-item" data-require-guest>
+                        <a href="../login.html" class="auth-boton-acceso">
+                            <i class="ri-user-line"></i>
+                            <span class="d-none d-sm-inline">Ingresar</span>
+                        </a>
+                    </li>
+                    <li class="nav-item auth-usuario-menu" data-require-auth style="display:none;">
+                        <div class="auth-avatar" data-auth-avatar id="auth-avatar-btn" role="button" tabindex="0" aria-label="Menú de usuario"></div>
+                        <div class="auth-dropdown" id="auth-dropdown">
+                            <div class="auth-dropdown-header">
+                                <p class="auth-dropdown-nombre" data-auth-nombre></p>
+                                <p class="auth-dropdown-email" data-auth-email></p>
+                            </div>
+                            <a href="#" class="auth-dropdown-item" data-auth-perfil>
+                                <i class="ri-user-line"></i> Mi Perfil
+                            </a>
+                            <div class="auth-dropdown-divider"></div>
+                            <button class="auth-dropdown-item auth-dropdown-item--logout" data-auth-logout>
+                                <i class="ri-logout-box-r-line"></i> Cerrar Sesión
+                            </button>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -469,8 +496,12 @@
 
     <!-- Scripts -->
     <script src="../js/utils/storage.js"></script>
+    <script src="../js/utils/hash.js"></script>
+    <script src="../js/services/auth.js"></script>
     <script src="../js/components/menu.js"></script>
     <script src="../js/components/carrito.js"></script>
+    <script src="../js/components/auth-modal.js"></script>
+    <script src="../js/components/auth-guard.js"></script>
     <script src="../js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

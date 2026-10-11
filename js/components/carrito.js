@@ -1,15 +1,197 @@
 // js/components/carrito.js
-// Responsabilidad: sincronizar el contador del carrito en el header.
-// Compartido en todas las páginas. Depende de: utils/storage.js
-// La lógica de los botones "Agregar al carrito" vive en pages/index.js
-// porque actualmente solo existen en index.html.
+// Responsabilidad: lógica compartida del carrito (todas las páginas).
+// — Gestión del array de items en localStorage (clave: 'prana_carrito')
+// — Sincronización del badge/contador en el header
+// — API pública: CarritoService
+//
+// Estructura de cada ítem en localStorage:
+// {
+//   id:       string   — identificador único del producto
+//   nombre:   string
+//   precio:   number   — precio unitario en pesos COP
+//   imagen:   string   — URL de la imagen
+//   categoria:string
+//   cantidad: number   — ≥ 1
+// }
+//
+// Dependencias: utils/storage.js (cargado antes)
 
-function iniciarCarrito() {
-    var contadorCarrito = document.querySelector('.contador-carrito');
+var CarritoService = (function () {
 
-    // Si esta página no tiene contador visible en el header, no hace nada
-    if (!contadorCarrito) return;
+    'use strict';
 
-    // Sincronizar el contador con el valor persistido
-    contadorCarrito.textContent = Storage.obtener('carrito', 0);
-}
+    var KEY = 'prana_carrito';
+    var ENVIO_GRATIS_DESDE = 150000; // COP
+    var COSTO_ENVIO        = 15000;  // COP si no alcanza el umbral
+
+    // ── Helpers internos ────────────────────────────────────────────────────
+
+    function leerItems() {
+        var raw = Storage.obtener(KEY, null);
+        if (!raw) return [];
+        try {
+            var parsed = JSON.parse(raw);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function guardarItems(items) {
+        Storage.guardar(KEY, JSON.stringify(items));
+        _actualizarContadores();
+        _dispatchCambio();
+    }
+
+    // Actualiza TODOS los badges .contador-carrito presentes en el DOM
+    function _actualizarContadores() {
+        var total = obtenerCantidadTotal();
+        var badges = document.querySelectorAll('.contador-carrito');
+        badges.forEach(function (b) {
+            b.textContent = total;
+            // Ocultar el badge si el carrito está vacío
+            b.style.display = total > 0 ? '' : 'none';
+        });
+    }
+
+    function _dispatchCambio() {
+        // Evento personalizado para que carrito.html pueda reaccionar
+        try {
+            var ev = new CustomEvent('prana:carritoActualizado');
+            document.dispatchEvent(ev);
+        } catch (e) { /* ignora en navegadores muy viejos */ }
+    }
+
+    // ── API PÚBLICA ─────────────────────────────────────────────────────────
+
+    /**
+     * Devuelve todos los ítems del carrito.
+     * @returns {Array}
+     */
+    function obtenerItems() {
+        return leerItems();
+    }
+
+    /**
+     * Agrega un producto al carrito.
+     * Si el producto ya existe, incrementa su cantidad en 1.
+     *
+     * @param {Object} producto - { id, nombre, precio, imagen, categoria }
+     * @returns {number} nueva cantidad del ítem agregado
+     */
+    function agregar(producto) {
+        if (!producto || !producto.id) return 0;
+
+        var items = leerItems();
+        var idx   = items.findIndex(function (i) { return i.id === producto.id; });
+
+        if (idx >= 0) {
+            items[idx].cantidad += 1;
+        } else {
+            items.push({
+                id:       String(producto.id),
+                nombre:   String(producto.nombre   || 'Producto'),
+                precio:   Number(producto.precio   || 0),
+                imagen:   String(producto.imagen   || ''),
+                categoria:String(producto.categoria || ''),
+                cantidad: 1
+            });
+        }
+
+        guardarItems(items);
+        return idx >= 0 ? items[idx].cantidad : 1;
+    }
+
+    /**
+     * Cambia la cantidad de un ítem. Si llega a 0 o menos, lo elimina.
+     *
+     * @param {string} id
+     * @param {number} nuevaCantidad
+     */
+    function setCantidad(id, nuevaCantidad) {
+        var items = leerItems();
+        if (nuevaCantidad <= 0) {
+            items = items.filter(function (i) { return i.id !== id; });
+        } else {
+            var idx = items.findIndex(function (i) { return i.id === id; });
+            if (idx >= 0) items[idx].cantidad = Math.min(nuevaCantidad, 99);
+        }
+        guardarItems(items);
+    }
+
+    /**
+     * Elimina un ítem por id.
+     * @param {string} id
+     */
+    function eliminar(id) {
+        var items = leerItems().filter(function (i) { return i.id !== id; });
+        guardarItems(items);
+    }
+
+    /**
+     * Vacía el carrito completamente.
+     */
+    function vaciar() {
+        Storage.eliminar(KEY);
+        _actualizarContadores();
+        _dispatchCambio();
+    }
+
+    /**
+     * Cantidad total de unidades en el carrito (suma de todas las cantidades).
+     * @returns {number}
+     */
+    function obtenerCantidadTotal() {
+        return leerItems().reduce(function (acc, i) { return acc + i.cantidad; }, 0);
+    }
+
+    /**
+     * Subtotal antes de envío.
+     * @returns {number}
+     */
+    function obtenerSubtotal() {
+        return leerItems().reduce(function (acc, i) {
+            return acc + (i.precio * i.cantidad);
+        }, 0);
+    }
+
+    /**
+     * Costo de envío (0 si supera el umbral de envío gratis).
+     * @returns {number}
+     */
+    function obtenerCostoEnvio() {
+        return obtenerSubtotal() >= ENVIO_GRATIS_DESDE ? 0 : COSTO_ENVIO;
+    }
+
+    /**
+     * Total final a pagar (subtotal + envío).
+     * @returns {number}
+     */
+    function obtenerTotal() {
+        return obtenerSubtotal() + obtenerCostoEnvio();
+    }
+
+    /**
+     * Inicia el contador al cargar cualquier página.
+     * Llamar desde main.js o el script de cada página.
+     */
+    function iniciar() {
+        _actualizarContadores();
+    }
+
+    return {
+        obtenerItems:       obtenerItems,
+        agregar:            agregar,
+        setCantidad:        setCantidad,
+        eliminar:           eliminar,
+        vaciar:             vaciar,
+        obtenerCantidadTotal: obtenerCantidadTotal,
+        obtenerSubtotal:    obtenerSubtotal,
+        obtenerCostoEnvio:  obtenerCostoEnvio,
+        obtenerTotal:       obtenerTotal,
+        iniciar:            iniciar,
+        ENVIO_GRATIS_DESDE: ENVIO_GRATIS_DESDE,
+        COSTO_ENVIO:        COSTO_ENVIO
+    };
+
+})();

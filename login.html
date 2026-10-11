@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- ==========================================================================
+         HEAD — LOGIN.HTML (PÁGINA DE ACCESO INDEPENDIENTE)
+         Página dedicada exclusivamente al inicio de sesión y registro de usuarios.
+         Arquitectura modular: separada de index.html para mayor escalabilidad.
+         ========================================================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión | Prana — Tienda Fitness Premium</title>
+    <meta name="description" content="Accede a tu cuenta Prana o regístrate para disfrutar de ofertas exclusivas, seguimiento de pedidos y asesoría fitness personalizada.">
+
+    <!-- Favicon de la marca -->
+    <link rel="icon" href="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" type="image/png">
+
+    <!-- Font Awesome — Iconos UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Remix Icons — Iconos complementarios -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css">
+
+    <!-- Google Fonts: Poppins (títulos) + Inter (cuerpo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Hojas de estilo del proyecto (variables → auth → estilos de página) -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+    <!-- ==========================================================================
+         BARRA DE RETORNO GLOBAL (visible en todos los tamaños de pantalla)
+         Navegación clara hacia index.html con branding de la marca
+         ========================================================================== -->
+    <header class="login-topbar" role="banner">
+        <div class="login-topbar__inner">
+
+            <!-- Logo de marca como enlace a inicio -->
+            <a href="index.html" class="login-topbar__logo" aria-label="Ir a la página de inicio de Prana">
+                <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png"
+                     alt="Logo Prana Fitness"
+                     class="login-topbar__logo-img">
+                <span class="login-topbar__marca">Prana</span>
+            </a>
+
+            <!-- Botón principal de regreso a la tienda -->
+            <a href="index.html" class="login-topbar__volver" aria-label="Volver a la tienda Prana">
+                <i class="ri-arrow-left-line" aria-hidden="true"></i>
+                <span>Volver a la Tienda</span>
+            </a>
+
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+         CONTENEDOR PRINCIPAL — Layout split-screen
+         Panel izquierdo: Branding vinotinto / Panel derecho: Formulario blanco
+         ========================================================================== -->
+    <main class="login-wrapper" id="main-content">
+
+        <!-- ── Panel izquierdo: Branding / Hero ───────────────────────────── -->
+        <aside class="login-brand" aria-label="Información de la marca Prana">
+            <!-- Elementos decorativos difuminados -->
+            <div class="login-brand__decor login-brand__decor--1" aria-hidden="true"></div>
+            <div class="login-brand__decor login-brand__decor--2" aria-hidden="true"></div>
+            <div class="login-brand__decor login-brand__decor--3" aria-hidden="true"></div>
+
+            <div class="login-brand__contenido">
+
+                <!-- Logo clicable que regresa al inicio -->
+                <a href="index.html" class="login-brand__logo-link" aria-label="Volver al inicio — Prana Fitness">
+                    <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png"
+                         alt="Logo oficial de Prana — Tienda Fitness Premium"
+                         class="login-brand__logo">
+                </a>
+
+                <h1 class="login-brand__titulo">
+                    Supera tus <strong>límites</strong><br>con Prana
+                </h1>
+                <p class="login-brand__subtitulo">
+                    Tu tienda fitness de alto rendimiento. Accede para disfrutar de
+                    ofertas exclusivas, seguimiento de pedidos y asesoría personalizada.
+                </p>
+
+                <!-- Lista de beneficios de la marca -->
+                <ul class="login-brand__beneficios" role="list">
+                    <li>
+                        <span class="login-brand__icono" aria-hidden="true"><i class="ri-shield-check-line"></i></span>
+                        <span>Productos 100% originales y certificados</span>
+                    </li>
+                    <li>
+                        <span class="login-brand__icono" aria-hidden="true"><i class="ri-truck-line"></i></span>
+                        <span>Envíos gratis a todo el país desde $150.000</span>
+                    </li>
+                    <li>
+                        <span class="login-brand__icono" aria-hidden="true"><i class="ri-user-star-line"></i></span>
+                        <span>Asesoría deportiva personalizada gratis</span>
+                    </li>
+                    <li>
+                        <span class="login-brand__icono" aria-hidden="true"><i class="ri-lock-2-line"></i></span>
+                        <span>Compras 100% seguras y encriptadas</span>
+                    </li>
+                </ul>
+
+                <!-- Botón secundario de retorno visible en el panel de marca -->
+                <a href="index.html" class="login-brand__btn-inicio" aria-label="Explorar la tienda sin iniciar sesión">
+                    <i class="ri-store-2-line" aria-hidden="true"></i>
+                    <span>Explorar la Tienda</span>
+                </a>
+
+            </div>
+
+            <!-- Pie del panel de marca -->
+            <div class="login-brand__footer">
+                <p>© 2026 Prana Fitness. Hecho con <i class="ri-heart-fill" aria-hidden="true"></i> en Medellín.</p>
+            </div>
+        </aside>
+
+        <!-- ── Panel derecho: Formulario de acceso ────────────────────────── -->
+        <section class="login-panel" aria-label="Formulario de acceso y registro">
+
+            <!-- Tarjeta del formulario -->
+            <div class="auth-modal login-card" role="main" aria-labelledby="login-titulo">
+
+                <!-- Encabezado con logo y título -->
+                <div class="auth-header">
+                    <a href="index.html" class="login-card__logo-link" aria-label="Volver al inicio">
+                        <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png"
+                             alt="Logo Prana Fitness"
+                             class="auth-logo">
+                    </a>
+                    <h2 class="auth-titulo" id="login-titulo">Bienvenido a Prana</h2>
+                    <p class="auth-subtitulo">Ingresa o crea tu cuenta para continuar</p>
+                </div>
+
+                <!-- Pestañas Login / Registro -->
+                <div class="auth-tabs" role="tablist" aria-label="Opciones de acceso">
+                    <button type="button"
+                            class="auth-tab auth-tab--activo"
+                            data-tab="login"
+                            id="tab-login"
+                            role="tab"
+                            aria-selected="true"
+                            aria-controls="form-login">
+                        <i class="ri-login-circle-line" aria-hidden="true"></i>
+                        Iniciar Sesión
+                    </button>
+                    <button type="button"
+                            class="auth-tab"
+                            data-tab="registro"
+                            id="tab-registro"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="form-registro">
+                        <i class="ri-user-add-line" aria-hidden="true"></i>
+                        Crear Cuenta
+                    </button>
+                </div>
+
+                <!-- Área de alertas visuales -->
+                <div class="auth-alertas" id="login-alertas" aria-live="polite" aria-atomic="true"></div>
+
+                <!-- ── Formulario de Login ─────────────────────────────────── -->
+                <form class="auth-form auth-form--activo"
+                      id="form-login"
+                      novalidate
+                      role="tabpanel"
+                      aria-labelledby="tab-login">
+
+                    <div class="auth-campo">
+                        <label for="login-email">Correo electrónico</label>
+                        <div class="auth-input-wrapper">
+                            <i class="ri-mail-line auth-input-icono" aria-hidden="true"></i>
+                            <input type="email"
+                                   id="login-email"
+                                   name="email"
+                                   placeholder="tucorreo@ejemplo.com"
+                                   autocomplete="email"
+                                   required
+                                   aria-required="true"
+                                   aria-describedby="login-email-error">
+                        </div>
+                        <small class="auth-error" id="login-email-error" role="alert"></small>
+                    </div>
+
+                    <div class="auth-campo">
+                        <label for="login-password">Contraseña</label>
+                        <div class="auth-input-wrapper">
+                            <i class="ri-lock-line auth-input-icono" aria-hidden="true"></i>
+                            <input type="password"
+                                   id="login-password"
+                                   name="password"
+                                   placeholder="••••••••"
+                                   autocomplete="current-password"
+                                   required
+                                   aria-required="true"
+                                   aria-describedby="login-password-error">
+                            <button type="button"
+                                    class="auth-toggle-password"
+                                    data-target="login-password"
+                                    aria-label="Mostrar contraseña">
+                                <i class="ri-eye-line" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <small class="auth-error" id="login-password-error" role="alert"></small>
+                    </div>
+
+                    <div class="auth-extra">
+                        <label class="auth-recordar">
+                            <input type="checkbox" id="login-recordar">
+                            <span>Recordarme</span>
+                        </label>
+                        <a href="#" class="auth-link" id="login-olvidaste">
+                            ¿Olvidaste tu contraseña?
+                        </a>
+                    </div>
+
+                    <button type="submit" class="auth-submit" id="login-submit">
+                        <i class="ri-login-circle-line" aria-hidden="true"></i>
+                        <span class="auth-submit-texto">Iniciar Sesión</span>
+                        <span class="auth-spinner" aria-hidden="true"></span>
+                    </button>
+
+                </form>
+
+                <!-- ── Formulario de Registro ──────────────────────────────── -->
+                <form class="auth-form"
+                      id="form-registro"
+                      novalidate
+                      role="tabpanel"
+                      aria-labelledby="tab-registro">
+
+                    <div class="auth-campo">
+                        <label for="registro-nombre">Nombre completo</label>
+                        <div class="auth-input-wrapper">
+                            <i class="ri-user-line auth-input-icono" aria-hidden="true"></i>
+                            <input type="text"
+                                   id="registro-nombre"
+                                   name="nombre"
+                                   placeholder="Tu nombre completo"
+                                   autocomplete="name"
+                                   required
+                                   aria-required="true"
+                                   aria-describedby="registro-nombre-error">
+                        </div>
+                        <small class="auth-error" id="registro-nombre-error" role="alert"></small>
+                    </div>
+
+                    <div class="auth-campo">
+                        <label for="registro-email">Correo electrónico</label>
+                        <div class="auth-input-wrapper">
+                            <i class="ri-mail-line auth-input-icono" aria-hidden="true"></i>
+                            <input type="email"
+                                   id="registro-email"
+                                   name="email"
+                                   placeholder="tucorreo@ejemplo.com"
+                                   autocomplete="email"
+                                   required
+                                   aria-required="true"
+                                   aria-describedby="registro-email-error">
+                        </div>
+                        <small class="auth-error" id="registro-email-error" role="alert"></small>
+                    </div>
+
+                    <div class="auth-campo">
+                        <label for="registro-password">Contraseña</label>
+                        <div class="auth-input-wrapper">
+                            <i class="ri-lock-line auth-input-icono" aria-hidden="true"></i>
+                            <input type="password"
+                                   id="registro-password"
+                                   name="password"
+                                   placeholder="Mínimo 6 caracteres"
+                                   autocomplete="new-password"
+                                   required
+                                   aria-required="true"
+                                   aria-describedby="registro-password-error">
+                            <button type="button"
+                                    class="auth-toggle-password"
+                                    data-target="registro-password"
+                                    aria-label="Mostrar contraseña">
+                                <i class="ri-eye-line" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <small class="auth-error" id="registro-password-error" role="alert"></small>
+                    </div>
+
+                    <div class="auth-campo">
+                        <label for="registro-password-confirm">Confirmar contraseña</label>
+                        <div class="auth-input-wrapper">
+                            <i class="ri-lock-2-line auth-input-icono" aria-hidden="true"></i>
+                            <input type="password"
+                                   id="registro-password-confirm"
+                                   name="passwordConfirm"
+                                   placeholder="Repite tu contraseña"
+                                   autocomplete="new-password"
+                                   required
+                                   aria-required="true"
+                                   aria-describedby="registro-password-confirm-error">
+                            <button type="button"
+                                    class="auth-toggle-password"
+                                    data-target="registro-password-confirm"
+                                    aria-label="Mostrar contraseña">
+                                <i class="ri-eye-line" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <small class="auth-error" id="registro-password-confirm-error" role="alert"></small>
+                    </div>
+
+                    <div class="auth-terminos">
+                        <label class="auth-recordar">
+                            <input type="checkbox" id="registro-terminos" required aria-required="true">
+                            <span>
+                                Acepto los
+                                <a href="#" class="auth-link">términos y condiciones</a>
+                                de uso
+                            </span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="auth-submit" id="registro-submit">
+                        <i class="ri-user-add-line" aria-hidden="true"></i>
+                        <span class="auth-submit-texto">Crear Cuenta</span>
+                        <span class="auth-spinner" aria-hidden="true"></span>
+                    </button>
+
+                </form>
+
+                <!-- Pie de la tarjeta -->
+                <div class="auth-footer">
+                    <p id="login-footer-texto">
+                        ¿No tienes cuenta?
+                        <strong class="auth-link" data-tab-toggle="registro" style="cursor:pointer;">
+                            Regístrate aquí
+                        </strong>
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==========================================================================
+         SCRIPTS — JavaScript
+         Orden: utilidades → servicio de auth → lógica de página
+         ========================================================================== -->
+    <script src="js/utils/storage.js"></script>
+    <script src="js/utils/hash.js"></script>
+    <script src="js/services/auth.js"></script>
+    <script src="js/pages/login.js"></script>
+
+</body>
+</html>

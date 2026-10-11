@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/bootstrap-custom.css">
     <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/auth.css">
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/productos.css">
 </head>
@@ -85,9 +86,36 @@
                         <a class="nav-link" href="#" aria-label="Buscar"><i class="ri-search-line fs-5"></i></a>
                     </li>
                     <li class="nav-item position-relative">
-                        <a class="nav-link" href="#" aria-label="Carrito"><i class="ri-shopping-cart-fill fs-5"></i>
+                        <a class="nav-link" href="../carrito.html" aria-label="Ver carrito de compras">
+                            <i class="ri-shopping-cart-fill fs-5"></i>
                             <span class="badge bg-danger position-absolute top-0 start-100 translate-middle contador-carrito">0</span>
                         </a>
+                    </li>
+                </ul>
+
+                <!-- Acceso / Cuenta de usuario (Módulo de Autenticación) -->
+                <ul class="navbar-nav ms-3 align-items-center">
+                    <li class="nav-item" data-require-guest>
+                        <a href="../login.html" class="auth-boton-acceso">
+                            <i class="ri-user-line"></i>
+                            <span class="d-none d-sm-inline">Ingresar</span>
+                        </a>
+                    </li>
+                    <li class="nav-item auth-usuario-menu" data-require-auth style="display:none;">
+                        <div class="auth-avatar" data-auth-avatar id="auth-avatar-btn" role="button" tabindex="0" aria-label="Menú de usuario"></div>
+                        <div class="auth-dropdown" id="auth-dropdown">
+                            <div class="auth-dropdown-header">
+                                <p class="auth-dropdown-nombre" data-auth-nombre></p>
+                                <p class="auth-dropdown-email" data-auth-email></p>
+                            </div>
+                            <a href="#" class="auth-dropdown-item" data-auth-perfil>
+                                <i class="ri-user-line"></i> Mi Perfil
+                            </a>
+                            <div class="auth-dropdown-divider"></div>
+                            <button class="auth-dropdown-item auth-dropdown-item--logout" data-auth-logout>
+                                <i class="ri-logout-box-r-line"></i> Cerrar Sesión
+                            </button>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -198,9 +226,11 @@
                                 <h2 class="card-title h5 fw-bold">Whey Protein Premium 2kg</h2>
                                 <p class="card-text text-muted small">25g de proteína por porción. Bajo en grasa, ideal para volumen y recuperación.</p>
                                 <h3 class="text-success fw-bold mb-3">$189.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Whey%20Protein%20Premium%202kg" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
-                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
-                                </a>
+                                <button class="btn btn-success w-100"
+                                        data-accion="agregar-carrito"
+                                        data-producto-id="whey-protein-2kg">
+                                    <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
+                                </button>
                             </div>
                         </div>
                     </article>
@@ -217,9 +247,11 @@
                                 <h2 class="card-title h5 fw-bold">Creatina Monohidratada 500g</h2>
                                 <p class="card-text text-muted small">Creatina micronizada pura. Aumenta fuerza, potencia y volumen muscular.</p>
                                 <h3 class="text-success fw-bold mb-3">$95.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Creatina%20Monohidratada%20500g" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
-                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
-                                </a>
+                                <button class="btn btn-success w-100"
+                                        data-accion="agregar-carrito"
+                                        data-producto-id="creatina-500g">
+                                    <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
+                                </button>
                             </div>
                         </div>
                     </article>
@@ -236,9 +268,11 @@
                                 <h2 class="card-title h5 fw-bold">Barras Proteicas Pack x12</h2>
                                 <p class="card-text text-muted small">20g de proteína por barra. Snack ideal pre/post entrenamiento y entre comidas.</p>
                                 <h3 class="text-success fw-bold mb-3">$82.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Barras%20Proteicas%20Pack%20x12" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
-                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
-                                </a>
+                                <button class="btn btn-success w-100"
+                                        data-accion="agregar-carrito"
+                                        data-producto-id="barras-proteicas-x12">
+                                    <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
+                                </button>
                             </div>
                         </div>
                     </article>
@@ -254,9 +288,11 @@
                                 <h2 class="card-title h5 fw-bold">Leggings Compresión High-Waist</h2>
                                 <p class="card-text text-muted small">Tejido técnico con control de abdomen y efecto lifting. Tallas XS–XL.</p>
                                 <h3 class="text-success fw-bold mb-3">$115.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Leggings%20Compresión%20High-Waist" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
-                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
-                                </a>
+                                <button class="btn btn-success w-100"
+                                        data-accion="agregar-carrito"
+                                        data-producto-id="leggings-hw">
+                                    <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
+                                </button>
                             </div>
                         </div>
                     </article>
@@ -273,9 +309,11 @@
                                 <h2 class="card-title h5 fw-bold">Sports Bra Soporte Alto</h2>
                                 <p class="card-text text-muted small">Top deportivo con soporte alto. Ideal para HIIT, crossfit y running.</p>
                                 <h3 class="text-success fw-bold mb-3">$89.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Sports%20Bra%20Soporte%20Alto" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
-                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
-                                </a>
+                                <button class="btn btn-success w-100"
+                                        data-accion="agregar-carrito"
+                                        data-producto-id="sports-bra">
+                                    <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
+                                </button>
                             </div>
                         </div>
                     </article>
@@ -292,9 +330,11 @@
                                 <h2 class="card-title h5 fw-bold">Sneakers Training Pro</h2>
                                 <p class="card-text text-muted small">Suela antideslizante + soporte lateral. Perfectas para levantamiento y cross.</p>
                                 <h3 class="text-success fw-bold mb-3">$260.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Sneakers%20Training%20Pro" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
-                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
-                                </a>
+                                <button class="btn btn-success w-100"
+                                        data-accion="agregar-carrito"
+                                        data-producto-id="sneakers-training-pro">
+                                    <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
+                                </button>
                             </div>
                         </div>
                     </article>
@@ -310,9 +350,11 @@
                                 <h2 class="card-title h5 fw-bold">Mancuernas Ajustables 20kg (par)</h2>
                                 <p class="card-text text-muted small">Kit de pesas ajustables de 2,5 a 20 kg. Perfectas para entrenar en casa.</p>
                                 <h3 class="text-success fw-bold mb-3">$489.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Mancuernas%20Ajustables%2020kg" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
-                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
-                                </a>
+                                <button class="btn btn-success w-100"
+                                        data-accion="agregar-carrito"
+                                        data-producto-id="mancuernas-20kg">
+                                    <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
+                                </button>
                             </div>
                         </div>
                     </article>
@@ -328,9 +370,11 @@
                                 <h2 class="card-title h5 fw-bold">Bandas Elásticas Set x5 Niveles</h2>
                                 <p class="card-text text-muted small">5 niveles de resistencia. Ideal para activación, glúteos, piernas y movilidad.</p>
                                 <h3 class="text-success fw-bold mb-3">$45.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Bandas%20Elásticas%20Set%20x5" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
-                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
-                                </a>
+                                <button class="btn btn-success w-100"
+                                        data-accion="agregar-carrito"
+                                        data-producto-id="bandas-elasticas-x5">
+                                    <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
+                                </button>
                             </div>
                         </div>
                     </article>
@@ -347,9 +391,11 @@
                                 <h2 class="card-title h5 fw-bold">Shaker Mezclador Pro 700ml</h2>
                                 <p class="card-text text-muted small">Batidor anti-derrames con bola mezcladora. Libre de BPA, apto lavavajillas.</p>
                                 <h3 class="text-success fw-bold mb-3">$32.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <a href="https://wa.me/573003091641?text=Hola!%20Me%20interesa%20Shaker%20Mezclador%20Pro%20700ml" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
-                                    <i class="fab fa-whatsapp me-2"></i>Pedir por WhatsApp
-                                </a>
+                                <button class="btn btn-success w-100"
+                                        data-accion="agregar-carrito"
+                                        data-producto-id="shaker-pro-700ml">
+                                    <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
+                                </button>
                             </div>
                         </div>
                     </article>
@@ -581,8 +627,12 @@
          SCRIPTS JavaScript
          ========================================================================== -->
     <script src="../js/utils/storage.js"></script>
+    <script src="../js/utils/hash.js"></script>
+    <script src="../js/services/auth.js"></script>
     <script src="../js/components/menu.js"></script>
     <script src="../js/components/carrito.js"></script>
+    <script src="../js/components/auth-modal.js"></script>
+    <script src="../js/components/auth-guard.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/pages/productos.js"></script>
     <!-- Bootstrap JS Bundle -->
