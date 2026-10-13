@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- ==========================================================================
+         HEAD — DASHBOARD.HTML
+         Panel de control con doble rol: Administrador / Cliente
+         ========================================================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control | Prana Fitness</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" type="image/png">
+
+    <!-- Remix Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<!-- Pantalla de carga mientras se verifica la sesión -->
+<div class="d-loading-screen" id="d-loading">
+    <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png"
+         alt="Prana Fitness" class="d-loading-logo">
+    <div class="d-loading-spin"></div>
+</div>
+
+<!-- ── Overlay oscuro para sidebar en móvil ─────────────────────────────── -->
+<div class="d-sidebar-overlay" id="d-sidebar-overlay"></div>
+
+<!-- ── Toast container ──────────────────────────────────────────────────── -->
+<div class="d-toast-wrap" id="d-toast-wrap" aria-live="polite"></div>
+
+<!-- ==========================================================================
+     LAYOUT PRINCIPAL
+     ========================================================================== -->
+<div class="d-layout" id="d-layout" style="display:none;">
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         SIDEBAR
+         ════════════════════════════════════════════════════════════════════ -->
+    <aside class="d-sidebar" id="d-sidebar" aria-label="Navegación del panel">
+
+        <!-- Cabecera: logo + nombre de marca -->
+        <div class="d-sidebar__head">
+            <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png"
+                 alt="Logo Prana" class="d-sidebar__logo">
+            <span class="d-sidebar__brand">Prana</span>
+            <!-- Botón colapsar/expandir -->
+            <button class="d-sidebar__toggle" id="d-sidebar-toggle" aria-label="Colapsar menú" title="Colapsar">
+                <i class="ri-arrow-left-s-line"></i>
+            </button>
+        </div>
+
+        <!-- Navegación dinámica (inyectada por JS según el rol) -->
+        <nav class="d-sidebar__nav" id="d-sidebar-nav" role="navigation"></nav>
+
+        <!-- Footer del sidebar: tarjeta de usuario -->
+        <div class="d-sidebar__foot">
+            <div class="d-sidebar__user-card">
+                <div class="d-sidebar__avatar" id="d-sidebar-avatar">U</div>
+                <div class="d-sidebar__user-info">
+                    <div class="d-sidebar__user-name" id="d-sidebar-nombre">Usuario</div>
+                    <div class="d-sidebar__user-role" id="d-sidebar-rol">Cliente</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         TOPBAR
+         ════════════════════════════════════════════════════════════════════ -->
+    <header class="d-topbar" id="d-topbar" role="banner">
+        <div class="d-topbar__left">
+            <!-- Toggle móvil -->
+            <button class="d-topbar__mobile-toggle" id="d-mobile-toggle" aria-label="Abrir menú">
+                <i class="ri-menu-line"></i>
+            </button>
+            <!-- Saludo personalizado -->
+            <div class="d-topbar__greeting">
+                <span class="d-topbar__hello">Bienvenido de vuelta,</span>
+                <span class="d-topbar__name" id="d-topbar-nombre">Usuario</span>
+            </div>
+        </div>
+
+        <div class="d-topbar__right">
+            <!-- Badge de rol activo -->
+            <div class="d-badge-rol" id="d-badge-rol">
+                <i class="ri-shield-star-line"></i>
+                <span id="d-badge-rol-text">Rol</span>
+            </div>
+
+            <!-- Volver a la tienda -->
+            <a href="index.html" class="d-topbar__btn d-topbar__btn--tienda">
+                <i class="ri-store-2-line"></i>
+                <span>Ir a la Tienda</span>
+            </a>
+
+            <!-- Cerrar sesión -->
+            <button class="d-topbar__btn d-topbar__btn--logout" id="d-btn-logout">
+                <i class="ri-logout-box-r-line"></i>
+                <span>Salir</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         CONTENIDO PRINCIPAL
+         ════════════════════════════════════════════════════════════════════ -->
+    <div class="d-content" id="d-content">
+        <div class="d-main" id="d-main">
+
+            <!-- ================================================================
+                 SECCIONES DE ADMINISTRADOR
+                 ================================================================ -->
+
+            <!-- ADMIN: Resumen / Analytics -->
+            <section class="d-section" id="sec-admin-resumen" data-rol="admin">
+                <div class="d-section-head">
+                    <div>
+                        <h1 class="d-section-title">Resumen General</h1>
+                        <p class="d-section-sub">Vista ejecutiva del rendimiento de Prana Fitness</p>
+                    </div>
+                    <button class="d-btn d-btn--secundario d-btn--sm" onclick="Dashboard.cargarDatosSeed()">
+                        <i class="ri-refresh-line"></i> Recargar datos
+                    </button>
+                </div>
+
+                <!-- KPIs -->
+                <div class="d-kpis" id="admin-kpis"></div>
+
+                <!-- Gráficos -->
+                <div class="d-charts">
+                    <div class="d-card">
+                        <div class="d-card__head">
+                            <span class="d-card__title">
+                                <i class="ri-bar-chart-2-line"></i>
+                                Ventas Mensuales (COP)
+                            </span>
+                        </div>
+                        <div class="d-card__body">
+                            <div class="d-chart-canvas-wrap">
+                                <svg id="chart-ventas" class="d-chart-bars" viewBox="0 0 560 200"
+                                     preserveAspectRatio="xMidYMid meet" aria-label="Gráfico de ventas mensuales">
+                                    <!-- Inyectado por JS -->
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-card">
+                        <div class="d-card__head">
+                            <span class="d-card__title">
+                                <i class="ri-donut-chart-line"></i>
+                                Categorías más vendidas
+                            </span>
+                        </div>
+                        <div class="d-card__body">
+                            <div class="d-chart-canvas-wrap">
+                                <div class="d-donut-wrap" id="donut-categorias"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ADMIN: Gestión de Pedidos -->
+            <section class="d-section" id="sec-admin-pedidos" data-rol="admin">
+                <div class="d-section-head">
+                    <div>
+                        <h1 class="d-section-title">Gestión de Pedidos</h1>
+                        <p class="d-section-sub">Administra y actualiza el estado de los pedidos de clientes</p>
+                    </div>
+                </div>
+                <div class="d-card">
+                    <div class="d-card__head">
+                        <span class="d-card__title">
+                            <i class="ri-shopping-bag-3-line"></i>
+                            Pedidos Recientes
+                        </span>
+                        <button class="d-btn d-btn--secundario d-btn--sm" onclick="Dashboard.exportarPedidosCSV()">
+                            <i class="ri-download-line"></i> Exportar
+                        </button>
+                    </div>
+                    <div class="d-table-wrap">
+                        <table class="d-table" id="admin-tabla-pedidos">
+                            <thead>
+                                <tr>
+                                    <th>Pedido</th>
+                                    <th>Cliente</th>
+                                    <th class="d-table__hide-mobile">Productos</th>
+                                    <th>Total</th>
+                                    <th>Estado</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-pedidos-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ADMIN: Gestión de Usuarios -->
+            <section class="d-section" id="sec-admin-usuarios" data-rol="admin">
+                <div class="d-section-head">
+                    <div>
+                        <h1 class="d-section-title">Gestión de Usuarios</h1>
+                        <p class="d-section-sub">Administra cuentas, roles y contraseñas de los usuarios registrados</p>
+                    </div>
+                </div>
+                <div class="d-card">
+                    <div class="d-card__head">
+                        <span class="d-card__title">
+                            <i class="ri-team-line"></i>
+                            Usuarios Registrados
+                        </span>
+                        <span class="d-badge-rol cliente" id="admin-usuarios-total">0 usuarios</span>
+                    </div>
+                    <div class="d-table-wrap">
+                        <table class="d-table" id="admin-tabla-usuarios">
+                            <thead>
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th>Rol</th>
+                                    <th class="d-table__hide-mobile">Registrado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-usuarios-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ADMIN: Gestión de Servicios -->
+            <section class="d-section" id="sec-admin-servicios" data-rol="admin">
+                <div class="d-section-head">
+                    <div>
+                        <h1 class="d-section-title">Servicios & Asesorías</h1>
+                        <p class="d-section-sub">Solicitudes de planes de entrenamiento, asesorías y reservas</p>
+                    </div>
+                </div>
+                <div class="d-card">
+                    <div class="d-card__head">
+                        <span class="d-card__title">
+                            <i class="ri-user-star-line"></i>
+                            Solicitudes Activas
+                        </span>
+                    </div>
+                    <div id="admin-servicios-list"></div>
+                </div>
+            </section>
+
+            <!-- ADMIN: Blog -->
+            <section class="d-section" id="sec-admin-blog" data-rol="admin">
+                <div class="d-section-head">
+                    <div>
+                        <h1 class="d-section-title">Gestor del Blog</h1>
+                        <p class="d-section-sub">Crea, edita y elimina artículos del blog de Prana</p>
+                    </div>
+                </div>
+                <div class="d-charts" style="grid-template-columns: 1fr 1fr;">
+                    <!-- Formulario nuevo post -->
+                    <div class="d-card">
+                        <div class="d-card__head">
+                            <span class="d-card__title" id="blog-form-titulo">
+                                <i class="ri-edit-2-line"></i>
+                                Nuevo Artículo
+                            </span>
+                        </div>
+                        <div class="d-card__body">
+                            <form class="d-form" id="form-blog" novalidate>
+                                <input type="hidden" id="blog-id-edit" value="">
+                                <div class="d-field">
+                                    <label class="d-label">Título del artículo</label>
+                                    <input type="text" class="d-input" id="blog-titulo" placeholder="Ej: 5 tips de nutrición fitness" required>
+                                </div>
+                                <div class="d-field">
+                                    <label class="d-label">Categoría</label>
+                                    <select class="d-select" id="blog-categoria">
+                                        <option value="Nutrición">Nutrición</option>
+                                        <option value="Entrenamiento">Entrenamiento</option>
+                                        <option value="Suplementos">Suplementos</option>
+                                        <option value="Estilo de vida">Estilo de vida</option>
+                                    </select>
+                                </div>
+                                <div class="d-field">
+                                    <label class="d-label">Extracto / Resumen</label>
+                                    <textarea class="d-textarea" id="blog-extracto" placeholder="Resumen breve del artículo..." required></textarea>
+                                </div>
+                                <div class="d-form__actions">
+                                    <button type="button" class="d-btn d-btn--secundario d-btn--sm" id="blog-btn-cancelar">
+                                        Cancelar
+                                    </button>
+                                    <button type="submit" class="d-btn d-btn--primario d-btn--sm">
+                                        <i class="ri-save-line"></i>
+                                        <span id="blog-btn-texto">Publicar</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Lista de posts -->
+                    <div class="d-card">
+                        <div class="d-card__head">
+                            <span class="d-card__title">
+                                <i class="ri-article-line"></i>
+                                Artículos publicados
+                            </span>
+                            <span class="d-badge-rol cliente" id="blog-count">0 posts</span>
+                        </div>
+                        <div class="d-card__body" style="padding: 12px 14px;">
+                            <div class="d-post-list" id="admin-blog-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ADMIN: Mensajes / Contáctanos -->
+            <section class="d-section" id="sec-admin-mensajes" data-rol="admin">
+                <div class="d-section-head">
+                    <div>
+                        <h1 class="d-section-title">Centro de Mensajes</h1>
+                        <p class="d-section-sub">Consultas recibidas desde el formulario de Contáctanos</p>
+                    </div>
+                    <div style="display:flex;gap:8px;">
+                        <button class="d-btn d-btn--secundario d-btn--sm" onclick="Dashboard.marcarTodosLeidos()">
+                            <i class="ri-check-double-line"></i> Marcar todos leídos
+                        </button>
+                    </div>
+                </div>
+                <div class="d-card">
+                    <div class="d-card__head">
+                        <span class="d-card__title">
+                            <i class="ri-mail-line"></i>
+                            Bandeja de entrada
+                        </span>
+                        <span class="d-badge-rol admin" id="msg-no-leidos-badge">0 nuevos</span>
+                    </div>
+                    <div class="d-msg-list" id="admin-mensajes-list"></div>
+                </div>
+            </section>
+
+            <!-- ================================================================
+                 SECCIONES DE CLIENTE
+                 ================================================================ -->
+
+            <!-- CLIENTE: Mis Pedidos -->
+            <section class="d-section" id="sec-cliente-pedidos" data-rol="cliente">
+                <div class="d-section-head">
+                    <div>
+                        <h1 class="d-section-title">Mis Compras y Pedidos</h1>
+                        <p class="d-section-sub">Historial y seguimiento de tus pedidos</p>
+                    </div>
+                    <a href="paginas/productos.html" class="d-btn d-btn--primario d-btn--sm">
+                        <i class="ri-shopping-bag-line"></i> Seguir comprando
+                    </a>
+                </div>
+                <div id="cliente-pedidos-contenedor"></div>
+            </section>
+
+            <!-- CLIENTE: Mis Servicios -->
+            <section class="d-section" id="sec-cliente-servicios" data-rol="cliente">
+                <div class="d-section-head">
+                    <div>
+                        <h1 class="d-section-title">Mis Asesorías & Servicios</h1>
+                        <p class="d-section-sub">Estado de tus programas y asesorías fitness contratadas</p>
+                    </div>
+                </div>
+                <div class="d-card">
+                    <div class="d-card__head">
+                        <span class="d-card__title">
+                            <i class="ri-calendar-check-line"></i>
+                            Servicios activos
+                        </span>
+                    </div>
+                    <div id="cliente-servicios-list"></div>
+                </div>
+            </section>
+
+            <!-- CLIENTE: Favoritos -->
+            <section class="d-section" id="sec-cliente-favoritos" data-rol="cliente">
+                <div class="d-section-head">
+                    <div>
+                        <h1 class="d-section-title">Favoritos y Guardados</h1>
+                        <p class="d-section-sub">Productos y artículos del blog que guardaste</p>
+                    </div>
+                </div>
+                <div class="d-favs" id="cliente-favs-grid"></div>
+            </section>
+
+            <!-- CLIENTE: Mi Perfil -->
+            <section class="d-section" id="sec-cliente-perfil" data-rol="cliente">
+                <div class="d-section-head">
+                    <div>
+                        <h1 class="d-section-title">Mi Perfil & Ajustes</h1>
+                        <p class="d-section-sub">Actualiza tus datos personales y preferencias</p>
+                    </div>
+                </div>
+                <div class="d-charts" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <!-- Datos personales -->
+                    <div class="d-card">
+                        <div class="d-card__head">
+                            <span class="d-card__title">
+                                <i class="ri-user-line"></i>
+                                Datos Personales
+                            </span>
+                        </div>
+                        <div class="d-card__body">
+                            <form class="d-form" id="form-perfil" novalidate>
+                                <div class="d-field">
+                                    <label class="d-label">Nombre completo</label>
+                                    <input type="text" class="d-input" id="perfil-nombre" placeholder="Tu nombre completo">
+                                </div>
+                                <div class="d-field">
+                                    <label class="d-label">Correo electrónico</label>
+                                    <input type="email" class="d-input" id="perfil-email" placeholder="correo@ejemplo.com" readonly
+                                           style="background:var(--d-fondo); color:var(--d-texto-mut);">
+                                </div>
+                                <div class="d-field">
+                                    <label class="d-label">Teléfono</label>
+                                    <input type="tel" class="d-input" id="perfil-telefono" placeholder="+57 300 000 0000">
+                                </div>
+                                <div class="d-field">
+                                    <label class="d-label">Ciudad</label>
+                                    <input type="text" class="d-input" id="perfil-ciudad" placeholder="Medellín">
+                                </div>
+                                <div class="d-field">
+                                    <label class="d-label">Dirección de envío</label>
+                                    <textarea class="d-textarea" id="perfil-direccion" placeholder="Calle 50 # 45-23, Apto 301"
+                                              style="min-height:70px;"></textarea>
+                                </div>
+                                <div class="d-form__actions">
+                                    <button type="submit" class="d-btn d-btn--primario">
+                                        <i class="ri-save-line"></i> Guardar cambios
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Cambiar contraseña -->
+                    <div class="d-card">
+                        <div class="d-card__head">
+                            <span class="d-card__title">
+                                <i class="ri-lock-password-line"></i>
+                                Cambiar Contraseña
+                            </span>
+                        </div>
+                        <div class="d-card__body">
+                            <form class="d-form" id="form-password" novalidate>
+                                <div class="d-field">
+                                    <label class="d-label">Contraseña actual</label>
+                                    <input type="password" class="d-input" id="pwd-actual" placeholder="••••••••">
+                                </div>
+                                <div class="d-field">
+                                    <label class="d-label">Nueva contraseña</label>
+                                    <input type="password" class="d-input" id="pwd-nueva" placeholder="Mínimo 6 caracteres">
+                                </div>
+                                <div class="d-field">
+                                    <label class="d-label">Confirmar nueva contraseña</label>
+                                    <input type="password" class="d-input" id="pwd-confirmar" placeholder="Repite la contraseña">
+                                </div>
+                                <div class="d-form__actions">
+                                    <button type="submit" class="d-btn d-btn--primario">
+                                        <i class="ri-key-line"></i> Actualizar contraseña
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Datos del objetivo fitness -->
+                        <div class="d-card__head" style="margin-top:0;">
+                            <span class="d-card__title" style="font-size:0.82rem;">
+                                <i class="ri-heart-pulse-line"></i>
+                                Objetivo Fitness
+                            </span>
+                        </div>
+                        <div class="d-card__body">
+                            <form class="d-form" id="form-fitness" novalidate>
+                                <div class="d-field">
+                                    <label class="d-label">Objetivo principal</label>
+                                    <select class="d-select" id="fitness-objetivo">
+                                        <option>Hipertrofia / Volumen</option>
+                                        <option>Definición / Pérdida de grasa</option>
+                                        <option>Fuerza máxima</option>
+                                        <option>Resistencia y cardio</option>
+                                        <option>Bienestar general</option>
+                                    </select>
+                                </div>
+                                <div class="d-field">
+                                    <label class="d-label">Frecuencia de entrenamiento</label>
+                                    <select class="d-select" id="fitness-frecuencia">
+                                        <option>1-2 días / semana</option>
+                                        <option>3-4 días / semana</option>
+                                        <option>5-6 días / semana</option>
+                                        <option>Todos los días</option>
+                                    </select>
+                                </div>
+                                <div class="d-form__actions">
+                                    <button type="submit" class="d-btn d-btn--primario d-btn--sm">
+                                        <i class="ri-save-line"></i> Guardar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div><!-- /d-main -->
+    </div><!-- /d-content -->
+</div><!-- /d-layout -->
+
+<!-- ==========================================================================
+     MODAL EDITAR USUARIO (Admin)
+     ========================================================================== -->
+<div id="modal-usr-overlay"
+     class="d-modal-overlay"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="modal-usr-titulo"
+     aria-hidden="true">
+
+    <div class="d-modal-card">
+        <div class="d-modal-card__head">
+            <h3 class="d-modal-card__titulo" id="modal-usr-titulo">Editar Usuario</h3>
+            <button type="button" class="d-modal-card__cerrar"
+                    id="modal-usr-cancelar" aria-label="Cerrar">
+                <i class="ri-close-line" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <form class="d-form" id="form-edit-usuario" novalidate>
+            <input type="hidden" id="edit-usr-id">
+
+            <div class="d-form__row">
+                <div class="d-field">
+                    <label class="d-label" for="edit-usr-nombre">Nombre completo</label>
+                    <input type="text" class="d-input" id="edit-usr-nombre"
+                           placeholder="Nombre del usuario" autocomplete="off" required>
+                </div>
+                <div class="d-field">
+                    <label class="d-label" for="edit-usr-email">Correo electrónico</label>
+                    <input type="email" class="d-input" id="edit-usr-email"
+                           placeholder="correo@ejemplo.com" autocomplete="off" required>
+                </div>
+            </div>
+
+            <div class="d-field">
+                <label class="d-label" for="edit-usr-rol">Rol del usuario</label>
+                <select class="d-select" id="edit-usr-rol">
+                    <option value="cliente">Cliente</option>
+                    <option value="admin">Administrador</option>
+                </select>
+            </div>
+
+            <div class="d-modal-card__divider">
+                <span>Cambiar contraseña
+                    <em style="font-weight:400;text-transform:none;letter-spacing:0;">
+                        — dejar vacío para no modificar
+                    </em>
+                </span>
+            </div>
+
+            <div class="d-form__row">
+                <div class="d-field">
+                    <label class="d-label" for="edit-usr-pwd">Nueva contraseña</label>
+                    <input type="password" class="d-input" id="edit-usr-pwd"
+                           placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+                </div>
+                <div class="d-field">
+                    <label class="d-label" for="edit-usr-pwd2">Confirmar contraseña</label>
+                    <input type="password" class="d-input" id="edit-usr-pwd2"
+                           placeholder="Repite la contraseña" autocomplete="new-password">
+                </div>
+            </div>
+
+            <div class="d-form__actions">
+                <button type="button" class="d-btn d-btn--secundario"
+                        onclick="DRender.cerrarModalEditarUsuario()">
+                    Cancelar
+                </button>
+                <button type="submit" class="d-btn d-btn--primario">
+                    <i class="ri-save-line" aria-hidden="true"></i>
+                    Guardar Cambios
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ==========================================================================
+     SCRIPTS
+     Orden: storage → hash → auth → dashboard
+     ========================================================================== -->
+<script src="js/utils/storage.js"></script>
+<script src="js/utils/hash.js"></script>
+<script src="js/utils/admin-seed.js"></script>
+<script src="js/services/auth.js"></script>
+<script src="js/pages/dashboard.js"></script>
+
+</body>
+</html>

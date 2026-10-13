@@ -190,9 +190,12 @@ var AuthService = (function () {
 
         var token = generarToken(usuario);
         var usuarioSeguro = {
-            id: usuario.id,
+            id:     usuario.id,
             nombre: usuario.nombre,
-            email: usuario.email
+            email:  usuario.email,
+            // IMPORTANTE: el rol debe viajar en la sesión para que el dashboard
+            // pueda leerlo sin acceder de nuevo a prana_usuarios.
+            role:   usuario.role || 'cliente'
         };
 
         // Persistir sesión

@@ -57,10 +57,23 @@
     }
 
     // ── Verificar sesión activa al cargar ───────────────────────────────────
-    // Si el usuario ya está autenticado, lo redirigimos al destino correcto
+    // Si el usuario ya está autenticado, lo redirigimos al destino correcto.
+    // Si tiene rol 'admin', va al dashboard; si no, al destino de retorno.
     function redirigirSiAutenticado() {
         if (typeof AuthService !== 'undefined' && AuthService.estaAutenticado()) {
-            window.location.replace(obtenerUrlRetorno());
+            var destino = obtenerUrlRetorno();
+            // Si el destino es index.html (default) y el usuario es admin → dashboard
+            if (destino === 'index.html' || destino.endsWith('/index.html')) {
+                try {
+                    var raw = localStorage.getItem('prana_sesion');
+                    var ses = raw ? JSON.parse(raw) : null;
+                    if (ses && ses.usuario && ses.usuario.role === 'admin') {
+                        window.location.replace('dashboard.html');
+                        return true;
+                    }
+                } catch (e) {}
+            }
+            window.location.replace(destino);
             return true;
         }
         return false;
@@ -348,9 +361,18 @@
 
                     var destino    = obtenerUrlRetorno();
                     var esCarrito  = destino.indexOf('carrito') !== -1;
+                    var esDashDefault = (destino === 'index.html' || destino.endsWith('/index.html'));
+
+                    // Admin sin destino específico → dashboard
+                    if (esDashDefault && resultado.usuario && resultado.usuario.role === 'admin') {
+                        destino = 'dashboard.html';
+                    }
+
                     var msgExtra   = esCarrito
                         ? ' Redirigiendo a tu carrito...'
-                        : ' Redirigiendo...';
+                        : destino.indexOf('dashboard') !== -1
+                            ? ' Accediendo al panel de control...'
+                            : ' Redirigiendo...';
 
                     mostrarAlerta('exito',
                         '¡Bienvenido de nuevo, ' + nombre + '!' + msgExtra);

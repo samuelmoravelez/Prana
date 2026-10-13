@@ -120,16 +120,30 @@ var AuthGuard = (function () {
             });
         }
 
-        // Link "Mi Perfil" (placeholder hasta que exista página de perfil)
+        // Enlace "Mi Panel" → dashboard.html
+        // Si el href ya apunta a dashboard.html (index.html) se navega directo.
+        // Si el href es "#" (subpáginas antiguas), se redirige a la ruta correcta.
         var perfilLinks = document.querySelectorAll('[data-auth-perfil]');
         perfilLinks.forEach(function (el) {
             el.addEventListener('click', function (e) {
+                var href = (el.getAttribute('href') || '').trim();
+
+                // href real y distinto de "#" → dejar que el navegador maneje el clic
+                if (href && href !== '#') {
+                    cerrarDropdown();
+                    return; // navegación nativa del <a>
+                }
+
+                // href="#" (subpáginas): calcular la ruta relativa al dashboard
                 e.preventDefault();
                 cerrarDropdown();
-                if (typeof AuthModal !== 'undefined' && AuthModal.abrir) {
-                    // Por ahora muestra un mensaje; en el futuro navega a perfil
-                    alert('Página de perfil próximamente.');
-                }
+
+                // Detectar si estamos dentro de /paginas/ para ajustar la ruta
+                var path      = window.location.pathname;
+                var enSubpag  = path.indexOf('/paginas/') !== -1 ||
+                                path.indexOf('\\paginas\\') !== -1;
+                var destino   = enSubpag ? '../dashboard.html' : 'dashboard.html';
+                window.location.href = destino;
             });
         });
     }

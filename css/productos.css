@@ -354,3 +354,64 @@
         font-size: 1.6rem;
     }
 }
+
+/* ── Grupo de botones en tarjeta de producto (carrito + favorito) ─────────── */
+.tarjeta-btns {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tarjeta-btns .btn-carrito-principal {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Botón corazón — integrado con la paleta vinotinto/plateado/blanco */
+.btn-fav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;   /* mismo alto que btn Bootstrap */
+    border: 1.5px solid #C0C0C0;
+    border-radius: 8px;
+    background: #FFFFFF;
+    color: #8A8A8A;
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-fav:hover {
+    border-color: #5C0A1B;
+    color: #5C0A1B;
+    background: rgba(92, 10, 27, 0.05);
+    transform: scale(1.08);
+}
+
+.btn-fav.activo {
+    background: linear-gradient(135deg, #5C0A1B, #7A1429);
+    border-color: #5C0A1B;
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(92, 10, 27, 0.32);
+}
+
+.btn-fav.activo:hover {
+    background: linear-gradient(135deg, #7A1429, #9A1F38);
+    transform: scale(1.08);
+}
+
+@keyframes fav-pulse {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.38); }
+    70%  { transform: scale(0.93); }
+    100% { transform: scale(1); }
+}
+
+.btn-fav.pulsando {
+    animation: fav-pulse 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}

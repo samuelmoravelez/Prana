@@ -1,17 +1,18 @@
 // js/pages/productos.js
 // Responsabilidad: lógica exclusiva de productos.html (catálogo).
 // — Conecta los botones "Agregar al Carrito" con CarritoService
-// — Muestra feedback visual al agregar
-// — Sincroniza el badge del header
+// — Conecta los botones "Me gusta" (corazón) con FavoritoService
+// — Sincroniza el badge del header y los estados visuales de favoritos
 //
-// Dependencias: utils/storage.js, components/carrito.js
+// Dependencias: utils/storage.js, utils/hash.js, services/auth.js,
+//               components/carrito.js
 
 (function () {
 
     'use strict';
 
-    // Catálogo de productos: fuente de verdad para los datos que se persisten
-    // en el carrito. Cada id debe ser único y estable entre páginas.
+    // ── Catálogo de productos ────────────────────────────────────────────────
+    // Fuente de verdad para persistir en carrito y favoritos.
     var CATALOGO = [
         {
             id:        'whey-protein-2kg',
@@ -78,79 +79,260 @@
         }
     ];
 
-    // ── Helpers ─────────────────────────────────────────────────────────────
+    // ════════════════════════════════════════════════════════════════════════
+    // FAVORITO SERVICE — gestión de favoritos en localStorage
+    // Clave: prana_favoritos_{userId}  (misma que usa dashboard.js)
+    // Si el usuario no está autenticado, muestra un aviso y redirige al login.
+    // ════════════════════════════════════════════════════════════════════════
+    var FavoritoService = (function () {
 
-    /**
-     * Busca el producto en el catálogo por el data-producto-id del botón.
-     * Como alternativa, acepta data-producto-index (posición en el array).
-     */
+        var KEY_PREFIX = 'prana_favoritos_';
+
+        /** Devuelve el id del usuario autenticado, o null si no hay sesión. */
+        function _obtenerUid() {
+            try {
+                if (typeof AuthService !== 'undefined' && AuthService.estaAutenticado()) {
+                    var u = AuthService.getCurrentUser();
+                    return (u && u.id) ? u.id : null;
+                }
+                // Fallback directo a localStorage
+                var raw = localStorage.getItem('prana_sesion');
+                if (!raw) return null;
+                var ses = JSON.parse(raw);
+                return (ses && ses.usuario && ses.usuario.id) ? ses.usuario.id : null;
+            } catch (e) { return null; }
+        }
+
+        /** Lee la lista de favoritos del usuario activo. */
+        function obtener() {
+            var uid = _obtenerUid();
+            if (!uid) return [];
+            try {
+                var raw = localStorage.getItem(KEY_PREFIX + uid);
+                return raw ? JSON.parse(raw) : [];
+            } catch (e) { return []; }
+        }
+
+        /** Guarda la lista completa. */
+        function _guardar(uid, lista) {
+            try { localStorage.setItem(KEY_PREFIX + uid, JSON.stringify(lista)); } catch (e) {}
+        }
+
+        /** Verifica si un producto está en favoritos. */
+        function esFavorito(productoId) {
+            return obtener().some(function (f) { return f.id === productoId; });
+        }
+
+        /**
+         * Agrega o quita un producto de favoritos.
+         * @param {Object} producto - ítem del catálogo { id, nombre, precio, imagen, categoria }
+         * @returns {boolean|null} true=agregado, false=quitado, null=sin sesión
+         */
+        function toggle(producto) {
+            var uid = _obtenerUid();
+            if (!uid) return null; // sin sesión
+
+            var lista = obtener();
+            var idx   = lista.findIndex(function (f) { return f.id === producto.id; });
+
+            if (idx >= 0) {
+                lista.splice(idx, 1);  // quitar
+                _guardar(uid, lista);
+                return false;
+            } else {
+                lista.unshift({        // agregar al inicio
+                    id:        producto.id,
+                    nombre:    producto.nombre,
+                    precio:    producto.precio,
+                    imagen:    producto.imagen,
+                    categoria: producto.categoria,
+                    tipo:      'producto',
+                    guardadoEn: new Date().toISOString()
+                });
+                _guardar(uid, lista);
+                return true;
+            }
+        }
+
+        return { obtener, esFavorito, toggle };
+
+    })();
+
+    // ── Helpers comunes ─────────────────────────────────────────────────────
+
+    /** Busca el producto en el catálogo por data-producto-id. */
     function resolverProducto(boton) {
-        var pid   = boton.getAttribute('data-producto-id');
-        var pidx  = boton.getAttribute('data-producto-index');
+        var pid = boton.getAttribute('data-producto-id');
+        return pid
+            ? CATALOGO.find(function (p) { return p.id === pid; }) || null
+            : null;
+    }
 
-        if (pid) {
-            return CATALOGO.find(function (p) { return p.id === pid; }) || null;
-        }
-        if (pidx !== null) {
-            return CATALOGO[parseInt(pidx, 10)] || null;
-        }
-        return null;
+    /** Feedback visual en el botón de carrito. */
+    function animarBotonCarrito(boton) {
+        var textoOriginal    = boton.innerHTML;
+        var clasesOriginales = boton.className;
+        boton.disabled  = true;
+        boton.innerHTML = '<i class="ri-checkbox-circle-fill me-2"></i>¡Agregado!';
+        boton.classList.add('btn-carrito--agregado');
+        setTimeout(function () {
+            boton.disabled  = false;
+            boton.innerHTML = textoOriginal;
+            boton.className = clasesOriginales;
+        }, 1800);
     }
 
     /**
-     * Feedback visual en el botón tras agregar al carrito.
+     * Actualiza el aspecto visual del botón de favorito según el estado actual.
+     * @param {HTMLElement} boton
+     * @param {boolean}     activo   — true si ya es favorito
+     * @param {boolean}     animar   — true para añadir la animación de pulso
      */
-    function animarBoton(boton) {
-        var textoOriginal = boton.innerHTML;
-        var clasesOriginales = boton.className;
+    function sincronizarBotonFav(boton, activo, animar) {
+        var icono = boton.querySelector('i');
+        boton.classList.toggle('activo', activo);
+        if (icono) {
+            icono.className = activo ? 'ri-heart-fill' : 'ri-heart-line';
+        }
+        boton.setAttribute('aria-pressed', activo ? 'true' : 'false');
+        boton.title = activo ? 'Quitar de favoritos' : 'Guardar en favoritos';
 
-        boton.disabled   = true;
-        boton.innerHTML  = '<i class="ri-checkbox-circle-fill me-2"></i>¡Agregado!';
-        boton.classList.add('btn-carrito--agregado');
+        if (animar) {
+            boton.classList.remove('pulsando');
+            void boton.offsetWidth; // reflow para reiniciar la animación CSS
+            boton.classList.add('pulsando');
+        }
+    }
 
-        setTimeout(function () {
-            boton.disabled   = false;
-            boton.innerHTML  = textoOriginal;
-            boton.className  = clasesOriginales;
-        }, 1800);
+    /** Actualiza TODOS los botones de favorito al cargar la página. */
+    function sincronizarTodosLosBotonesFav() {
+        document.querySelectorAll('[data-accion="toggle-favorito"]').forEach(function (btn) {
+            var pid    = btn.getAttribute('data-producto-id');
+            var activo = pid ? FavoritoService.esFavorito(pid) : false;
+            sincronizarBotonFav(btn, activo, false);
+        });
     }
 
     // ── Inicialización ───────────────────────────────────────────────────────
 
     function init() {
-        if (typeof CarritoService === 'undefined') return;
+        // ── Botones "Agregar al Carrito" ──────────────────────────────────
+        if (typeof CarritoService !== 'undefined') {
+            CarritoService.iniciar();
+        }
 
-        // Sincronizar el badge al cargar
-        CarritoService.iniciar();
-
-        // Conectar todos los botones "Agregar al carrito"
-        var botones = document.querySelectorAll('[data-accion="agregar-carrito"]');
-
-        botones.forEach(function (boton) {
+        document.querySelectorAll('[data-accion="agregar-carrito"]').forEach(function (boton) {
             boton.addEventListener('click', function (e) {
                 e.preventDefault();
-
                 var producto = resolverProducto(boton);
                 if (!producto) {
-                    console.warn('[Prana] Producto no encontrado para el botón:', boton);
+                    console.warn('[Prana] Producto no encontrado:', boton.getAttribute('data-producto-id'));
                     return;
                 }
+                if (typeof CarritoService !== 'undefined') {
+                    CarritoService.agregar(producto);
+                }
+                animarBotonCarrito(boton);
 
-                CarritoService.agregar(producto);
-                animarBoton(boton);
-
-                // Actualizar badge visualmente con micro-animación
-                var badges = document.querySelectorAll('.contador-carrito');
-                badges.forEach(function (b) {
+                // Pulso en el badge del carrito
+                document.querySelectorAll('.contador-carrito').forEach(function (b) {
                     b.classList.remove('carrito-badge--pulso');
-                    // Forzar reflow para reiniciar la animación
                     void b.offsetWidth;
                     b.classList.add('carrito-badge--pulso');
                 });
             });
         });
+
+        // ── Botones "Me gusta" (corazón) ─────────────────────────────────
+        // Sincronizar estado inicial (resalta los ya guardados)
+        sincronizarTodosLosBotonesFav();
+
+        document.querySelectorAll('[data-accion="toggle-favorito"]').forEach(function (boton) {
+            boton.addEventListener('click', function (e) {
+                e.preventDefault();
+                var producto = resolverProducto(boton);
+                if (!producto) return;
+
+                var resultado = FavoritoService.toggle(producto);
+
+                if (resultado === null) {
+                    // Sin sesión → redirigir al login guardando retorno
+                    try {
+                        sessionStorage.setItem('prana_login_retorno', window.location.href);
+                    } catch (_) {}
+                    // Mini banner flotante en vez de alert
+                    _mostrarAviso('Debes iniciar sesión para guardar favoritos.');
+                    setTimeout(function () {
+                        window.location.href = '../login.html';
+                    }, 1800);
+                    return;
+                }
+
+                // Actualizar el botón que fue clicado
+                sincronizarBotonFav(boton, resultado, true);
+
+                // Si hay más de un botón para el mismo producto (por si el catálogo
+                // repite el item en otra vista), sincronizarlos todos
+                var pid = boton.getAttribute('data-producto-id');
+                document.querySelectorAll('[data-accion="toggle-favorito"][data-producto-id="' + pid + '"]')
+                    .forEach(function (b) {
+                        if (b !== boton) sincronizarBotonFav(b, resultado, false);
+                    });
+
+                // Aviso de confirmación
+                if (resultado) {
+                    _mostrarAviso('❤️ ' + producto.nombre + ' guardado en favoritos.', '#5C0A1B');
+                } else {
+                    _mostrarAviso('💔 ' + producto.nombre + ' eliminado de favoritos.', '#6B6B6B');
+                }
+            });
+        });
+
+        // Escuchar cambios de sesión desde otras pestañas (login en otra pestaña)
+        window.addEventListener('storage', function (e) {
+            if (e.key === 'prana_sesion') {
+                sincronizarTodosLosBotonesFav();
+            }
+        });
     }
 
+    // ── Aviso flotante (mini toast, sin dependencias externas) ───────────────
+    function _mostrarAviso(mensaje, color) {
+        var aviso = document.createElement('div');
+        aviso.setAttribute('role', 'status');
+        aviso.setAttribute('aria-live', 'polite');
+        aviso.style.cssText = [
+            'position:fixed', 'bottom:24px', 'right:24px', 'z-index:9999',
+            'background:' + (color || '#1A1A2E'),
+            'color:#FFFFFF', 'border-radius:10px',
+            'padding:12px 20px', 'font-size:0.88rem', 'font-weight:600',
+            'box-shadow:0 8px 24px rgba(0,0,0,0.25)',
+            'max-width:320px', 'line-height:1.4',
+            'animation:fav-toast-in 0.3s cubic-bezier(0.34,1.56,0.64,1) both',
+            'font-family:Inter,sans-serif'
+        ].join(';');
+        aviso.textContent = mensaje;
+
+        // Inyectar keyframes si no existen
+        if (!document.getElementById('fav-toast-kf')) {
+            var style = document.createElement('style');
+            style.id  = 'fav-toast-kf';
+            style.textContent =
+                '@keyframes fav-toast-in{from{opacity:0;transform:translateX(30px) scale(.95)}to{opacity:1;transform:none}}' +
+                '@keyframes fav-toast-out{to{opacity:0;transform:translateX(30px) scale(.95)}}';
+            document.head.appendChild(style);
+        }
+
+        document.body.appendChild(aviso);
+        setTimeout(function () {
+            aviso.style.animation = 'fav-toast-out 0.3s ease both';
+            setTimeout(function () {
+                if (aviso.parentNode) aviso.parentNode.removeChild(aviso);
+            }, 320);
+        }, 2800);
+    }
+
+    // ── Arranque ─────────────────────────────────────────────────────────────
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
