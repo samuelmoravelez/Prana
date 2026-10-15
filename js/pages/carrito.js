@@ -539,7 +539,7 @@
         if (enlaceWA) {
             var items   = CarritoService.obtenerItems();
             var mensaje = construirMensajeWA(items);
-            enlaceWA.href = 'https://wa.me/573003091641?text=' + mensaje;
+            enlaceWA.href = 'https://wa.me/573332359677?text=' + mensaje;
         }
 
         overlay.classList.add('carr-modal-overlay--visible');
