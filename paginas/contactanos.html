@@ -24,7 +24,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Hojas de estilo -->
     <link rel="stylesheet" href="../css/variables.css">
@@ -32,93 +32,15 @@
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/auth.css">
     <link rel="stylesheet" href="../css/contacto.css">
+    <link rel="stylesheet" href="../css/design-elevation.css">
 </head>
 <body>
 
     <!-- ==========================================================================
-         BARRA DE ANUNCIO SUPERIOR
+         HEADER GLOBAL (componente reutilizable)
+         Se inyecta dinámicamente desde js/components/header-footer.js
          ========================================================================== -->
-    <div class="barra-anuncio bg-success text-white text-center py-2">
-        <p class="mb-0"><i class="ri-flashlight-fill me-2"></i> ¡Envíos gratis a todo el país desde $150.000! Escríbenos directamente a nuestro WhatsApp <i class="ri-flashlight-fill ms-2"></i></p>
-    </div>
-
-    <!-- ==========================================================================
-         HEADER + NAVBAR BOOTSTRAP (menú con las 6 páginas)
-         ========================================================================== -->
-    <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
-        <div class="container">
-            <!-- Logo empresa -->
-            <a class="navbar-brand fw-bold" href="../index.html">
-                <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" alt="Logo de la marca fitness" width="44" height="44" class="logo-imagen d-inline-block align-text-top me-2">
-            </a>
-            <!-- Botón hamburguesa móvil -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- Menú de navegación completo -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="quienes-somos.html">Quiénes Somos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="productos.html">Productos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="servicios.html">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="blog.html">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="contactanos.html">Contáctanos</a>
-                    </li>
-                </ul>
-                <!-- Iconos de búsqueda y carrito -->
-                <ul class="navbar-nav ms-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" aria-label="Buscar"><i class="ri-search-line fs-5"></i></a>
-                    </li>
-                    <li class="nav-item position-relative">
-                        <a class="nav-link" href="#" aria-label="Carrito"><i class="ri-shopping-cart-fill fs-5"></i>
-                            <span class="badge bg-danger position-absolute top-0 start-100 translate-middle contador-carrito">0</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <!-- Acceso / Cuenta de usuario (Módulo de Autenticación) -->
-                <ul class="navbar-nav ms-3 align-items-center">
-                    <li class="nav-item" data-require-guest>
-                        <a href="../login.html" class="auth-boton-acceso">
-                            <i class="ri-user-line"></i>
-                            <span class="d-none d-sm-inline">Ingresar</span>
-                        </a>
-                    </li>
-                    <li class="nav-item auth-usuario-menu" data-require-auth style="display:none;">
-                        <div class="auth-avatar" data-auth-avatar id="auth-avatar-btn" role="button" tabindex="0" aria-label="Menú de usuario"></div>
-                        <div class="auth-dropdown" id="auth-dropdown">
-                            <div class="auth-dropdown-header">
-                                <p class="auth-dropdown-nombre" data-auth-nombre></p>
-                                <p class="auth-dropdown-email" data-auth-email></p>
-                            </div>
-                            <a href="../dashboard.html" class="auth-dropdown-item" data-auth-perfil>
-                                <i class="ri-dashboard-line"></i> Mi Panel
-                            </a>
-                            <div class="auth-dropdown-divider"></div>
-                            <button class="auth-dropdown-item auth-dropdown-item--logout" data-auth-logout>
-                                <i class="ri-logout-box-r-line"></i> Cerrar Sesión
-                            </button>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    </header>
+    <div id="global-header"></div>
 
     <!-- ==========================================================================
          MAIN: CONTENIDO PRINCIPAL DE CONTÁCTANOS
@@ -269,9 +191,37 @@
                             </div>
                         </div>
 
-                        <!-- Google Maps iframe (requisito obligatorio) -->
-                        <div class="ratio ratio-16x9 rounded-3 overflow-hidden shadow mt-4">
-                            <iframe title="Ubicación de la tienda fitness premium en Medellín" src="https://www.google.com/maps/embed?pb=!3m2!1ses!2sus!4v1784080160495!5m2!1ses!2sus!6m8!1m7!1s_Qchf1-XgBYVNyeq1Fev9g!2m2!1d6.336250156809227!2d-75.55798064181052!3f277.6225894074462!4f11.508190381646159!5f0.7820865974627469" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                        <!-- Tarjeta minimalista: Ubicación &amp; Atención (reemplaza el iframe de Google Maps) -->
+                        <div class="rounded-4 overflow-hidden shadow-sm mt-4" style="background: #FFFFFF; border: 1px solid rgba(92,10,27,0.15);">
+                            <div class="px-4 py-3" style="background: linear-gradient(135deg, #3D0712 0%, #5C0A1B 55%, #7A1429 100%);">
+                                <h3 class="h5 fw-bold mb-0 text-white"><i class="ri-map-pin-2-fill me-2"></i>Ubicación &amp; Atención</h3>
+                            </div>
+                            <div class="p-4">
+                                <ul class="list-unstyled mb-4">
+                                    <li class="d-flex align-items-start mb-3">
+                                        <i class="ri-map-pin-fill fs-5 me-3" style="color: #5C0A1B;"></i>
+                                        <div>
+                                            <span class="d-block fw-semibold small text-uppercase" style="color: #7A1429; letter-spacing: 0.05em;">Dirección</span>
+                                            <span style="color: #1A1A1A;">Medellín, Colombia</span>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex align-items-start">
+                                        <i class="ri-time-fill fs-5 me-3" style="color: #5C0A1B;"></i>
+                                        <div>
+                                            <span class="d-block fw-semibold small text-uppercase" style="color: #7A1429; letter-spacing: 0.05em;">Horario</span>
+                                            <span style="color: #1A1A1A;">Lunes a Sábado, 8:00 a.m. a 8:00 p.m.</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="d-flex flex-column flex-sm-row gap-3">
+                                    <a href="https://www.google.com/maps/search/?api=1&amp;query=6.336250156809227,-75.55798064181052" target="_blank" rel="noopener noreferrer" class="btn flex-fill fw-semibold" style="background: linear-gradient(135deg, #5C0A1B 0%, #7A1429 100%); color: #FFFFFF; border: none;">
+                                        <i class="ri-map-2-line me-2"></i> Abrir en Google Maps
+                                    </a>
+                                    <a href="https://wa.me/573332359677?text=Hola!%20Quiero%20asesoría%20fitness" target="_blank" rel="noopener noreferrer" class="btn flex-fill fw-semibold" style="background: transparent; color: #3D0712; border: 2px solid #5C0A1B;">
+                                        <i class="fab fa-whatsapp me-2" style="color: #5C0A1B;"></i> WhatsApp
+                                    </a>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -369,74 +319,10 @@
     </main>
 
     <!-- ==========================================================================
-         FOOTER: Pie de página común con navegación de 6 páginas
+         FOOTER GLOBAL (componente reutilizable)
+         Se inyecta dinámicamente desde js/components/header-footer.js
          ========================================================================== -->
-    <footer class="bg-dark text-light py-5">
-        <div class="container">
-            <div class="row g-4 mb-4">
-                <!-- Marca -->
-                <div class="col-lg-3 col-md-6">
-                    <a href="../index.html" class="d-flex align-items-center text-decoration-none mb-3">
-                        <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" alt="Logo de la marca fitness" width="40" height="40" class="logo-imagen me-2">
-                        <h4 class="fw-bold mb-0 text-light">Prana</h4>
-                    </a>
-                    <p class="text-muted small">Tu tienda fitness de confianza en Medellín. Alto rendimiento deportivo.</p>
-                    <div class="d-flex gap-3 mt-3">
-                        <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" class="text-light text-decoration-none fs-5 hover-text-success transition">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.tiktok.com/" target="_blank" aria-label="TikTok" class="text-light text-decoration-none fs-5 hover-text-success transition">
-                            <i class="fab fa-tiktok"></i>
-                        </a>
-                        <a href="https://wa.me/573332359677" target="_blank" aria-label="WhatsApp" class="text-light text-decoration-none fs-5 hover-text-success transition">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                    </div>
-                </div>
-                <!-- Navegación -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Navegación</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="../index.html" class="text-light text-decoration-none hover-text-success transition">Inicio</a></li>
-                        <li class="mb-2"><a href="quienes-somos.html" class="text-light text-decoration-none hover-text-success transition">Quiénes Somos</a></li>
-                        <li class="mb-2"><a href="productos.html" class="text-light text-decoration-none hover-text-success transition">Productos</a></li>
-                        <li class="mb-2"><a href="servicios.html" class="text-light text-decoration-none hover-text-success transition">Servicios</a></li>
-                        <li class="mb-2"><a href="blog.html" class="text-light text-decoration-none hover-text-success transition">Blog</a></li>
-                        <li><a href="contactanos.html" class="text-light text-decoration-none hover-text-success transition">Contáctanos</a></li>
-                    </ul>
-                </div>
-                <!-- Contacto -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Contacto</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="ri-map-pin-fill text-success me-2"></i><span class="text-muted small">Medellín, Colombia</span></li>
-                        <li class="mb-2"><i class="ri-phone-fill text-success me-2"></i><a href="tel:+573332359677" class="text-light text-decoration-none hover-text-success transition small">+57 300 309 1641</a></li>
-                        <li class="mb-2"><i class="ri-mail-fill text-success me-2"></i><a href="mailto:contacto@marcafitness.co" class="text-light text-decoration-none hover-text-success transition small">contacto@marcafitness.co</a></li>
-                        <li><i class="ri-time-fill text-success me-2"></i><span class="text-muted small">Lun–Sáb: 8am – 8pm</span></li>
-                    </ul>
-                </div>
-                <!-- Newsletter -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Newsletter</h5>
-                    <p class="text-muted small mb-3">Suscríbete para tips, descuentos y lanzamientos.</p>
-                    <div class="input-group mb-2">
-                        <input type="email" class="form-control" placeholder="Tu email" aria-label="Tu email">
-                        <button class="btn btn-success" type="button"><i class="ri-send-plane-fill"></i></button>
-                    </div>
-                </div>
-            </div>
-            <hr class="bg-secondary">
-            <!-- Copyright y año -->
-            <div class="row text-center text-md-start">
-                <div class="col-md-6 mb-2 mb-md-0">
-                    <p class="text-muted small mb-0">© 2026 De Prana. Todos los derechos reservados.</p>
-                </div>
-                <div class="col-md-6">
-                    <p class="text-muted small mb-0">Hecho con <i class="ri-heart-fill text-danger"></i> en Medellín — Año 2026</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div id="global-footer"></div>
 
     <!-- Botón flotante WhatsApp -->
     <a href="https://wa.me/573332359677?text=Hola!%20Vi%20tu%20página%20web%20fitness%20y%20quiero%20asesoría"
@@ -449,11 +335,15 @@
          ========================================================================== -->
     <script src="../js/utils/storage.js"></script>
     <script src="../js/utils/hash.js"></script>
+    <script src="../js/services/supabaseClient.js"></script>
     <script src="../js/services/auth.js"></script>
     <script src="../js/components/menu.js"></script>
     <script src="../js/components/carrito.js"></script>
     <script src="../js/components/auth-modal.js"></script>
     <script src="../js/components/auth-guard.js"></script>
+    <!-- Componente global de cabecera y pie (debe cargar ANTES de main.js) -->
+    <script src="../js/components/header-footer.js"></script>
+    <script src="../js/services/servicios-store.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/pages/contacto.js"></script>
     <!-- Bootstrap JS Bundle -->

@@ -4,6 +4,9 @@
 // — Sincronización del badge/contador en el header
 // — API pública: CarritoService
 //
+// NOTA: El carrito es estado temporal de sesión y se mantiene en localStorage por diseño.
+// Los pedidos finales se guardan en Supabase cuando el usuario completa la compra.
+//
 // Estructura de cada ítem en localStorage:
 // {
 //   id:       string   — identificador único del producto
@@ -83,13 +86,14 @@ var CarritoService = (function () {
         if (!producto || !producto.id) return 0;
 
         var items = leerItems();
-        var idx   = items.findIndex(function (i) { return i.id === producto.id; });
+        var prodId = String(producto.id);
+        var idx   = items.findIndex(function (i) { return String(i.id) === prodId; });
 
         if (idx >= 0) {
             items[idx].cantidad += 1;
         } else {
             items.push({
-                id:       String(producto.id),
+                id:       prodId,
                 nombre:   String(producto.nombre   || 'Producto'),
                 precio:   Number(producto.precio   || 0),
                 imagen:   String(producto.imagen   || ''),
@@ -109,11 +113,12 @@ var CarritoService = (function () {
      * @param {number} nuevaCantidad
      */
     function setCantidad(id, nuevaCantidad) {
+        var strId = String(id);
         var items = leerItems();
         if (nuevaCantidad <= 0) {
-            items = items.filter(function (i) { return i.id !== id; });
+            items = items.filter(function (i) { return String(i.id) !== strId; });
         } else {
-            var idx = items.findIndex(function (i) { return i.id === id; });
+            var idx = items.findIndex(function (i) { return String(i.id) === strId; });
             if (idx >= 0) items[idx].cantidad = Math.min(nuevaCantidad, 99);
         }
         guardarItems(items);
@@ -124,7 +129,8 @@ var CarritoService = (function () {
      * @param {string} id
      */
     function eliminar(id) {
-        var items = leerItems().filter(function (i) { return i.id !== id; });
+        var strId = String(id);
+        var items = leerItems().filter(function (i) { return String(i.id) !== strId; });
         guardarItems(items);
     }
 

@@ -56,6 +56,8 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 4px 14px rgba(92, 10, 27, 0.40) !important;
     position: relative;
     overflow: hidden;
+    letter-spacing: 0.05em;
+    border-radius: 6px;
 }
 .btn-success::before {
     content: '';
@@ -218,7 +220,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 14px 36px rgba(92,10,27,0.18) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 0 0 1px rgba(107,13,37,0.12) !important;
     border-color: var(--vinotinto);
 }
 .card-body {
@@ -875,3 +877,34 @@ strong {
 .opacity-75 { opacity: 0.75; }
 .opacity-50 { opacity: 0.5; }
 .opacity-25 { opacity: 0.25; }
+
+/* ── RESPONSIVE MOBILE-FIRST FIXES ── */
+@media (max-width: 768px) {
+    .card {
+        border-radius: 12px !important;
+    }
+    .badge {
+        font-size: 0.65rem;
+    }
+}
+@media (max-width: 414px) {
+    .btn {
+        min-height: 44px;
+        font-size: 0.82rem;
+    }
+    .card-body {
+        padding: 1rem;
+    }
+    .badge {
+        padding: 0.3rem 0.6rem;
+    }
+    .table-responsive {
+        font-size: 0.82rem;
+    }
+    .display-4 {
+        font-size: 2rem !important;
+    }
+    .display-5 {
+        font-size: 1.7rem !important;
+    }
+}

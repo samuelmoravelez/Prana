@@ -171,6 +171,56 @@
                 </div>
             </section>
 
+            <!-- ADMIN: Gestión de Productos -->
+            <section class="d-section" id="sec-admin-productos" data-rol="admin">
+                <div class="d-section-head">
+                    <div>
+                        <h1 class="d-section-title">Gestión de Productos</h1>
+                        <p class="d-section-sub">Administra catálogo, existencias, precios y promociones de la tienda</p>
+                    </div>
+                    <button class="d-btn d-btn--primario d-btn--sm" onclick="DRender.abrirModalProducto()">
+                        <i class="ri-add-line"></i> Nuevo Producto
+                    </button>
+                </div>
+                <div class="d-card">
+                    <div class="d-card__head">
+                        <span class="d-card__title">
+                            <i class="ri-box-3-line"></i>
+                            Catálogo de Productos
+                        </span>
+                        <span class="d-badge-rol cliente" id="admin-productos-total">0 productos</span>
+                    </div>
+                    <div class="d-card__body" style="padding-bottom:12px;">
+                        <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+                            <input type="text" id="admin-prod-buscar" class="d-input" placeholder="Buscar por nombre o categoría..." style="max-width:300px;">
+                            <select id="admin-prod-filtro-cat" class="d-select" style="max-width:200px;">
+                                <option value="">Todas las categorías</option>
+                                <option value="Suplementos">Suplementos</option>
+                                <option value="Indumentaria">Indumentaria</option>
+                                <option value="Equipamiento">Equipamiento</option>
+                                <option value="Accesorios">Accesorios</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="d-table-wrap">
+                        <table class="d-table" id="admin-tabla-productos">
+                            <thead>
+                                <tr>
+                                    <th style="width:60px;">Img</th>
+                                    <th>Producto</th>
+                                    <th>Categoría</th>
+                                    <th>Precio</th>
+                                    <th>Stock</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-productos-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
             <!-- ADMIN: Gestión de Pedidos -->
             <section class="d-section" id="sec-admin-pedidos" data-rol="admin">
                 <div class="d-section-head">
@@ -197,6 +247,7 @@
                                     <th>Cliente</th>
                                     <th class="d-table__hide-mobile">Productos</th>
                                     <th>Total</th>
+                                    <th>Fecha</th>
                                     <th>Estado</th>
                                     <th>Acción</th>
                                 </tr>
@@ -244,19 +295,53 @@
                 <div class="d-section-head">
                     <div>
                         <h1 class="d-section-title">Servicios & Asesorías</h1>
-                        <p class="d-section-sub">Solicitudes de planes de entrenamiento, asesorías y reservas</p>
+                        <p class="d-section-sub">Gestiona el catálogo de servicios ofrecidos y las solicitudes de clientes</p>
+                    </div>
+                    <button class="d-btn d-btn--primario d-btn--sm" onclick="DRender.abrirModalServicio()">
+                        <i class="ri-add-line"></i> Nuevo Servicio
+                    </button>
+                </div>
+
+                <!-- 1. Catálogo de Servicios Ofrecidos (CRUD) -->
+                <div class="d-card" style="margin-bottom:24px;">
+                    <div class="d-card__head">
+                        <span class="d-card__title">
+                            <i class="ri-service-line"></i>
+                            Catálogo de Servicios Ofrecidos
+                        </span>
+                        <span class="d-badge-rol cliente" id="admin-servicios-cat-total">0 servicios</span>
+                    </div>
+                    <div class="d-table-wrap">
+                        <table class="d-table" id="admin-tabla-servicios-cat">
+                            <thead>
+                                <tr>
+                                    <th style="width:50px;">Img</th>
+                                    <th>Servicio</th>
+                                    <th>Categoría</th>
+                                    <th>Duración</th>
+                                    <th>Coach</th>
+                                    <th>Precio</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-servicios-cat-tbody"></tbody>
+                        </table>
                     </div>
                 </div>
+
+                <!-- 2. Solicitudes de Clientes -->
                 <div class="d-card">
                     <div class="d-card__head">
                         <span class="d-card__title">
                             <i class="ri-user-star-line"></i>
-                            Solicitudes Activas
+                            Solicitudes de Asesoría de Clientes
                         </span>
+                        <span class="d-badge-rol admin" id="admin-solicitudes-total">0 solicitudes</span>
                     </div>
                     <div id="admin-servicios-list"></div>
                 </div>
             </section>
+
 
             <!-- ADMIN: Blog -->
             <section class="d-section" id="sec-admin-blog" data-rol="admin">
@@ -292,7 +377,12 @@
                                     </select>
                                 </div>
                                 <div class="d-field">
+                                    <label class="d-label">URL de Imagen (Cloudinary / Web)</label>
+                                    <input type="url" class="d-input" id="blog-imagen" placeholder="https://res.cloudinary.com/.../imagen.jpg">
+                                </div>
+                                <div class="d-field">
                                     <label class="d-label">Extracto / Resumen</label>
+
                                     <textarea class="d-textarea" id="blog-extracto" placeholder="Resumen breve del artículo..." required></textarea>
                                 </div>
                                 <div class="d-form__actions">
@@ -599,14 +689,192 @@
 </div>
 
 <!-- ==========================================================================
+     MODAL CREAR / EDITAR PRODUCTO (Admin)
+     ========================================================================== -->
+<div id="modal-prod-overlay"
+     class="d-modal-overlay"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="modal-prod-titulo"
+     aria-hidden="true">
+
+    <div class="d-modal-card">
+        <div class="d-modal-card__head">
+            <h3 class="d-modal-card__titulo" id="modal-prod-titulo">
+                <i class="ri-box-3-line"></i>
+                <span id="modal-prod-titulo-txt">Nuevo Producto</span>
+            </h3>
+            <button type="button" class="d-modal-card__cerrar"
+                    id="modal-prod-cancelar" aria-label="Cerrar">
+                <i class="ri-close-line" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <form class="d-form" id="form-producto" novalidate>
+            <input type="hidden" id="prod-id" value="">
+
+            <div class="d-form__row">
+                <div class="d-field" style="flex:2;">
+                    <label class="d-label" for="prod-nombre">Nombre del producto *</label>
+                    <input type="text" class="d-input" id="prod-nombre"
+                           placeholder="Ej: Whey Protein Isolate 2kg" required>
+                </div>
+                <div class="d-field" style="flex:1;">
+                    <label class="d-label" for="prod-categoria">Categoría *</label>
+                    <select class="d-select" id="prod-categoria" required>
+                        <option value="Suplementos">Suplementos</option>
+                        <option value="Indumentaria">Indumentaria</option>
+                        <option value="Equipamiento">Equipamiento</option>
+                        <option value="Accesorios">Accesorios</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="d-form__row">
+                <div class="d-field">
+                    <label class="d-label" for="prod-precio">Precio (COP) *</label>
+                    <input type="number" class="d-input" id="prod-precio" min="0" step="500"
+                           placeholder="189000" required>
+                </div>
+                <div class="d-field">
+                    <label class="d-label" for="prod-stock">Stock / Existencias *</label>
+                    <input type="number" class="d-input" id="prod-stock" min="0" step="1"
+                           placeholder="25" required>
+                </div>
+                <div class="d-field">
+                    <label class="d-label" for="prod-badge">Distintivo (Badge opcional)</label>
+                    <input type="text" class="d-input" id="prod-badge"
+                           placeholder="Nuevo, Popular, Oferta...">
+                </div>
+            </div>
+
+            <div class="d-field">
+                <label class="d-label" for="prod-imagen">URL de Imagen (Cloudinary / Web) *</label>
+                <input type="url" class="d-input" id="prod-imagen"
+                       placeholder="https://res.cloudinary.com/.../imagen.png" required>
+            </div>
+
+            <div class="d-field">
+                <label class="d-label" for="prod-descripcion">Descripción detallada</label>
+                <textarea class="d-textarea" id="prod-descripcion" rows="3"
+                          placeholder="Características, beneficios, modo de uso..."></textarea>
+            </div>
+
+            <div class="d-form__actions">
+                <button type="button" class="d-btn d-btn--secundario"
+                        onclick="DRender.cerrarModalProducto()">
+                    Cancelar
+                </button>
+                <button type="submit" class="d-btn d-btn--primario">
+                    <i class="ri-save-line" aria-hidden="true"></i>
+                    <span id="prod-btn-guardar-txt">Guardar Producto</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ==========================================================================
+     MODAL CREAR / EDITAR SERVICIO (Admin)
+     ========================================================================== -->
+<div id="modal-srv-overlay"
+     class="d-modal-overlay"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="modal-srv-titulo"
+     aria-hidden="true">
+
+    <div class="d-modal-card">
+        <div class="d-modal-card__head">
+            <h3 class="d-modal-card__titulo" id="modal-srv-titulo">
+                <i class="ri-service-line"></i>
+                <span id="modal-srv-titulo-txt">Nuevo Servicio</span>
+            </h3>
+            <button type="button" class="d-modal-card__cerrar"
+                    id="modal-srv-cancelar" aria-label="Cerrar">
+                <i class="ri-close-line" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <form class="d-form" id="form-servicio" novalidate>
+            <input type="hidden" id="srv-id" value="">
+
+            <div class="d-form__row">
+                <div class="d-field" style="flex:2;">
+                    <label class="d-label" for="srv-nombre">Nombre del servicio *</label>
+                    <input type="text" class="d-input" id="srv-nombre"
+                           placeholder="Ej: Asesoría Nutricional Personalizada" required>
+                </div>
+                <div class="d-field" style="flex:1;">
+                    <label class="d-label" for="srv-categoria">Categoría *</label>
+                    <select class="d-select" id="srv-categoria" required>
+                        <option value="Nutrición">Nutrición</option>
+                        <option value="Entrenamiento">Entrenamiento</option>
+                        <option value="Indumentaria">Indumentaria</option>
+                        <option value="Equipamiento">Equipamiento</option>
+                        <option value="Virtual">Virtual</option>
+                        <option value="Elite">Elite</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="d-form__row">
+                <div class="d-field">
+                    <label class="d-label" for="srv-precio">Precio (COP) *</label>
+                    <input type="number" class="d-input" id="srv-precio" min="0" step="1000"
+                           placeholder="80000" required>
+                </div>
+                <div class="d-field">
+                    <label class="d-label" for="srv-duracion">Duración / Frecuencia *</label>
+                    <input type="text" class="d-input" id="srv-duracion"
+                           placeholder="Ej: 1 mes, Por unidad, Por visita" required>
+                </div>
+                <div class="d-field">
+                    <label class="d-label" for="srv-coach">Coach o Especialista</label>
+                    <input type="text" class="d-input" id="srv-coach"
+                           placeholder="Ej: Nut. Ana Giraldo, Coach Miguel">
+                </div>
+            </div>
+
+            <div class="d-field">
+                <label class="d-label" for="srv-imagen">URL de Imagen (Cloudinary / Web)</label>
+                <input type="url" class="d-input" id="srv-imagen"
+                       placeholder="https://res.cloudinary.com/.../imagen.jpg">
+            </div>
+
+            <div class="d-field">
+                <label class="d-label" for="srv-descripcion">Descripción del servicio *</label>
+                <textarea class="d-textarea" id="srv-descripcion" rows="3"
+                          placeholder="Metodología, qué incluye, a quién va dirigido..." required></textarea>
+            </div>
+
+            <div class="d-form__actions">
+                <button type="button" class="d-btn d-btn--secundario"
+                        onclick="DRender.cerrarModalServicio()">
+                    Cancelar
+                </button>
+                <button type="submit" class="d-btn d-btn--primario">
+                    <i class="ri-save-line" aria-hidden="true"></i>
+                    <span id="srv-btn-guardar-txt">Guardar Servicio</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ==========================================================================
      SCRIPTS
-     Orden: storage → hash → auth → dashboard
+     Orden: storage → hash → auth → supabase → stores → carrito → dashboard
      ========================================================================== -->
 <script src="js/utils/storage.js"></script>
 <script src="js/utils/hash.js"></script>
-<script src="js/utils/admin-seed.js"></script>
+<script src="js/services/supabaseClient.js"></script>
 <script src="js/services/auth.js"></script>
+<script src="js/services/productos-store.js"></script>
+<script src="js/services/servicios-store.js"></script>
+<script src="js/components/carrito.js"></script>
 <script src="js/pages/dashboard.js"></script>
 
 </body>
 </html>
+

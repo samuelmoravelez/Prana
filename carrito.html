@@ -23,11 +23,12 @@
     <!-- Google Fonts: Poppins + Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Hojas de estilo: variables → carrito (independiente, sin global.css) -->
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/carrito.css">
+    <link rel="stylesheet" href="css/design-elevation.css">
 </head>
 <body>
 
@@ -368,10 +369,19 @@
 
             <div class="carr-modal__acciones">
 
-                <!-- Botón principal: volver al inicio -->
+                <!-- Botón ver en mi panel -->
+                <a href="dashboard.html"
+                   class="carr-modal__btn-principal"
+                   style="background:linear-gradient(135deg, #3D0712 0%, #6B0D25 100%); margin-bottom:8px;">
+                    <i class="ri-dashboard-line" aria-hidden="true"></i>
+                    Ver en Mis Pedidos
+                </a>
+
+                <!-- Botón secundario: volver al inicio -->
                 <button type="button"
                         class="carr-modal__btn-principal"
-                        id="carr-modal-btn-inicio">
+                        id="carr-modal-btn-inicio"
+                        style="background:transparent; color:#3D0712; border:1.5px solid #6B0D25;">
                     <i class="ri-home-4-line" aria-hidden="true"></i>
                     Volver al Inicio
                 </button>
@@ -392,7 +402,7 @@
                    style="display:block; margin-top:6px; font-size:0.82rem;
                           color:#8A8A8A; text-align:center; font-weight:600;
                           transition:color 0.2s ease;"
-                   onmouseover="this.style.color='#5C0A1B'"
+                   onmouseover="this.style.color='#6B0D25'"
                    onmouseout="this.style.color='#8A8A8A'">
                     Seguir explorando el catálogo
                 </a>
@@ -403,11 +413,13 @@
 
     <!-- ==========================================================================
          SCRIPTS JavaScript
-         Orden: utilidades → auth → servicio carrito → lógica de página
+         Orden: utilidades → auth → supabase → servicio productos → servicio carrito → lógica de página
          ========================================================================== -->
     <script src="js/utils/storage.js"></script>
     <script src="js/utils/hash.js"></script>
+    <script src="js/services/supabaseClient.js"></script>
     <script src="js/services/auth.js"></script>
+    <script src="js/services/productos-store.js"></script>
     <script src="js/components/carrito.js"></script>
     <script src="js/pages/carrito.js"></script>
 

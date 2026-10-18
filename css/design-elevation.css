@@ -1,0 +1,468 @@
+/* ==========================================================================
+   design-elevation.css — Elevación Visual & Correcciones Mobile-First
+   Prana Fitness | Sistema de diseño Premium
+   Cargado DESPUÉS de global.css para sobrescribir con mayor especificidad.
+   ========================================================================== */
+
+/* ==========================================================================
+   0. FUENTES: Plus Jakarta Sans como fuente de cuerpo premium
+   ========================================================================== */
+:root {
+    --fuente-cuerpo: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    --fuente-titulos: 'Poppins', sans-serif;
+
+    /* Paleta corporativa ajustada */
+    --vinotinto:          #6B0D25;
+    --vinotinto-hover:    #7A1429;
+    --vinotinto-claro:    #9A1F38;
+    --vinotinto-oscuro:   #3D0712;
+    --plateado-borde:     #E2E8F0;   /* Borde plateado suave — tarjetas secundarias */
+
+    /* Sombras minimalistas (sustituyen las dramáticas) */
+    --sombra-xs:         0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --sombra-suave:      0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.04);
+    --sombra-media:      0 10px 15px rgba(0,0,0,0.07), 0 4px 6px rgba(0,0,0,0.05);
+    --sombra-alta:       0 20px 25px rgba(0,0,0,0.08), 0 10px 10px rgba(0,0,0,0.04);
+    --sombra-vinotinto:  0 4px 14px rgba(107,13,37,0.25);
+    --sombra-plateada:   0 4px 14px rgba(192,192,192,0.20);
+    --sombra-neon:       0 0 0 1px rgba(107,13,37,0.15), 0 4px 16px rgba(107,13,37,0.18);
+
+    /* Gradientes actualizados */
+    --gradiente-vinotinto:       linear-gradient(135deg, #3D0712 0%, #6B0D25 40%, #7A1429 100%);
+    --gradiente-vinotinto-suave: linear-gradient(135deg, rgba(107,13,37,0.92) 0%, rgba(122,20,41,0.85) 100%);
+    --gradiente-cta:             linear-gradient(135deg, #6B0D25 0%, #7A1429 100%);
+}
+
+/* ==========================================================================
+   1. BASE — Renderizado de texto mejorado
+   ========================================================================== */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden; /* Previene scroll horizontal global */
+}
+
+/* ==========================================================================
+   2. TIPOGRAFÍA JERÁRQUICA — Escalas limpias y coherentes
+   ========================================================================== */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--fuente-titulos);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+}
+
+p, li, td, th, label, input, textarea, select {
+    font-family: var(--fuente-cuerpo);
+}
+
+/* Tamaños de display más controlados */
+.display-4 { font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.15; }
+.display-5 { font-size: clamp(1.5rem, 3.5vw, 2rem); line-height: 1.2; }
+.display-6 { font-size: clamp(1.3rem, 3vw, 1.75rem); line-height: 1.25; }
+
+/* ==========================================================================
+   3. HEADER — Limpio sin sombra neon exagerada
+   ========================================================================== */
+.header-principal {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.16) !important;
+    border-bottom: 1px solid rgba(226,232,240,0.3) !important;
+}
+
+/* Logo más refinado */
+.logo-imagen {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.20) !important;
+    border-color: rgba(226,232,240,0.5) !important;
+}
+
+.logo a:hover .logo-imagen {
+    box-shadow: 0 4px 14px rgba(107,13,37,0.30) !important;
+}
+
+/* ==========================================================================
+   4. TARJETAS DE PRODUCTO — Bordes finos, sombra suave de elevación
+   ========================================================================== */
+.tarjeta-producto {
+    border: 1px solid var(--plateado-borde) !important;
+    box-shadow: var(--sombra-xs) !important;
+    border-radius: 12px !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+}
+
+.tarjeta-producto:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.10), 0 0 0 1.5px rgba(107,13,37,0.15) !important;
+    border-color: rgba(107,13,37,0.25) !important;
+}
+
+/* Altura de imagen de producto más compacta y uniforme */
+.imagen-producto-wrapper {
+    height: 260px !important;
+    background: linear-gradient(135deg, #f8f9fa 0%, #edf0f3 100%) !important;
+}
+
+/* ==========================================================================
+   5. CARDS BOOTSTRAP — Elevación contenida
+   ========================================================================== */
+.card {
+    border: 1px solid var(--plateado-borde) !important;
+    box-shadow: var(--sombra-xs) !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+}
+
+.card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 0 0 1.5px rgba(107,13,37,0.12) !important;
+    border-color: rgba(107,13,37,0.20) !important;
+}
+
+/* ==========================================================================
+   6. BOTONES — Touch-friendly y con jerarquía clara
+   ========================================================================== */
+.btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease !important;
+}
+
+.btn-success {
+    box-shadow: 0 2px 8px rgba(107,13,37,0.25) !important;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 18px rgba(107,13,37,0.35) !important;
+}
+
+.btn-outline-success {
+    min-height: 44px;
+}
+
+/* Botón primario personalizado */
+.btn-primario {
+    box-shadow: var(--sombra-vinotinto) !important;
+}
+
+.btn-primario:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 18px rgba(107,13,37,0.35) !important;
+}
+
+/* ==========================================================================
+   7. SECCIONES HERO INTERIORES — Padding limpio
+   ========================================================================== */
+.hero-seccion {
+    padding: 60px 0 !important;
+}
+
+.hero-seccion__titulo {
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+}
+
+/* ==========================================================================
+   8. FOOTER — Bordes limpios
+   ========================================================================== */
+.footer::before {
+    background: linear-gradient(90deg, transparent, rgba(226,232,240,0.5), transparent) !important;
+    height: 1px !important;
+}
+
+.footer-redes a {
+    border: 1px solid rgba(226,232,240,0.2) !important;
+    box-shadow: none !important;
+}
+
+.footer-redes a:hover {
+    box-shadow: 0 4px 12px rgba(107,13,37,0.20) !important;
+}
+
+/* ==========================================================================
+   9. TABLA — Estilo más limpio
+   ========================================================================== */
+.table {
+    --bs-table-border-color: #E2E8F0;
+}
+
+.table thead {
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+}
+
+.table tbody tr {
+    transition: background-color 0.18s ease;
+}
+
+/* ==========================================================================
+   10. CONTENEDOR — Safe areas + overflow control
+   ========================================================================== */
+.contenedor {
+    width: min(90%, 1200px);
+    margin-inline: auto;
+    padding-inline: 16px;
+}
+
+/* ==========================================================================
+   11. WHATSAPP FLOTANTE — Sombra moderada
+   ========================================================================== */
+.whatsapp-flotante {
+    box-shadow: 0 4px 16px rgba(37,211,102,0.40), 0 0 0 2px var(--vinotinto) !important;
+}
+
+.whatsapp-flotante:hover {
+    box-shadow: 0 8px 24px rgba(37,211,102,0.50), 0 0 0 2px rgba(226,232,240,0.5) !important;
+    transform: scale(1.10) !important;
+}
+
+/* ==========================================================================
+   12. SCROLL — Suavidad global
+   ========================================================================== */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ==========================================================================
+   13. MOBILE-FIRST — Breakpoints principales
+   ========================================================================== */
+
+/* --- Tablet --- */
+@media (max-width: 768px) {
+    /* Contenedor lateral */
+    .contenedor {
+        width: 95%;
+        padding-inline: 12px;
+    }
+
+    /* Secciones: padding reducido */
+    .pagina-interior {
+        padding: 50px 0;
+    }
+
+    /* Hero secciones */
+    .hero-seccion {
+        padding: 44px 0 !important;
+    }
+
+    /* Footer en 1 columna */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    /* Tarjetas de producto */
+    .imagen-producto-wrapper {
+        height: 220px !important;
+    }
+
+    /* Header grid más compacto */
+    .logo-imagen {
+        width: 42px !important;
+        height: 42px !important;
+    }
+}
+
+/* --- Móvil estándar (hasta 576px) --- */
+@media (max-width: 576px) {
+    /* Display fluid */
+    .display-4 { font-size: 1.75rem !important; }
+    .display-5 { font-size: 1.5rem !important; }
+    .display-6 { font-size: 1.3rem !important; }
+
+    /* Buttons full width en hero sections */
+    .hero-seccion .btn,
+    .idx-seccion .btn-lg {
+        width: 100%;
+        padding: 13px 18px !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* Imagen hero más pequeña */
+    .col-lg-6.text-center .img-fluid {
+        max-height: 260px !important;
+    }
+
+    /* Navegación móvil: items más grandes */
+    .navegacion a {
+        padding: 16px 24px !important;
+        font-size: 1rem;
+    }
+}
+
+/* --- Móvil pequeño (360px – 414px) --- */
+@media (max-width: 414px) {
+    body {
+        font-size: 0.93rem;
+    }
+
+    /* Contenedor máximo */
+    .contenedor {
+        width: 100%;
+        padding-inline: 14px;
+    }
+
+    /* Botones accesibles */
+    .btn {
+        min-height: 46px;
+        font-size: 0.82rem;
+    }
+
+    /* Grid de productos: 1 columna */
+    .grilla-productos {
+        grid-template-columns: 1fr !important;
+        gap: 14px;
+    }
+
+    /* Tarjeta producto más compacta */
+    .info-producto {
+        padding: 16px 14px;
+    }
+
+    .nombre-producto {
+        font-size: 1rem;
+    }
+
+    .precio-producto {
+        font-size: 1.2rem;
+    }
+
+    /* Barra de anuncio más pequeña */
+    .barra-anuncio {
+        font-size: 0.70rem !important;
+        padding: 6px 8px !important;
+        letter-spacing: 0.4px !important;
+    }
+
+    /* Logo texto más compacto */
+    .logo h1 {
+        font-size: 0.92rem;
+    }
+
+    .logo h1 span {
+        font-size: 0.52rem;
+    }
+
+    /* Iconos header más separados */
+    .iconos-header {
+        gap: 12px;
+    }
+
+    /* Secciones con padding reducido */
+    .hero-seccion {
+        padding: 36px 0 !important;
+    }
+
+    .hero-seccion__titulo {
+        font-size: 1.5rem !important;
+    }
+
+    .hero-seccion__descripcion {
+        font-size: 0.9rem;
+    }
+
+    /* Footer inferior centrado */
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+
+    /* WhatsApp flotante: más pequeño */
+    .whatsapp-flotante {
+        width: 52px !important;
+        height: 52px !important;
+        bottom: 20px !important;
+        right: 16px !important;
+    }
+
+    .whatsapp-flotante img {
+        width: 26px !important;
+        height: 26px !important;
+    }
+}
+
+/* --- Móvil mínimo (360px) --- */
+@media (max-width: 360px) {
+    .contenedor {
+        padding-inline: 10px;
+    }
+
+    .btn {
+        font-size: 0.78rem;
+    }
+
+    .hero-seccion__titulo {
+        font-size: 1.35rem !important;
+    }
+
+    .nombre-producto {
+        font-size: 0.95rem;
+    }
+}
+
+/* ==========================================================================
+   14. ACCESIBILIDAD — Focus visible
+   ========================================================================== */
+:focus-visible {
+    outline: 2px solid var(--vinotinto);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--vinotinto);
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   15. INPUTS — Evitar zoom automático en iOS
+   ========================================================================== */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="password"],
+select,
+textarea {
+    font-size: max(16px, 0.92rem) !important; /* Previene zoom en iOS < 16 */
+}
+
+/* ==========================================================================
+   16. IMÁGENES — Sin desbordamiento
+   ========================================================================== */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Etiqueta de producto: sin desbordamiento */
+.etiqueta-producto {
+    max-width: calc(100% - 30px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ==========================================================================
+   17. OVERRIDES DE SECCIONES INDEX — Más limpias
+   ========================================================================== */
+.idx-seccion--clara {
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+}
+
+/* ==========================================================================
+   18. ANIMACIONES — Más suaves, respeta prefers-reduced-motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

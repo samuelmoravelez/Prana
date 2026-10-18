@@ -25,7 +25,7 @@
     <!-- Google Fonts: Poppins (títulos) + Inter (cuerpo) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Hojas de estilo del proyecto (orden de carga: variables → custom → global → auth → página) -->
     <link rel="stylesheet" href="css/variables.css">
@@ -33,100 +33,16 @@
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/auth.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/design-elevation.css">
 </head>
 <body>
 
     <!-- ==========================================================================
-         1. BARRA DE ANUNCIO SUPERIOR
-         Promoción visible en la parte superior de todas las páginas
+         HEADER GLOBAL (componente reutilizable)
+         Se inyecta dinámicamente desde js/components/header-footer.js
+         Incluye barra de anuncio + navbar + carrito + menú de usuario/sesión
          ========================================================================== -->
-    <div class="barra-anuncio bg-success text-white text-center py-2">
-        <p class="mb-0"><i class="ri-flashlight-fill me-2"></i> ¡Envíos gratis a todo el país desde $150.000! Escríbenos directamente a nuestro WhatsApp <i class="ri-flashlight-fill ms-2"></i></p>
-    </div>
-
-    <!-- ==========================================================================
-         2. HEADER + NAVBAR RESPONSIVA DE BOOTSTRAP
-         Contiene logo, menú de navegación completo (6 páginas) y iconos
-         ========================================================================== -->
-    <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
-        <div class="container">
-            <!-- Logo y nombre de la empresa -->
-            <a class="navbar-brand fw-bold" href="index.html">
-                <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" alt="Logo de la marca fitness" width="44" height="44" class="logo-imagen d-inline-block align-text-top me-2">
-            </a>
-
-            <!-- Botón hamburguesa para dispositivos móviles -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Menú de navegación completo con las 6 páginas requeridas -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="paginas/quienes-somos.html">Quiénes Somos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="paginas/productos.html">Productos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="paginas/servicios.html">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="paginas/blog.html">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="paginas/contactanos.html">Contáctanos</a>
-                    </li>
-                </ul>
-
-                <!-- Iconos de búsqueda y carrito con badge Bootstrap -->
-                <ul class="navbar-nav ms-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" aria-label="Buscar"><i class="ri-search-line fs-5"></i></a>
-                    </li>
-                    <li class="nav-item position-relative">
-                        <a class="nav-link" href="carrito.html" aria-label="Ver carrito de compras"><i class="ri-shopping-cart-fill fs-5"></i>
-                            <span class="badge bg-danger position-absolute top-0 start-100 translate-middle contador-carrito">0</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <!-- Acceso / Cuenta de usuario (Módulo de Autenticación) -->
-                <ul class="navbar-nav ms-3 align-items-center">
-                    <!-- Botón de acceso (visible solo para invitados) -->
-                    <li class="nav-item" data-require-guest>
-                        <a href="login.html" class="auth-boton-acceso">
-                            <i class="ri-user-line"></i>
-                            <span class="d-none d-sm-inline">Ingresar</span>
-                        </a>
-                    </li>
-                    <!-- Menú de usuario (visible solo si está autenticado) -->
-                    <li class="nav-item auth-usuario-menu" data-require-auth style="display:none;">
-                        <div class="auth-avatar" data-auth-avatar id="auth-avatar-btn" role="button" tabindex="0" aria-label="Menú de usuario"></div>
-                        <div class="auth-dropdown" id="auth-dropdown">
-                            <div class="auth-dropdown-header">
-                                <p class="auth-dropdown-nombre" data-auth-nombre></p>
-                                <p class="auth-dropdown-email" data-auth-email></p>
-                            </div>
-                            <a href="dashboard.html" class="auth-dropdown-item" data-auth-perfil>
-                                <i class="ri-dashboard-line"></i> Mi Panel
-                            </a>
-                            <div class="auth-dropdown-divider"></div>
-                            <button class="auth-dropdown-item auth-dropdown-item--logout" data-auth-logout>
-                                <i class="ri-logout-box-r-line"></i> Cerrar Sesión
-                            </button>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    </header>
+    <div id="global-header"></div>
 
     <!-- ==========================================================================
          3. MAIN — CONTENIDO PRINCIPAL DE LA PÁGINA DE INICIO
@@ -221,7 +137,7 @@
                     <div class="col-lg-5 mb-4 mb-lg-0 position-relative">
                         <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" alt="Showroom de la tienda fitness premium en Medellín" class="img-fluid rounded-3 shadow">
                         <div class="position-absolute bottom-0 end-0 badge bg-success py-2 px-3 fs-6">
-                            <i class="ri-calendar-line me-1"></i> Desde 2019
+                            <i class="ri-calendar-line me-1"></i> Desde 2021
                         </div>
                     </div>
 
@@ -289,74 +205,8 @@
                     <div class="w-25 mx-auto" style="height: 4px; background: linear-gradient(to right, #5C0A1B, #C0C0C0); border-radius: 2px;"></div>
                 </div>
 
-                <!-- Sistema de rejillas Grid Bootstrap (obligatorio) -->
-                <div class="row g-4">
-                    <!-- Producto 1: Whey Protein -->
-                    <article class="col-lg-4 col-md-6" data-categoria="suplementos">
-                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden position-relative hover-shadow transition" style="background-color: #FFFFFF !important;">
-                            <div class="position-relative overflow-hidden" style="height: 300px; background: linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%) !important;">
-                                <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/11.png" alt="Whey Protein Premium 2kg - Proteína de suero lácteo" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                                <span class="badge position-absolute top-3 start-3" style="background: linear-gradient(135deg, #3D0712 0%, #5C0A1B 50%, #7A1429 100%) !important; color: #FFFFFF !important; border: 1px solid rgba(192,192,192,0.18);">Nuevo</span>
-                            </div>
-                            <div class="card-body" style="background-color: #FFFFFF !important;">
-                                <span class="badge mb-2 d-inline-block" style="background: linear-gradient(135deg, rgba(92,10,27,0.10) 0%, rgba(122,20,41,0.08) 100%) !important; color: #5C0A1B !important; border: 1px solid rgba(92,10,27,0.18);">Suplementos</span>
-                                <h3 class="card-title h5 fw-bold" style="color: #3D0712 !important;">Whey Protein Premium 2kg</h3>
-                                <p class="card-text small" style="color: #2C2C2C !important;">Proteína de suero lácteo concentrada, 25g por porción, ideal para construcción muscular.</p>
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h4 class="mb-0 fw-bold" style="color: #5C0A1B !important;">$189.000</h4>
-                                    <small style="color: #8A8A8A !important;">COP</small>
-                                </div>
-                                <button class="btn btn-success w-100 btn-comprar-tarjeta">
-                                    <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
-                                </button>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Producto 2: Creatina Monohidratada -->
-                    <article class="col-lg-4 col-md-6" data-categoria="suplementos">
-                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden position-relative hover-shadow transition" style="background-color: #FFFFFF !important;">
-                            <div class="position-relative overflow-hidden" style="height: 300px; background: linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%) !important;">
-                                <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/22.png" alt="Creatina Monohidratada 500g - Fuerza y potencia muscular" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                                <span class="badge position-absolute top-3 start-3" style="background: linear-gradient(135deg, #7A1429 0%, #9A1F38 100%) !important; color: #FFFFFF !important;">Popular</span>
-                            </div>
-                            <div class="card-body" style="background-color: #FFFFFF !important;">
-                                <span class="badge mb-2 d-inline-block" style="background: linear-gradient(135deg, rgba(122,20,41,0.12) 0%, rgba(154,31,56,0.08) 100%) !important; color: #7A1429 !important; border: 1px solid rgba(122,20,41,0.18);">Suplementos</span>
-                                <h3 class="card-title h5 fw-bold" style="color: #3D0712 !important;">Creatina Monohidratada 500g</h3>
-                                <p class="card-text small" style="color: #2C2C2C !important;">Creatina micronizada pura, mejora fuerza, potencia y recuperación muscular.</p>
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h4 class="mb-0 fw-bold" style="color: #5C0A1B !important;">$95.000</h4>
-                                    <small style="color: #8A8A8A !important;">COP</small>
-                                </div>
-                                <button class="btn btn-success w-100 btn-comprar-tarjeta">
-                                    <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
-                                </button>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Producto 3: Sneakers Training -->
-                    <article class="col-lg-4 col-md-6" data-categoria="indumentaria">
-                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden position-relative hover-shadow transition" style="background-color: #FFFFFF !important;">
-                            <div class="position-relative overflow-hidden" style="height: 300px; background: linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%) !important;">
-                                <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/33.png" alt="Zapatillas Sneakers Training Pro - Estabilidad y soporte gym" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                                <span class="badge position-absolute top-3 start-3" style="background: linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 100%) !important; color: #FFFFFF !important;">Destacado</span>
-                            </div>
-                            <div class="card-body" style="background-color: #FFFFFF !important;">
-                                <span class="badge mb-2 d-inline-block" style="background: linear-gradient(135deg, rgba(44,44,44,0.10) 0%, rgba(74,74,74,0.08) 100%) !important; color: #4A4A4A !important; border: 1px solid rgba(44,44,44,0.18);">Indumentaria</span>
-                                <h3 class="card-title h5 fw-bold" style="color: #3D0712 !important;">Sneakers Training Pro</h3>
-                                <p class="card-text small" style="color: #2C2C2C !important;">Zapatillas de entrenamiento con suela anti-deslizante y soporte lateral para levantamiento.</p>
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h4 class="mb-0 fw-bold" style="color: #5C0A1B !important;">$260.000</h4>
-                                    <small style="color: #8A8A8A !important;">COP</small>
-                                </div>
-                                <button class="btn btn-success w-100 btn-comprar-tarjeta">
-                                    <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
-                                </button>
-                            </div>
-                        </div>
-                    </article>
-                </div>
+                <!-- Grilla dinámica de productos destacados desde Supabase -->
+                <div id="contenedor-productos-destacados" class="row g-4"></div>
 
                 <!-- Botón para ver todos los productos -->
                 <div class="text-center mt-5">
@@ -515,34 +365,44 @@
                         <h2 class="display-5 fw-bold mb-3" style="color: #000000 !important;">Visítanos en nuestro punto físico</h2>
                         <p class="lead mb-4" style="color: #1A1A1A !important;">Conoce nuestra tienda fitness en <span style="color: #5C0A1B !important; font-weight: 600;">Medellín</span> y prueba el <span style="color: #5C0A1B !important; font-weight: 600;">equipo antes de comprar</span>.</p>
 
-                        <!-- Lista UL con información de contacto -->
-                        <div class="mb-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="ri-map-pin-fill fs-4 me-3" style="color: #5C0A1B !important;"></i>
-                                <div>
-                                    <h3 class="h6 mb-0 fw-bold" style="color: #3D0712 !important;">Dirección</h3>
-                                    <p class="mb-0" style="color: #1A1A1A !important;">Medellín, Colombia</p>
+                        <!-- Tarjeta minimalista: Ubicación &amp; Atención (reemplaza el iframe de Google Maps) -->
+                        <div class="rounded-4 overflow-hidden shadow-sm" style="background: #FFFFFF; border: 1px solid rgba(92,10,27,0.15);">
+                            <div class="px-4 py-3" style="background: linear-gradient(135deg, #3D0712 0%, #5C0A1B 55%, #7A1429 100%);">
+                                <h3 class="h5 fw-bold mb-0 text-white"><i class="ri-map-pin-2-fill me-2"></i>Ubicación &amp; Atención</h3>
+                            </div>
+                            <div class="p-4">
+                                <ul class="list-unstyled mb-4">
+                                    <li class="d-flex align-items-start mb-3">
+                                        <i class="ri-map-pin-fill fs-5 me-3" style="color: #5C0A1B;"></i>
+                                        <div>
+                                            <span class="d-block fw-semibold small text-uppercase" style="color: #7A1429; letter-spacing: 0.05em;">Dirección</span>
+                                            <span style="color: #1A1A1A;">Medellín, Colombia</span>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex align-items-start mb-3">
+                                        <i class="ri-time-fill fs-5 me-3" style="color: #5C0A1B;"></i>
+                                        <div>
+                                            <span class="d-block fw-semibold small text-uppercase" style="color: #7A1429; letter-spacing: 0.05em;">Horario</span>
+                                            <span style="color: #1A1A1A;">Lunes a Sábado, 8:00 a.m. a 8:00 p.m.</span>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex align-items-start">
+                                        <i class="ri-phone-fill fs-5 me-3" style="color: #5C0A1B;"></i>
+                                        <div>
+                                            <span class="d-block fw-semibold small text-uppercase" style="color: #7A1429; letter-spacing: 0.05em;">Atención</span>
+                                            <a href="tel:+573332359677" style="color: #5C0A1B; font-weight: 600; text-decoration: none;">+57 300 309 1641</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="d-flex flex-column flex-sm-row gap-3">
+                                    <a href="https://www.google.com/maps/search/?api=1&amp;query=6.336250156809227,-75.55798064181052" target="_blank" rel="noopener noreferrer" class="btn flex-fill fw-semibold" style="background: linear-gradient(135deg, #5C0A1B 0%, #7A1429 100%); color: #FFFFFF; border: none;">
+                                        <i class="ri-map-2-line me-2"></i> Abrir en Google Maps
+                                    </a>
+                                    <a href="https://wa.me/573332359677?text=Hola!%20Quiero%20asesoría%20fitness" target="_blank" rel="noopener noreferrer" class="btn flex-fill fw-semibold" style="background: transparent; color: #3D0712; border: 2px solid #5C0A1B;">
+                                        <i class="fab fa-whatsapp me-2" style="color: #5C0A1B;"></i> WhatsApp
+                                    </a>
                                 </div>
                             </div>
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="ri-time-fill fs-4 me-3" style="color: #5C0A1B !important;"></i>
-                                <div>
-                                    <h3 class="h6 mb-0 fw-bold" style="color: #3D0712 !important;">Horario</h3>
-                                    <p class="mb-0" style="color: #1A1A1A !important;">Lunes a Sábado, 8:00 a.m. a 8:00 p.m.</p>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <i class="ri-phone-fill fs-4 me-3" style="color: #5C0A1B !important;"></i>
-                                <div>
-                                    <h3 class="h6 mb-0 fw-bold" style="color: #3D0712 !important;">Atención</h3>
-                                    <p class="mb-0" style="color: #1A1A1A !important;"><a href="tel:+573332359677" style="color: #5C0A1B !important; font-weight: 600; text-decoration: none;">+57 300 309 1641</a></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Iframe de Google Maps (requisito obligatorio) -->
-                        <div class="ratio ratio-16x9 rounded-3 overflow-hidden" style="border: 2px solid rgba(92,10,27,0.18); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);">
-                            <iframe title="Ubicación de la tienda fitness premium en Medellín" src="https://www.google.com/maps/embed?pb=!3m2!1ses!2sus!4v1784080160495!5m2!1ses!2sus!6m8!1m7!1s_Qchf1-XgBYVNyeq1Fev9g!2m2!1d6.336250156809227!2d-75.55798064181052!3f277.6225894074462!4f11.508190381646159!5f0.7820865974627469" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                         </div>
                     </div>
 
@@ -565,82 +425,10 @@
     </main><!-- /main contenido-principal -->
 
     <!-- ==========================================================================
-         FOOTER — Pie de página común en todas las páginas
-         Información de contacto, redes sociales, navegación y copyright
+         FOOTER GLOBAL (componente reutilizable)
+         Se inyecta dinámicamente desde js/components/header-footer.js
          ========================================================================== -->
-    <footer class="bg-dark text-light py-5">
-        <div class="container">
-            <div class="row g-4 mb-4">
-                <!-- Columna 1: Información de marca -->
-                <div class="col-lg-3 col-md-6">
-                    <a href="index.html" class="d-flex align-items-center text-decoration-none mb-3">
-                        <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" alt="Logo de la marca fitness" width="40" height="40" class="logo-imagen me-2">
-                        <h4 class="fw-bold mb-0 text-light">Prana</h4>
-                    </a>
-                    <p class="text-muted small">Tu tienda fitness de confianza en Medellín. Suplementos deportivos, indumentaria técnica, accesorios y equipamiento gym profesional.</p>
-                    <!-- Redes sociales -->
-                    <div class="d-flex gap-3 mt-3">
-                        <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" class="text-light text-decoration-none fs-5 hover-text-success transition">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.tiktok.com/" target="_blank" aria-label="TikTok" class="text-light text-decoration-none fs-5 hover-text-success transition">
-                            <i class="fab fa-tiktok"></i>
-                        </a>
-                        <a href="https://wa.me/573332359677" target="_blank" aria-label="WhatsApp" class="text-light text-decoration-none fs-5 hover-text-success transition">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Columna 2: Navegación completa (6 páginas) -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Navegación</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="index.html" class="text-light text-decoration-none hover-text-success transition">Inicio</a></li>
-                        <li class="mb-2"><a href="paginas/quienes-somos.html" class="text-light text-decoration-none hover-text-success transition">Quiénes Somos</a></li>
-                        <li class="mb-2"><a href="paginas/productos.html" class="text-light text-decoration-none hover-text-success transition">Productos</a></li>
-                        <li class="mb-2"><a href="paginas/servicios.html" class="text-light text-decoration-none hover-text-success transition">Servicios</a></li>
-                        <li class="mb-2"><a href="paginas/blog.html" class="text-light text-decoration-none hover-text-success transition">Blog</a></li>
-                        <li><a href="paginas/contactanos.html" class="text-light text-decoration-none hover-text-success transition">Contáctanos</a></li>
-                    </ul>
-                </div>
-
-                <!-- Columna 3: Información de contacto -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Contacto</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="ri-map-pin-fill text-success me-2"></i><span class="text-muted small">Medellín, Colombia</span></li>
-                        <li class="mb-2"><i class="ri-phone-fill text-success me-2"></i><a href="tel:+573332359677" class="text-light text-decoration-none hover-text-success transition small">+57 333 235 9677</a></li>
-                        <li class="mb-2"><i class="ri-mail-fill text-success me-2"></i><a href="mailto:contacto@marcafitness.co" class="text-light text-decoration-none hover-text-success transition small">contacto@marcafitness.co</a></li>
-                        <li><i class="ri-time-fill text-success me-2"></i><span class="text-muted small">Lun–Sáb: 8am – 8pm</span></li>
-                    </ul>
-                </div>
-
-                <!-- Columna 4: Newsletter suscripción -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Newsletter Fitness</h5>
-                    <p class="text-muted small mb-3">Suscríbete para recibir tips de entrenamiento, descuentos exclusivos y lanzamientos.</p>
-                    <div class="input-group mb-2">
-                        <input type="email" class="form-control" placeholder="Tu email" aria-label="Tu email">
-                        <button class="btn btn-success" type="button"><i class="ri-send-plane-fill"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Línea divisoria -->
-            <hr class="bg-secondary">
-
-            <!-- Copyright y año de desarrollo (requisito obligatorio) -->
-            <div class="row text-center text-md-start">
-                <div class="col-md-6 mb-2 mb-md-0">
-                    <p class="text-muted small mb-0">© 2026 De Prana. Todos los derechos reservados.</p>
-                </div>
-                <div class="col-md-6">
-                    <p class="text-muted small mb-0">Hecho con <i class="ri-heart-fill text-danger"></i> en Medellín — Año 2026</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div id="global-footer"></div>
 
     <!-- ==========================================================================
          BOTÓN FLOTANTE DE WHATSAPP
@@ -657,6 +445,9 @@
     <script src="js/utils/storage.js"></script>
     <script src="js/utils/hash.js"></script>
 
+    <!-- Cliente Supabase (para conexión con PostgreSQL) -->
+    <script src="js/services/supabaseClient.js"></script>
+
     <!-- Servicios (capa de abstracción de autenticación) -->
     <script src="js/services/auth.js"></script>
 
@@ -665,6 +456,10 @@
     <script src="js/components/carrito.js"></script>
     <script src="js/components/auth-modal.js"></script>
     <script src="js/components/auth-guard.js"></script>
+
+    <!-- Componente global de cabecera y pie (debe cargar ANTES de main.js) -->
+    <script src="js/components/header-footer.js"></script>
+    <script src="js/services/productos-store.js"></script>
 
     <!-- Inicializador global -->
     <script src="js/main.js"></script>

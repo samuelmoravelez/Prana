@@ -35,89 +35,10 @@
 <body>
 
     <!-- ==========================================================================
-         BARRA DE ANUNCIO SUPERIOR
+         HEADER GLOBAL (componente reutilizable)
+         Se inyecta dinámicamente desde js/components/header-footer.js
          ========================================================================== -->
-    <div class="barra-anuncio bg-success text-white text-center py-2">
-        <p class="mb-0"><i class="ri-flashlight-fill me-2"></i> ¡Envíos gratis a todo el país desde $150.000! Escríbenos directamente a nuestro WhatsApp <i class="ri-flashlight-fill ms-2"></i></p>
-    </div>
-
-    <!-- ==========================================================================
-         HEADER + NAVBAR BOOTSTRAP (6 páginas)
-         ========================================================================== -->
-    <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
-        <div class="container">
-            <!-- Logo -->
-            <a class="navbar-brand fw-bold" href="../index.html">
-                <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" alt="Logo de la marca fitness" width="44" height="44" class="logo-imagen d-inline-block align-text-top me-2">
-            </a>
-            <!-- Botón hamburguesa móvil -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- Menú completo de navegación -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="quienes-somos.html">Quiénes Somos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="productos.html">Productos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="servicios.html">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="blog.html">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contactanos.html">Contáctanos</a>
-                    </li>
-                </ul>
-                <!-- Iconos -->
-                <ul class="navbar-nav ms-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" aria-label="Buscar"><i class="ri-search-line fs-5"></i></a>
-                    </li>
-                    <li class="nav-item position-relative">
-                        <a class="nav-link" href="#" aria-label="Carrito"><i class="ri-shopping-cart-fill fs-5"></i>
-                            <span class="badge bg-danger position-absolute top-0 start-100 translate-middle contador-carrito">0</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <!-- Acceso / Cuenta de usuario (Módulo de Autenticación) -->
-                <ul class="navbar-nav ms-3 align-items-center">
-                    <li class="nav-item" data-require-guest>
-                        <a href="../login.html" class="auth-boton-acceso">
-                            <i class="ri-user-line"></i>
-                            <span class="d-none d-sm-inline">Ingresar</span>
-                        </a>
-                    </li>
-                    <li class="nav-item auth-usuario-menu" data-require-auth style="display:none;">
-                        <div class="auth-avatar" data-auth-avatar id="auth-avatar-btn" role="button" tabindex="0" aria-label="Menú de usuario"></div>
-                        <div class="auth-dropdown" id="auth-dropdown">
-                            <div class="auth-dropdown-header">
-                                <p class="auth-dropdown-nombre" data-auth-nombre></p>
-                                <p class="auth-dropdown-email" data-auth-email></p>
-                            </div>
-                            <a href="../dashboard.html" class="auth-dropdown-item" data-auth-perfil>
-                                <i class="ri-dashboard-line"></i> Mi Panel
-                            </a>
-                            <div class="auth-dropdown-divider"></div>
-                            <button class="auth-dropdown-item auth-dropdown-item--logout" data-auth-logout>
-                                <i class="ri-logout-box-r-line"></i> Cerrar Sesión
-                            </button>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    </header>
+    <div id="global-header"></div>
 
     <!-- ==========================================================================
          MAIN: CONTENIDO PRINCIPAL DEL BLOG
@@ -166,134 +87,13 @@
                     de cardio moderado y un déficit calórico inteligente. ¡Tu progreso se construye todos los días! 💪
                 </div>
 
-                <!-- Grid de artículos del blog (Bootstrap Grid) -->
-                <div class="row g-4">
-
-                    <!-- Artículo 1: Whey Protein (suplementación) -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden hover-shadow transition">
-                            <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791240543/nhm.webp" class="card-img-top p-3 bg-light" alt="Guía completa Whey Protein - Cómo elegir y tomar proteína" style="height: 220px; object-fit: contain;">
-                            <div class="card-body">
-                                <span class="badge bg-success mb-2">Suplementación</span>
-                                <h2 class="h5 fw-bold mb-2">Guía definitiva de Whey Protein: cómo elegir y tomarla correctamente</h2>
-                                <p class="text-muted small mb-3">
-                                    Diferencias entre <strong>concentrada, aislada e hidrolizada</strong>,
-                                    cuándo tomarla y cuántos gramos diarios necesitas según tu objetivo.
-                                </p>
-                                <div class="d-flex align-items-center text-muted small mb-3">
-                                    <i class="far fa-calendar me-2"></i>12 Julio 2025
-                                    <span class="mx-2">•</span>
-                                    <i class="far fa-clock me-2"></i>8 min lectura
-                                </div>
-                                <a href="#" class="btn btn-outline-success">Leer más <i class="fas fa-arrow-right ms-2"></i></a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Artículo 2: Hipertrofia (entrenamiento) -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden hover-shadow transition">
-                            <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791240969/ddfgg.png" class="card-img-top p-3 bg-light" alt="Cómo ganar masa muscular - Hipertrofia guía" style="height: 220px; object-fit: contain;">
-                            <div class="card-body">
-                                <span class="badge bg-danger mb-2">Entrenamiento</span>
-                                <h2 class="h5 fw-bold mb-2">Cómo ganar masa muscular (hipertrofia): los 7 principios que nunca fallan</h2>
-                                <p class="text-muted small mb-3">
-                                    Volumen, intensidad, frecuencia, progresión y descanso.
-                                    <em>Errores comunes y cómo corregirlos</em> para crecer de verdad.
-                                </p>
-                                <div class="d-flex align-items-center text-muted small mb-3">
-                                    <i class="far fa-calendar me-2"></i>08 Julio 2025
-                                    <span class="mx-2">•</span>
-                                    <i class="far fa-clock me-2"></i>10 min lectura
-                                </div>
-                                <a href="#" class="btn btn-outline-success">Leer más <i class="fas fa-arrow-right ms-2"></i></a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Artículo 3: Rutina Full-Body (entrenamiento) -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden hover-shadow transition">
-                            <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791241047/nhhnnhg.jpg" class="card-img-top p-3 bg-light" alt="Rutina Full-Body 3 días - Principiantes y avanzados" style="height: 220px; object-fit: contain;">
-                            <div class="card-body">
-                                <span class="badge bg-info mb-2">Entrenamiento</span>
-                                <h2 class="h5 fw-bold mb-2">Rutina Full-Body de 3 días: perfecta para principiantes y avanzados</h2>
-                                <p class="text-muted small mb-3">
-                                    Ejercicios, series, repeticiones y técnicas
-                                    de intensidad para una <strong>ganancia muscular continua</strong>.
-                                </p>
-                                <div class="d-flex align-items-center text-muted small mb-3">
-                                    <i class="far fa-calendar me-2"></i>30 Junio 2025
-                                    <span class="mx-2">•</span>
-                                    <i class="far fa-clock me-2"></i>12 min lectura
-                                </div>
-                                <a href="#" class="btn btn-outline-success">Leer más <i class="fas fa-arrow-right ms-2"></i></a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Artículo 4: Creatina (suplementación) -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden hover-shadow transition">
-                            <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791241119/Gemini_Generated_Image_r4mjr1r4mjr1r4mj.jpg" class="card-img-top p-3 bg-light" alt="Creatina Monohidratada - Beneficios, dosis y ciclos" style="height: 220px; object-fit: contain;">
-                            <div class="card-body">
-                                <span class="badge bg-warning text-dark mb-2">Suplementación</span>
-                                <h2 class="h5 fw-bold mb-2">Creatina Monohidratada: todo lo que debes saber (dosis, fase carga, beneficios)</h2>
-                                <p class="text-muted small mb-3">
-                                    El suplemento más estudiado de la historia:
-                                    cuánto tomar, cuándo, retención de líquidos y resultados esperados.
-                                </p>
-                                <div class="d-flex align-items-center text-muted small mb-3">
-                                    <i class="far fa-calendar me-2"></i>22 Junio 2025
-                                    <span class="mx-2">•</span>
-                                    <i class="far fa-clock me-2"></i>7 min lectura
-                                </div>
-                                <a href="#" class="btn btn-outline-success">Leer más <i class="fas fa-arrow-right ms-2"></i></a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Artículo 5: Leggings deportivos (indumentaria) -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden hover-shadow transition">
-                            <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791241179/cga.jpg" class="card-img-top p-3 bg-light" alt="Cómo elegir leggings deportivos - Tela, compresión y tallas" style="height: 220px; object-fit: contain;">
-                            <div class="card-body">
-                                <span class="badge bg-success mb-2">Indumentaria</span>
-                                <h2 class="h5 fw-bold mb-2">Cómo elegir leggings deportivos: guía de tejidos, compresión y tallas correctas</h2>
-                                <p class="text-muted small mb-3">
-                                    Diferencia entre poliéster, nailon y spandex.
-                                    <strong>Consejos para evitar transparencias</strong> y elegir la talla exacta.
-                                </p>
-                                <div class="d-flex align-items-center text-muted small mb-3">
-                                    <i class="far fa-calendar me-2"></i>18 Junio 2025
-                                    <span class="mx-2">•</span>
-                                    <i class="far fa-clock me-2"></i>5 min lectura
-                                </div>
-                                <a href="#" class="btn btn-outline-success">Leer más <i class="fas fa-arrow-right ms-2"></i></a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Artículo 6: Electrolitos (nutrición) -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden hover-shadow transition">
-                            <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791241247/jjn.jpg" class="card-img-top p-3 bg-light" alt="Electrolitos e hidratación - Rendimiento deportivo" style="height: 220px; object-fit: contain;">
-                            <div class="card-body">
-                                <span class="badge bg-dark mb-2">Nutrición</span>
-                                <h2 class="h5 fw-bold mb-2">Hidratación y electrolitos en entrenamientos prolongados: qué, cuánto y cuándo</h2>
-                                <p class="text-muted small mb-3">
-                                    Sales minerales, hidratos y BCAA para entrenamientos largos de +90 min.
-                                    <em>Crampones, fatiga y cómo prevenirlo</em>.
-                                </p>
-                                <div class="d-flex align-items-center text-muted small mb-3">
-                                    <i class="far fa-calendar me-2"></i>10 Junio 2025
-                                    <span class="mx-2">•</span>
-                                    <i class="far fa-clock me-2"></i>9 min lectura
-                                </div>
-                                <a href="#" class="btn btn-outline-success">Leer más <i class="fas fa-arrow-right ms-2"></i></a>
-                            </div>
-                        </div>
-                    </article>
+                <!-- Grid de artículos del blog (renderizado dinámico desde Supabase) -->
+                <div id="contenedor-blog" class="row g-4">
+                  <div class="col-12 text-center py-5">
+                    <div class="spinner-border text-success" role="status">
+                      <span class="visually-hidden">Cargando publicaciones...</span>
+                    </div>
+                  </div>
                 </div>
             </div>
         </section>
@@ -426,67 +226,10 @@
     </main>
 
     <!-- ==========================================================================
-         FOOTER: Pie de página común
+         FOOTER GLOBAL (componente reutilizable)
+         Se inyecta dinámicamente desde js/components/header-footer.js
          ========================================================================== -->
-    <footer class="bg-dark text-light py-5">
-        <div class="container">
-            <div class="row g-4 mb-4">
-                <!-- Marca -->
-                <div class="col-lg-3 col-md-6">
-                    <a href="../index.html" class="d-flex align-items-center text-decoration-none mb-3">
-                        <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" alt="Logo de la marca fitness" width="40" height="40" class="logo-imagen me-2">
-                        <h4 class="fw-bold mb-0 text-light">Prana</h4>
-                    </a>
-                    <p class="text-muted small">Tu tienda fitness de confianza en Medellín. Alto rendimiento deportivo.</p>
-                    <div class="d-flex gap-3 mt-3">
-                        <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" class="text-light text-decoration-none fs-5 hover-text-success transition"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.tiktok.com/" target="_blank" aria-label="TikTok" class="text-light text-decoration-none fs-5 hover-text-success transition"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://wa.me/573332359677" target="_blank" aria-label="WhatsApp" class="text-light text-decoration-none fs-5 hover-text-success transition"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                <!-- Navegación -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Navegación</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="../index.html" class="text-light text-decoration-none hover-text-success transition">Inicio</a></li>
-                        <li class="mb-2"><a href="quienes-somos.html" class="text-light text-decoration-none hover-text-success transition">Quiénes Somos</a></li>
-                        <li class="mb-2"><a href="productos.html" class="text-light text-decoration-none hover-text-success transition">Productos</a></li>
-                        <li class="mb-2"><a href="servicios.html" class="text-light text-decoration-none hover-text-success transition">Servicios</a></li>
-                        <li class="mb-2"><a href="blog.html" class="text-light text-decoration-none hover-text-success transition">Blog</a></li>
-                        <li><a href="contactanos.html" class="text-light text-decoration-none hover-text-success transition">Contáctanos</a></li>
-                    </ul>
-                </div>
-                <!-- Contacto -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Contacto</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="ri-map-pin-fill text-success me-2"></i><span class="text-muted small">Medellín, Colombia</span></li>
-                        <li class="mb-2"><i class="ri-phone-fill text-success me-2"></i><a href="tel:+573332359677" class="text-light text-decoration-none hover-text-success transition small">+57 300 309 1641</a></li>
-                        <li class="mb-2"><i class="ri-mail-fill text-success me-2"></i><a href="mailto:contacto@marcafitness.co" class="text-light text-decoration-none hover-text-success transition small">contacto@marcafitness.co</a></li>
-                        <li><i class="ri-time-fill text-success me-2"></i><span class="text-muted small">Lun–Sáb: 8am – 8pm</span></li>
-                    </ul>
-                </div>
-                <!-- Newsletter -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Newsletter</h5>
-                    <p class="text-muted small mb-3">Suscríbete para tips, descuentos y lanzamientos.</p>
-                    <div class="input-group mb-2">
-                        <input type="email" class="form-control" placeholder="Tu email" aria-label="Tu email">
-                        <button class="btn btn-success" type="button"><i class="ri-send-plane-fill"></i></button>
-                    </div>
-                </div>
-            </div>
-            <hr class="bg-secondary">
-            <div class="row text-center text-md-start">
-                <div class="col-md-6 mb-2 mb-md-0">
-                    <p class="text-muted small mb-0">© 2026 De Prana. Todos los derechos reservados.</p>
-                </div>
-                <div class="col-md-6">
-                    <p class="text-muted small mb-0">Hecho con <i class="ri-heart-fill text-danger"></i> en Medellín — Año 2026</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div id="global-footer"></div>
 
     <!-- Botón flotante WhatsApp -->
     <a href="https://wa.me/573332359677?text=Hola!%20Vengo%20del%20blog%20fitness"
@@ -497,12 +240,16 @@
     <!-- Scripts -->
     <script src="../js/utils/storage.js"></script>
     <script src="../js/utils/hash.js"></script>
+    <script src="../js/services/supabaseClient.js"></script>
     <script src="../js/services/auth.js"></script>
     <script src="../js/components/menu.js"></script>
     <script src="../js/components/carrito.js"></script>
     <script src="../js/components/auth-modal.js"></script>
     <script src="../js/components/auth-guard.js"></script>
+    <!-- Componente global de cabecera y pie (debe cargar ANTES de main.js) -->
+    <script src="../js/components/header-footer.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/pages/blog.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

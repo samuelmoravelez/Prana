@@ -864,6 +864,8 @@ button { cursor: pointer; font-family: var(--d-font-body); }
 
 .d-status--pendiente   { background: var(--d-amarillo-bg); color: #92400E; border: 1px solid rgba(245,158,11,0.25); }
 .d-status--pendiente::before { background: var(--d-amarillo); }
+.d-status--confirmado  { background: rgba(14, 165, 233, 0.15); color: #0369a1; border: 1px solid rgba(14, 165, 233, 0.3); }
+.d-status--confirmado::before { background: #0284c7; }
 .d-status--proceso     { background: var(--d-azul-bg); color: #1E40AF; border: 1px solid rgba(59,130,246,0.25); }
 .d-status--proceso::before { background: var(--d-azul); }
 .d-status--enviado     { background: var(--d-vino-ghost); color: var(--d-vino); border: 1px solid var(--d-vino-tint); }

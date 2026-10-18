@@ -25,7 +25,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Hojas de estilo del proyecto -->
     <link rel="stylesheet" href="../css/variables.css">
@@ -34,94 +34,15 @@
     <link rel="stylesheet" href="../css/auth.css">
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/productos.css">
+    <link rel="stylesheet" href="../css/design-elevation.css">
 </head>
 <body>
 
     <!-- ==========================================================================
-         BARRA DE ANUNCIO SUPERIOR
+         HEADER GLOBAL (componente reutilizable)
+         Se inyecta dinámicamente desde js/components/header-footer.js
          ========================================================================== -->
-    <div class="barra-anuncio bg-success text-white text-center py-2">
-        <p class="mb-0"><i class="ri-flashlight-fill me-2"></i> ¡Envíos gratis a todo el país desde $150.000! Escríbenos directamente a nuestro WhatsApp <i class="ri-flashlight-fill ms-2"></i></p>
-    </div>
-
-    <!-- ==========================================================================
-         HEADER + NAVBAR BOOTSTRAP (6 páginas del menú completo)
-         ========================================================================== -->
-    <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
-        <div class="container">
-            <!-- Logo -->
-            <a class="navbar-brand fw-bold" href="../index.html">
-                <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" alt="Logo de la marca fitness" width="44" height="44" class="logo-imagen d-inline-block align-text-top me-2">
-            </a>
-            <!-- Botón hamburguesa móvil -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- Menú de navegación completo con las 6 páginas -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="quienes-somos.html">Quiénes Somos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="productos.html">Productos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="servicios.html">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="blog.html">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contactanos.html">Contáctanos</a>
-                    </li>
-                </ul>
-                <!-- Iconos búsqueda y carrito -->
-                <ul class="navbar-nav ms-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" aria-label="Buscar"><i class="ri-search-line fs-5"></i></a>
-                    </li>
-                    <li class="nav-item position-relative">
-                        <a class="nav-link" href="../carrito.html" aria-label="Ver carrito de compras">
-                            <i class="ri-shopping-cart-fill fs-5"></i>
-                            <span class="badge bg-danger position-absolute top-0 start-100 translate-middle contador-carrito">0</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <!-- Acceso / Cuenta de usuario (Módulo de Autenticación) -->
-                <ul class="navbar-nav ms-3 align-items-center">
-                    <li class="nav-item" data-require-guest>
-                        <a href="../login.html" class="auth-boton-acceso">
-                            <i class="ri-user-line"></i>
-                            <span class="d-none d-sm-inline">Ingresar</span>
-                        </a>
-                    </li>
-                    <li class="nav-item auth-usuario-menu" data-require-auth style="display:none;">
-                        <div class="auth-avatar" data-auth-avatar id="auth-avatar-btn" role="button" tabindex="0" aria-label="Menú de usuario"></div>
-                        <div class="auth-dropdown" id="auth-dropdown">
-                            <div class="auth-dropdown-header">
-                                <p class="auth-dropdown-nombre" data-auth-nombre></p>
-                                <p class="auth-dropdown-email" data-auth-email></p>
-                            </div>
-                            <a href="../dashboard.html" class="auth-dropdown-item" data-auth-perfil>
-                                <i class="ri-dashboard-line"></i> Mi Panel
-                            </a>
-                            <div class="auth-dropdown-divider"></div>
-                            <button class="auth-dropdown-item auth-dropdown-item--logout" data-auth-logout>
-                                <i class="ri-logout-box-r-line"></i> Cerrar Sesión
-                            </button>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    </header>
+    <div id="global-header"></div>
 
     <!-- ==========================================================================
          MAIN: CONTENIDO PRINCIPAL DE PRODUCTOS
@@ -211,277 +132,8 @@
                     <input type="radio" name="filtro" id="filtro-equipamiento" class="filtro-input" hidden>
                 </div>
 
-                <!-- Grilla de productos: Bootstrap Grid + clases filtro-* para CSS -->
-                <div class="productos-grid row g-4">
-
-                    <!-- P1: Whey Protein (Suplementos) -->
-                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="suplementos">
-                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
-                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791239384/1111111.png" alt="Whey Protein Premium 2kg - Proteína concentrada de suero lácteo" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                                <span class="etiqueta-producto badge bg-success position-absolute top-3 start-3">Nuevo</span>
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-light text-success mb-2 d-inline-block">Suplementos</span>
-                                <h2 class="card-title h5 fw-bold">Whey Protein Premium 2kg</h2>
-                                <p class="card-text text-muted small">25g de proteína por porción. Bajo en grasa, ideal para volumen y recuperación.</p>
-                                <h3 class="text-success fw-bold mb-3">$189.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <div class="tarjeta-btns">
-                                    <button class="btn btn-success tarjeta-btns-carrito btn-carrito-principal"
-                                            data-accion="agregar-carrito"
-                                            data-producto-id="whey-protein-2kg">
-                                        <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
-                                    </button>
-                                    <button class="btn-fav"
-                                            data-accion="toggle-favorito"
-                                            data-producto-id="whey-protein-2kg"
-                                            aria-label="Guardar en favoritos: Whey Protein Premium 2kg"
-                                            title="Guardar en favoritos">
-                                        <i class="ri-heart-line" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- P2: Creatina (Suplementos) -->
-                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="suplementos">
-                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
-                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791237388/22.png" alt="Creatina Monohidratada 500g - Fuerza y potencia" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                                <span class="etiqueta-producto badge bg-danger position-absolute top-3 start-3">Popular</span>
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-light text-danger mb-2 d-inline-block">Suplementos</span>
-                                <h2 class="card-title h5 fw-bold">Creatina Monohidratada 500g</h2>
-                                <p class="card-text text-muted small">Creatina micronizada pura. Aumenta fuerza, potencia y volumen muscular.</p>
-                                <h3 class="text-success fw-bold mb-3">$95.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <div class="tarjeta-btns">
-                                    <button class="btn btn-success tarjeta-btns-carrito btn-carrito-principal"
-                                            data-accion="agregar-carrito"
-                                            data-producto-id="creatina-500g">
-                                        <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
-                                    </button>
-                                    <button class="btn-fav"
-                                            data-accion="toggle-favorito"
-                                            data-producto-id="creatina-500g"
-                                            aria-label="Guardar en favoritos: Creatina Monohidratada 500g"
-                                            title="Guardar en favoritos">
-                                        <i class="ri-heart-line" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- P3: Barras Proteicas (Suplementos) -->
-                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="suplementos">
-                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
-                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791239559/222222-removebg-preview.png" alt="Barras Proteicas Pack x12 - Snack alto en proteína" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                                <span class="etiqueta-producto badge bg-info position-absolute top-3 start-3">Destacado</span>
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-light text-info mb-2 d-inline-block">Suplementos</span>
-                                <h2 class="card-title h5 fw-bold">Barras Proteicas Pack x12</h2>
-                                <p class="card-text text-muted small">20g de proteína por barra. Snack ideal pre/post entrenamiento y entre comidas.</p>
-                                <h3 class="text-success fw-bold mb-3">$82.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <div class="tarjeta-btns">
-                                    <button class="btn btn-success tarjeta-btns-carrito btn-carrito-principal"
-                                            data-accion="agregar-carrito"
-                                            data-producto-id="barras-proteicas-x12">
-                                        <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
-                                    </button>
-                                    <button class="btn-fav"
-                                            data-accion="toggle-favorito"
-                                            data-producto-id="barras-proteicas-x12"
-                                            aria-label="Guardar en favoritos: Barras Proteicas Pack x12"
-                                            title="Guardar en favoritos">
-                                        <i class="ri-heart-line" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- P4: Leggings Compresión (Indumentaria) -->
-                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="indumentaria">
-                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
-                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791239646/sdd.png" alt="Leggings Compresión High-Waist - Control abdomen" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-light text-success mb-2 d-inline-block">Indumentaria</span>
-                                <h2 class="card-title h5 fw-bold">Leggings Compresión High-Waist</h2>
-                                <p class="card-text text-muted small">Tejido técnico con control de abdomen y efecto lifting. Tallas XS–XL.</p>
-                                <h3 class="text-success fw-bold mb-3">$115.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <div class="tarjeta-btns">
-                                    <button class="btn btn-success tarjeta-btns-carrito btn-carrito-principal"
-                                            data-accion="agregar-carrito"
-                                            data-producto-id="leggings-hw">
-                                        <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
-                                    </button>
-                                    <button class="btn-fav"
-                                            data-accion="toggle-favorito"
-                                            data-producto-id="leggings-hw"
-                                            aria-label="Guardar en favoritos: Leggings Compresión High-Waist"
-                                            title="Guardar en favoritos">
-                                        <i class="ri-heart-line" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- P5: Sports Bra (Indumentaria) -->
-                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="indumentaria">
-                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
-                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791239713/rrrr.png" alt="Sports Bra Soporte Alto - Top deportivo entrenamiento intensidad alta" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                                <span class="etiqueta-producto badge bg-success position-absolute top-3 start-3">Nuevo</span>
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-light text-danger mb-2 d-inline-block">Indumentaria</span>
-                                <h2 class="card-title h5 fw-bold">Sports Bra Soporte Alto</h2>
-                                <p class="card-text text-muted small">Top deportivo con soporte alto. Ideal para HIIT, crossfit y running.</p>
-                                <h3 class="text-success fw-bold mb-3">$89.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <div class="tarjeta-btns">
-                                    <button class="btn btn-success tarjeta-btns-carrito btn-carrito-principal"
-                                            data-accion="agregar-carrito"
-                                            data-producto-id="sports-bra">
-                                        <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
-                                    </button>
-                                    <button class="btn-fav"
-                                            data-accion="toggle-favorito"
-                                            data-producto-id="sports-bra"
-                                            aria-label="Guardar en favoritos: Sports Bra Soporte Alto"
-                                            title="Guardar en favoritos">
-                                        <i class="ri-heart-line" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- P6: Sneakers Training (Indumentaria) -->
-                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="indumentaria">
-                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
-                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791237492/33.png" alt="Sneakers Training Pro - Zapatillas entrenamiento gym" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                                <span class="etiqueta-producto badge bg-danger position-absolute top-3 start-3">Popular</span>
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-light text-info mb-2 d-inline-block">Indumentaria</span>
-                                <h2 class="card-title h5 fw-bold">Sneakers Training Pro</h2>
-                                <p class="card-text text-muted small">Suela antideslizante + soporte lateral. Perfectas para levantamiento y cross.</p>
-                                <h3 class="text-success fw-bold mb-3">$260.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <div class="tarjeta-btns">
-                                    <button class="btn btn-success tarjeta-btns-carrito btn-carrito-principal"
-                                            data-accion="agregar-carrito"
-                                            data-producto-id="sneakers-training-pro">
-                                        <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
-                                    </button>
-                                    <button class="btn-fav"
-                                            data-accion="toggle-favorito"
-                                            data-producto-id="sneakers-training-pro"
-                                            aria-label="Guardar en favoritos: Sneakers Training Pro"
-                                            title="Guardar en favoritos">
-                                        <i class="ri-heart-line" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- P7: Mancuernas Ajustables (Equipamiento) -->
-                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="equipamiento">
-                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
-                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791239824/ee-removebg-preview.png" alt="Mancuernas Ajustables 20kg x2 - Kit pesas hogar gym" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-light text-info mb-2 d-inline-block">Equipamiento</span>
-                                <h2 class="card-title h5 fw-bold">Mancuernas Ajustables 20kg (par)</h2>
-                                <p class="card-text text-muted small">Kit de pesas ajustables de 2,5 a 20 kg. Perfectas para entrenar en casa.</p>
-                                <h3 class="text-success fw-bold mb-3">$489.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <div class="tarjeta-btns">
-                                    <button class="btn btn-success tarjeta-btns-carrito btn-carrito-principal"
-                                            data-accion="agregar-carrito"
-                                            data-producto-id="mancuernas-20kg">
-                                        <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
-                                    </button>
-                                    <button class="btn-fav"
-                                            data-accion="toggle-favorito"
-                                            data-producto-id="mancuernas-20kg"
-                                            aria-label="Guardar en favoritos: Mancuernas Ajustables 20kg"
-                                            title="Guardar en favoritos">
-                                        <i class="ri-heart-line" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- P8: Bandas Elásticas (Accesorios) -->
-                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="accesorios">
-                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
-                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791239903/eqw.png" alt="Bandas Elásticas Set x5 - Resistencias variadas entrenamiento" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-light text-success mb-2 d-inline-block">Accesorios</span>
-                                <h2 class="card-title h5 fw-bold">Bandas Elásticas Set x5 Niveles</h2>
-                                <p class="card-text text-muted small">5 niveles de resistencia. Ideal para activación, glúteos, piernas y movilidad.</p>
-                                <h3 class="text-success fw-bold mb-3">$45.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <div class="tarjeta-btns">
-                                    <button class="btn btn-success tarjeta-btns-carrito btn-carrito-principal"
-                                            data-accion="agregar-carrito"
-                                            data-producto-id="bandas-elasticas-x5">
-                                        <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
-                                    </button>
-                                    <button class="btn-fav"
-                                            data-accion="toggle-favorito"
-                                            data-producto-id="bandas-elasticas-x5"
-                                            aria-label="Guardar en favoritos: Bandas Elásticas Set x5"
-                                            title="Guardar en favoritos">
-                                        <i class="ri-heart-line" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- P9: Shaker Mezclador (Accesorios) -->
-                    <article class="col-lg-4 col-md-6 producto-item" data-categoria="accesorios">
-                        <div class="tarjeta-producto card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition hover-shadow">
-                            <div class="position-relative overflow-hidden bg-light" style="height: 300px;">
-                                <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791239962/fre.png" alt="Shaker Mezclador Pro 700ml - Vaso batidor proteína" class="w-100 h-100 object-fit-contain p-3" loading="lazy">
-                                <span class="etiqueta-producto badge bg-success position-absolute top-3 start-3">Nuevo</span>
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-light text-info mb-2 d-inline-block">Accesorios</span>
-                                <h2 class="card-title h5 fw-bold">Shaker Mezclador Pro 700ml</h2>
-                                <p class="card-text text-muted small">Batidor anti-derrames con bola mezcladora. Libre de BPA, apto lavavajillas.</p>
-                                <h3 class="text-success fw-bold mb-3">$32.000 <small class="text-muted fw-normal">COP</small></h3>
-                                <div class="tarjeta-btns">
-                                    <button class="btn btn-success tarjeta-btns-carrito btn-carrito-principal"
-                                            data-accion="agregar-carrito"
-                                            data-producto-id="shaker-pro-700ml">
-                                        <i class="ri-shopping-cart-line me-2"></i>Agregar al Carrito
-                                    </button>
-                                    <button class="btn-fav"
-                                            data-accion="toggle-favorito"
-                                            data-producto-id="shaker-pro-700ml"
-                                            aria-label="Guardar en favoritos: Shaker Mezclador Pro 700ml"
-                                            title="Guardar en favoritos">
-                                        <i class="ri-heart-line" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                </div>
+                <!-- Grilla de productos dinámica desde Supabase -->
+                <div id="contenedor-productos" class="productos-grid row g-4"></div>
             </div>
         </section>
 
@@ -629,74 +281,10 @@
     </main>
 
     <!-- ==========================================================================
-         FOOTER: Pie de página común con navegación de 6 páginas
+         FOOTER GLOBAL (componente reutilizable)
+         Se inyecta dinámicamente desde js/components/header-footer.js
          ========================================================================== -->
-    <footer class="bg-dark text-light py-5">
-        <div class="container">
-            <div class="row g-4 mb-4">
-                <!-- Marca -->
-                <div class="col-lg-3 col-md-6">
-                    <a href="../index.html" class="d-flex align-items-center text-decoration-none mb-3">
-                        <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" alt="Logo de la marca fitness" width="40" height="40" class="logo-imagen me-2">
-                        <h4 class="fw-bold mb-0 text-light">Prana</h4>
-                    </a>
-                    <p class="text-muted small">Tu tienda fitness de confianza en Medellín. Suplementos, ropa y equipamiento profesional.</p>
-                    <div class="d-flex gap-3 mt-3">
-                        <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" class="text-light text-decoration-none fs-5 hover-text-success transition">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.tiktok.com/" target="_blank" aria-label="TikTok" class="text-light text-decoration-none fs-5 hover-text-success transition">
-                            <i class="fab fa-tiktok"></i>
-                        </a>
-                        <a href="https://wa.me/573332359677" target="_blank" aria-label="WhatsApp" class="text-light text-decoration-none fs-5 hover-text-success transition">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                    </div>
-                </div>
-                <!-- Navegación completa -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Navegación</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="../index.html" class="text-light text-decoration-none hover-text-success transition">Inicio</a></li>
-                        <li class="mb-2"><a href="quienes-somos.html" class="text-light text-decoration-none hover-text-success transition">Quiénes Somos</a></li>
-                        <li class="mb-2"><a href="productos.html" class="text-light text-decoration-none hover-text-success transition">Productos</a></li>
-                        <li class="mb-2"><a href="servicios.html" class="text-light text-decoration-none hover-text-success transition">Servicios</a></li>
-                        <li class="mb-2"><a href="blog.html" class="text-light text-decoration-none hover-text-success transition">Blog</a></li>
-                        <li><a href="contactanos.html" class="text-light text-decoration-none hover-text-success transition">Contáctanos</a></li>
-                    </ul>
-                </div>
-                <!-- Contacto -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Contacto</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="ri-map-pin-fill text-success me-2"></i><span class="text-muted small">Medellín, Colombia</span></li>
-                        <li class="mb-2"><i class="ri-phone-fill text-success me-2"></i><a href="tel:+573332359677" class="text-light text-decoration-none hover-text-success transition small">+57 300 309 1641</a></li>
-                        <li class="mb-2"><i class="ri-mail-fill text-success me-2"></i><a href="mailto:contacto@marcafitness.co" class="text-light text-decoration-none hover-text-success transition small">contacto@marcafitness.co</a></li>
-                        <li><i class="ri-time-fill text-success me-2"></i><span class="text-muted small">Lun–Sáb: 8am – 8pm</span></li>
-                    </ul>
-                </div>
-                <!-- Newsletter -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Newsletter</h5>
-                    <p class="text-muted small mb-3">Suscríbete para tips, lanzamientos y descuentos exclusivos.</p>
-                    <div class="input-group mb-2">
-                        <input type="email" class="form-control" placeholder="Tu email" aria-label="Tu email">
-                        <button class="btn btn-success" type="button"><i class="ri-send-plane-fill"></i></button>
-                    </div>
-                </div>
-            </div>
-            <hr class="bg-secondary">
-            <!-- Copyright y año -->
-            <div class="row text-center text-md-start">
-                <div class="col-md-6 mb-2 mb-md-0">
-                    <p class="text-muted small mb-0">© 2026 De Prana. Todos los derechos reservados.</p>
-                </div>
-                <div class="col-md-6">
-                    <p class="text-muted small mb-0">Hecho con <i class="ri-heart-fill text-danger"></i> en Medellín — Año 2026</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div id="global-footer"></div>
 
     <!-- Botón flotante WhatsApp -->
     <a href="https://wa.me/573332359677?text=Hola!%20Tengo%20una%20consulta%20sobre%20productos%20fitness"
@@ -709,12 +297,15 @@
          ========================================================================== -->
     <script src="../js/utils/storage.js"></script>
     <script src="../js/utils/hash.js"></script>
-    <script src="../js/utils/admin-seed.js"></script>
+    <script src="../js/services/supabaseClient.js"></script>
     <script src="../js/services/auth.js"></script>
     <script src="../js/components/menu.js"></script>
     <script src="../js/components/carrito.js"></script>
     <script src="../js/components/auth-modal.js"></script>
     <script src="../js/components/auth-guard.js"></script>
+    <!-- Componente global de cabecera y pie (debe cargar ANTES de main.js) -->
+    <script src="../js/components/header-footer.js"></script>
+    <script src="../js/services/productos-store.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/pages/productos.js"></script>
     <!-- Bootstrap JS Bundle -->

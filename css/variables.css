@@ -3,11 +3,11 @@
     /* ── PALETA FITNESS TRICOLOR — Vinotinto / Plateado / Blanco ── */
 
     /* VINOTINTO — Color dominante (fondos oscuros, navbar, CTAs principales) */
-    --vinotinto:          #5C0A1B;   /* Vinotinto profundo — máximo impacto */
+    --vinotinto:          #6B0D25;   /* Vinotinto profundo — paleta corporativa oficial */
     --vinotinto-hover:    #7A1429;   /* Vinotinto un poco más claro — hover */
     --vinotinto-claro:    #9A1F38;   /* Vinotinto medio — acentos intensos */
     --vinotinto-oscuro:   #3D0712;   /* Vinotinto muy oscuro — contraste extremo */
-    --vinotinto-suave:    rgba(92, 10, 27, 0.08);
+    --vinotinto-suave:    rgba(107, 13, 37, 0.08);
 
     /* PLATEADO / GRIS METÁLICO — Color de estructura (bordes, textos secundarios, detalles) */
     --plateado:           #C0C0C0;   /* Plata metálico clásico */
@@ -34,31 +34,32 @@
 
     /* BORDES */
     --borde-suave:        #D4D4D4;
-    --borde-vinotinto:    #5C0A1B;
+    --borde-vinotinto:    #6B0D25;
     --borde-plateado:     #C0C0C0;
+    --plateado-borde:     #E2E8F0;   /* Plateado suave — bordes de tarjetas y separadores */
 
     /* ── GRADIENTES FITNESS ENERGÉTICOS ── */
-    --gradiente-vinotinto:      linear-gradient(135deg, #3D0712 0%, #5C0A1B 40%, #7A1429 100%);
-    --gradiente-vinotinto-suave:linear-gradient(135deg, rgba(92,10,27,0.92) 0%, rgba(122,20,41,0.85) 100%);
+    --gradiente-vinotinto:      linear-gradient(135deg, #3D0712 0%, #6B0D25 40%, #7A1429 100%);
+    --gradiente-vinotinto-suave:linear-gradient(135deg, rgba(107,13,37,0.92) 0%, rgba(122,20,41,0.85) 100%);
     --gradiente-metal:          linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 50%, #2C2C2C 100%);
     --gradiente-plateado:       linear-gradient(135deg, #C0C0C0 0%, #E0E0E0 50%, #8A8A8A 100%);
-    --gradiente-cta:            linear-gradient(135deg, #5C0A1B 0%, #7A1429 100%);
-    --gradiente-seccion:        linear-gradient(180deg, #FAFAFA 0%, #F0F0F0 100%);
-    --gradiente-texto-energia:  linear-gradient(135deg, #5C0A1B 0%, #9A1F38 100%);
+    --gradiente-cta:            linear-gradient(135deg, #6B0D25 0%, #7A1429 100%);
+    --gradiente-seccion:        linear-gradient(180deg, #FAFAFA 0%, #F5F5F5 100%);
+    --gradiente-texto-energia:  linear-gradient(135deg, #6B0D25 0%, #9A1F38 100%);
     --gradiente-texto-plateado: linear-gradient(135deg, #8A8A8A 0%, #C0C0C0 100%);
 
     /* ── TIPOGRAFÍAS (se mantienen, son adecuadas) ── */
     --fuente-titulos: 'Poppins', sans-serif;
-    --fuente-cuerpo:  'Inter', sans-serif;
+    --fuente-cuerpo:  'Plus Jakarta Sans', 'Inter', sans-serif;
 
-    /* ── SOMBRAS FITNESS (impacto + acento plateado/vinotinto) ── */
-    --sombra-xs:    0 2px 8px  rgba(92, 10, 27, 0.08);
-    --sombra-suave: 0 4px 15px rgba(92, 10, 27, 0.10);
-    --sombra-media: 0 8px 25px rgba(92, 10, 27, 0.14);
-    --sombra-alta:  0 12px 40px rgba(92, 10, 27, 0.20);
-    --sombra-vinotinto: 0 6px 24px rgba(92, 10, 27, 0.35);
-    --sombra-plateada:  0 6px 20px rgba(192, 192, 192, 0.30);
-    --sombra-neon:     0 0 20px rgba(154, 31, 56, 0.45);
+    /* ── SOMBRAS FITNESS — minimalistas, sin dominar el diseño ── */
+    --sombra-xs:    0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --sombra-suave: 0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.04);
+    --sombra-media: 0 10px 15px rgba(0,0,0,0.07), 0 4px 6px rgba(0,0,0,0.05);
+    --sombra-alta:  0 20px 25px rgba(0,0,0,0.08), 0 10px 10px rgba(0,0,0,0.04);
+    --sombra-vinotinto: 0 4px 14px rgba(107,13,37,0.25);
+    --sombra-plateada:  0 4px 14px rgba(192,192,192,0.20);
+    --sombra-neon:      0 0 0 1px rgba(107,13,37,0.15), 0 4px 16px rgba(107,13,37,0.20);
 
     /* ── BORDER RADIUS (ángulos más marcados para look industrial/gym) ── */
     --radio-sm:      4px;

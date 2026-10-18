@@ -24,100 +24,22 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Hojas de estilo del proyecto -->
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/bootstrap-custom.css">
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="../css/design-elevation.css">
 </head>
 <body>
 
     <!-- ==========================================================================
-         BARRA DE ANUNCIO SUPERIOR
+         HEADER GLOBAL (componente reutilizable)
+         Se inyecta dinámicamente desde js/components/header-footer.js
          ========================================================================== -->
-    <div class="barra-anuncio bg-success text-white text-center py-2">
-        <p class="mb-0"><i class="ri-flashlight-fill me-2"></i> ¡Envíos gratis a todo el país desde $150.000! Escríbenos directamente a nuestro WhatsApp <i class="ri-flashlight-fill ms-2"></i></p>
-    </div>
-
-    <!-- ==========================================================================
-         HEADER + NAVBAR BOOTSTRAP (6 páginas del menú)
-         ========================================================================== -->
-    <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
-        <div class="container">
-            <!-- Logo -->
-            <a class="navbar-brand fw-bold" href="../index.html">
-                <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" alt="Logo de la marca fitness" width="44" height="44" class="logo-imagen d-inline-block align-text-top me-2">
-            </a>
-            <!-- Botón hamburguesa móvil -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- Menú de navegación completo -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="quienes-somos.html">Quiénes Somos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="productos.html">Productos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="servicios.html">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="blog.html">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contactanos.html">Contáctanos</a>
-                    </li>
-                </ul>
-                <!-- Iconos búsqueda y carrito -->
-                <ul class="navbar-nav ms-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" aria-label="Buscar"><i class="ri-search-line fs-5"></i></a>
-                    </li>
-                    <li class="nav-item position-relative">
-                        <a class="nav-link" href="#" aria-label="Carrito"><i class="ri-shopping-cart-fill fs-5"></i>
-                            <span class="badge bg-danger position-absolute top-0 start-100 translate-middle contador-carrito">0</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <!-- Acceso / Cuenta de usuario (Módulo de Autenticación) -->
-                <ul class="navbar-nav ms-3 align-items-center">
-                    <li class="nav-item" data-require-guest>
-                        <a href="../login.html" class="auth-boton-acceso">
-                            <i class="ri-user-line"></i>
-                            <span class="d-none d-sm-inline">Ingresar</span>
-                        </a>
-                    </li>
-                    <li class="nav-item auth-usuario-menu" data-require-auth style="display:none;">
-                        <div class="auth-avatar" data-auth-avatar id="auth-avatar-btn" role="button" tabindex="0" aria-label="Menú de usuario"></div>
-                        <div class="auth-dropdown" id="auth-dropdown">
-                            <div class="auth-dropdown-header">
-                                <p class="auth-dropdown-nombre" data-auth-nombre></p>
-                                <p class="auth-dropdown-email" data-auth-email></p>
-                            </div>
-                            <a href="../dashboard.html" class="auth-dropdown-item" data-auth-perfil>
-                                <i class="ri-dashboard-line"></i> Mi Panel
-                            </a>
-                            <div class="auth-dropdown-divider"></div>
-                            <button class="auth-dropdown-item auth-dropdown-item--logout" data-auth-logout>
-                                <i class="ri-logout-box-r-line"></i> Cerrar Sesión
-                            </button>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    </header>
+    <div id="global-header"></div>
 
     <!-- ==========================================================================
          MAIN: CONTENIDO PRINCIPAL DE SERVICIOS
@@ -146,111 +68,14 @@
                     <p class="lead text-muted">Selecciona el servicio ideal y agéndalo hoy mismo</p>
                 </div>
 
-                <!-- Grid de servicios: filas y columnas Bootstrap -->
-                <div class="row g-4">
-                    <!-- Servicio 1: Asesoría Nutricional -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden hover-shadow transition">
-                            <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791240018/asesoria-nutricional-deportiva.png" class="card-img-top p-4 bg-light" alt="Asesoría Nutricional Deportiva - Plan de alimentación" style="height: 220px; object-fit: contain;">
-                            <div class="card-body">
-                                <span class="badge bg-success mb-2">Nutrición</span>
-                                <h3 class="h5 fw-bold mb-2">Asesoría Nutricional Deportiva</h3>
-                                <p class="text-muted small mb-3">
-                                    Plan de alimentación <strong>100% personalizado</strong> según objetivo
-                                    (volumen, definición, pérdida de grasa o resistencia) + pauta de suplementación.
-                                </p>
-                                <h4 class="text-success fw-bold mb-3">$80.000 <small class="text-muted fw-normal">COP / mes</small></h4>
-                                <a href="contactanos.html" class="btn btn-success w-100">Agendar Ahora</a>
-                            </div>
+                <!-- Grid de servicios dinámico (renderizado desde Supabase) -->
+                <div id="contenedor-servicios" class="row g-4">
+                    <div class="col-12 text-center py-5">
+                        <div class="spinner-border text-success" role="status">
+                            <span class="visually-hidden">Cargando servicios...</span>
                         </div>
-                    </article>
-
-                    <!-- Servicio 2: Plan Entrenamiento Personalizado -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden hover-shadow transition">
-                            <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791240157/images.jpg" class="card-img-top p-4 bg-light" alt="Plan de Entrenamiento Personalizado - Rutina gym" style="height: 220px; object-fit: contain;">
-                            <div class="card-body">
-                                <span class="badge bg-danger mb-2">Entrenamiento</span>
-                                <h3 class="h5 fw-bold mb-2">Plan de Entrenamiento Personalizado</h3>
-                                <p class="text-muted small mb-3">
-                                    Rutina diseñada a tu medida: fuerza, hipertrofia, crossfit o resistencia.
-                                    <em>Incluye video demostrativo de ejercicios</em>.
-                                </p>
-                                <h4 class="text-success fw-bold mb-3">$65.000 <small class="text-muted fw-normal">COP / mes</small></h4>
-                                <a href="contactanos.html" class="btn btn-success w-100">Agendar Ahora</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Servicio 3: Indumentaria a Medida -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden hover-shadow transition">
-                            <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791240208/ty.jpg" class="card-img-top p-4 bg-light" alt="Indumentaria deportiva a medida - Uniformes gym" style="height: 220px; object-fit: contain;">
-                            <div class="card-body">
-                                <span class="badge bg-info mb-2">Indumentaria</span>
-                                <h3 class="h5 fw-bold mb-2">Indumentaria a Medida / Uniformes</h3>
-                                <p class="text-muted small mb-3">
-                                    Diseño y confección de <strong>uniformes para gimnasios, equipos deportivos y marcas</strong>.
-                                    Personalización con logo, colores y tallas.
-                                </p>
-                                <h4 class="text-success fw-bold mb-3">Desde $45.000 <small class="text-muted fw-normal">COP / unidad</small></h4>
-                                <a href="contactanos.html" class="btn btn-success w-100">Cotizar</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Servicio 4: Mantenimiento Equipamiento Gym -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden hover-shadow transition">
-                            <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791240254/rer.png" class="card-img-top p-4 bg-light" alt="Mantenimiento de equipamiento gym - Máquinas y pesas" style="height: 220px; object-fit: contain;">
-                            <div class="card-body">
-                                <span class="badge bg-warning text-dark mb-2">Equipamiento</span>
-                                <h3 class="h5 fw-bold mb-2">Mantenimiento Equipamiento Gym</h3>
-                                <p class="text-muted small mb-3">
-                                    Revisión, lubricación y reparación de máquinas, bancas, racks y pesas.
-                                    Servicio <em>preventivo y correctivo</em> para gimnasios y home-gyms.
-                                </p>
-                                <h4 class="text-success fw-bold mb-3">$90.000 <small class="text-muted fw-normal">COP / visita</small></h4>
-                                <a href="contactanos.html" class="btn btn-success w-100">Agendar Ahora</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Servicio 5: Asesoría Virtual Online -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden hover-shadow transition">
-                            <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791240312/hhn.jpg" class="card-img-top p-4 bg-light" alt="Asesoría Virtual Online - Coaching deportivo remoto" style="height: 220px; object-fit: contain;">
-                            <div class="card-body">
-                                <span class="badge bg-success mb-2">Virtual</span>
-                                <h3 class="h5 fw-bold mb-2">Coaching Online Virtual</h3>
-                                <p class="text-muted small mb-3">
-                                    <em>Atención 100% online</em> por video llamada o WhatsApp: plan nutricional
-                                    + plan de entrenamiento + seguimiento semanal.
-                                </p>
-                                <h4 class="text-success fw-bold mb-3">$120.000 <small class="text-muted fw-normal">COP / mes</small></h4>
-                                <a href="https://wa.me/573332359677" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100">
-                                    <i class="fab fa-whatsapp me-2"></i>Asesoría Online
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Servicio 6: Coaching Personalizado Elite -->
-                    <article class="col-lg-4 col-md-6">
-                        <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden hover-shadow transition">
-                            <img src="https://res.cloudinary.com/atexcbli/image/upload/v1791240400/ge.jpg" class="card-img-top p-4 bg-light" alt="Paquete Elite - Coaching personalizado Full service" style="height: 220px; object-fit: contain;">
-                            <div class="card-body">
-                                <span class="badge bg-dark mb-2">Elite</span>
-                                <h3 class="h5 fw-bold mb-2">Paquete Elite Full Service</h3>
-                                <p class="text-muted small mb-3">
-                                    Plan nutricional + entrenamiento + suplementación + seguimiento diario
-                                    + <strong>1 sesión presencial</strong> por semana.
-                                </p>
-                                <h4 class="text-success fw-bold mb-3">$380.000 <small class="text-muted fw-normal">COP / mes</small></h4>
-                                <a href="contactanos.html" class="btn btn-success w-100">Agendar Elite</a>
-                            </div>
-                        </div>
-                    </article>
+                        <p class="text-muted mt-3">Cargando servicios disponibles...</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -381,70 +206,38 @@
             </div>
         </section>
 
-    </main>
-
-    <!-- ==========================================================================
-         FOOTER: Pie de página común
-         ========================================================================== -->
-    <footer class="bg-dark text-light py-5">
-        <div class="container">
-            <div class="row g-4 mb-4">
-                <!-- Columna marca -->
-                <div class="col-lg-3 col-md-6">
-                    <a href="../index.html" class="d-flex align-items-center text-decoration-none mb-3">
-                        <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" alt="Logo de la marca fitness" width="40" height="40" class="logo-imagen me-2">
-                        <h4 class="fw-bold mb-0 text-light">Prana</h4>
-                    </a>
-                    <p class="text-muted small">Tu tienda fitness de confianza en Medellín. Alto rendimiento deportivo.</p>
-                    <div class="d-flex gap-3 mt-3">
-                        <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" class="text-light text-decoration-none fs-5 hover-text-success transition"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.tiktok.com/" target="_blank" aria-label="TikTok" class="text-light text-decoration-none fs-5 hover-text-success transition"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://wa.me/573332359677" target="_blank" aria-label="WhatsApp" class="text-light text-decoration-none fs-5 hover-text-success transition"><i class="fab fa-whatsapp"></i></a>
+        <!-- Modal de Confirmación de Agendamiento Directo -->
+        <div class="modal fade" id="modal-servicio-agendado" tabindex="-1" aria-labelledby="modalServicioAgendadoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                    <div class="modal-body text-center p-4 p-md-5">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-success-subtle text-success rounded-circle mb-3" style="width: 72px; height: 72px;">
+                            <i class="ri-checkbox-circle-fill fs-1 text-success"></i>
+                        </div>
+                        <h3 class="h4 fw-bold mb-2" id="modalServicioAgendadoLabel">¡Solicitud Agendada con Éxito!</h3>
+                        <p class="text-muted mb-4" id="modal-servicio-agendado-msg">
+                            Hemos registrado tu solicitud para el servicio seleccionado. Uno de nuestros coaches se pondrá en contacto contigo muy pronto.
+                        </p>
+                        <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center">
+                            <a href="../dashboard.html#sec-cliente-servicios" class="btn btn-success px-4 py-2">
+                                <i class="ri-dashboard-line me-2"></i>Ir a Mis Servicios
+                            </a>
+                            <button type="button" class="btn btn-outline-secondary px-4 py-2" data-bs-dismiss="modal">
+                                Continuar Explorando
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <!-- Columna navegación -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Navegación</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="../index.html" class="text-light text-decoration-none hover-text-success transition">Inicio</a></li>
-                        <li class="mb-2"><a href="quienes-somos.html" class="text-light text-decoration-none hover-text-success transition">Quiénes Somos</a></li>
-                        <li class="mb-2"><a href="productos.html" class="text-light text-decoration-none hover-text-success transition">Productos</a></li>
-                        <li class="mb-2"><a href="servicios.html" class="text-light text-decoration-none hover-text-success transition">Servicios</a></li>
-                        <li class="mb-2"><a href="blog.html" class="text-light text-decoration-none hover-text-success transition">Blog</a></li>
-                        <li><a href="contactanos.html" class="text-light text-decoration-none hover-text-success transition">Contáctanos</a></li>
-                    </ul>
-                </div>
-                <!-- Columna contacto -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Contacto</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="ri-map-pin-fill text-success me-2"></i><span class="text-muted small">Medellín, Colombia</span></li>
-                        <li class="mb-2"><i class="ri-phone-fill text-success me-2"></i><a href="tel:+573332359677" class="text-light text-decoration-none hover-text-success transition small">+57 300 309 1641</a></li>
-                        <li class="mb-2"><i class="ri-mail-fill text-success me-2"></i><a href="mailto:contacto@marcafitness.co" class="text-light text-decoration-none hover-text-success transition small">contacto@marcafitness.co</a></li>
-                        <li><i class="ri-time-fill text-success me-2"></i><span class="text-muted small">Lun–Sáb: 8am – 8pm</span></li>
-                    </ul>
-                </div>
-                <!-- Columna newsletter -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Newsletter</h5>
-                    <p class="text-muted small mb-3">Suscríbete para tips, lanzamientos y descuentos.</p>
-                    <div class="input-group mb-2">
-                        <input type="email" class="form-control" placeholder="Tu email" aria-label="Tu email">
-                        <button class="btn btn-success" type="button"><i class="ri-send-plane-fill"></i></button>
-                    </div>
-                </div>
-            </div>
-            <hr class="bg-secondary">
-            <div class="row text-center text-md-start">
-                <div class="col-md-6 mb-2 mb-md-0">
-                    <p class="text-muted small mb-0">© 2026 De Prana. Todos los derechos reservados.</p>
-                </div>
-                <div class="col-md-6">
-                    <p class="text-muted small mb-0">Hecho con <i class="ri-heart-fill text-danger"></i> en Medellín — Año 2026</p>
                 </div>
             </div>
         </div>
-    </footer>
+
+    </main>
+
+    <!-- ==========================================================================
+         FOOTER GLOBAL (componente reutilizable)
+         Se inyecta dinámicamente desde js/components/header-footer.js
+         ========================================================================== -->
+    <div id="global-footer"></div>
 
     <!-- Botón flotante WhatsApp -->
     <a href="https://wa.me/573332359677?text=Hola!%20Quiero%20agendar%20un%20servicio%20fitness"
@@ -455,12 +248,17 @@
     <!-- Scripts -->
     <script src="../js/utils/storage.js"></script>
     <script src="../js/utils/hash.js"></script>
+    <script src="../js/services/supabaseClient.js"></script>
     <script src="../js/services/auth.js"></script>
     <script src="../js/components/menu.js"></script>
     <script src="../js/components/carrito.js"></script>
     <script src="../js/components/auth-modal.js"></script>
     <script src="../js/components/auth-guard.js"></script>
+    <!-- Componente global de cabecera y pie (debe cargar ANTES de main.js) -->
+    <script src="../js/components/header-footer.js"></script>
+    <script src="../js/services/servicios-store.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/pages/servicios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
