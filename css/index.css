@@ -12,15 +12,17 @@
 /* Bloque base común de toda sección del index (padding, separadores plateados) */
 .idx-seccion {
     position: relative;
-    padding: 80px 0;
+    padding: 70px 0;
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
     clear: both;
 }
 
 /* ── Variante CLARA: fondo blanco / muy claro → texto OSCURO vinotinto ── */
 .idx-seccion--clara {
-    background: linear-gradient(180deg, #FFFFFF 0%, #F6F6F6 100%);
-    border-top: 1px solid rgba(192, 192, 192, 0.35);
-    border-bottom: 1px solid rgba(192, 192, 192, 0.35);
+    background-color: #FFFFFF;
+    border-top: 1px solid #E2E8F0;
+    border-bottom: 1px solid #E2E8F0;
     color: #1A1A1A;
 }
 
@@ -111,7 +113,7 @@
     width: 340px;
     height: 340px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(154, 31, 56, 0.30) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(154, 31, 56, 0.18) 0%, transparent 70%);
     bottom: -140px;
     left: -90px;
     pointer-events: none;
@@ -796,5 +798,53 @@
 
     .titulo-seccion {
         font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 414px) {
+    .idx-seccion {
+        padding: 40px 0;
+    }
+    /* Hero: botones en columna */
+    .d-flex.flex-column.flex-sm-row.gap-3 {
+        gap: 10px !important;
+    }
+    /* Tabla ofertas: texto más pequeño */
+    .table {
+        font-size: 0.80rem;
+    }
+    /* Video wrapper: controles accesibles */
+    video {
+        min-height: 180px;
+    }
+    /* Card beneficios: padding reducido */
+    .col-lg-4.col-md-6 .card-body {
+        padding: 1rem !important;
+    }
+}
+@media (max-width: 360px) {
+    .idx-seccion {
+        padding: 32px 0;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Hero h1 en móvil */
+    .idx-seccion .display-4 {
+        font-size: 1.8rem !important;
+        line-height: 1.2 !important;
+    }
+    .idx-seccion .lead {
+        font-size: 0.95rem !important;
+    }
+    /* Hero: imagen del logo más pequeña */
+    .idx-seccion .col-lg-6 .img-fluid {
+        max-height: 280px !important;
+    }
+    /* Botones hero en móvil: ancho completo */
+    .idx-seccion .btn-lg {
+        padding: 12px 20px !important;
+        font-size: 0.85rem !important;
+        width: 100%;
     }
 }

@@ -284,7 +284,7 @@
     white-space: nowrap;
     transition: var(--transicion);
     flex-shrink: 0;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
     border: 2px solid var(--blanco-puro);
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -345,13 +345,48 @@
 }
 
 @media (max-width: 480px) {
+    .categorias-grid {
+        grid-template-columns: repeat(3, 1fr);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .categoria-card {
+        min-width: 80px;
+        padding: 14px 8px 12px;
+    }
+    .categoria-card__icono {
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+        border-radius: 12px;
+    }
+    .categorias-visuales {
+        padding: 20px 0 0;
+    }
     .categoria-card__nombre {
         font-size: 0.72rem;
         letter-spacing: 0.01em;
     }
 
+    .filtro-pill {
+        padding: 10px 14px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+
     .productos-hero__titulo {
         font-size: 1.6rem;
+    }
+
+    .productos-cta {
+        padding: 48px 16px;
+    }
+    .productos-cta__titulo {
+        font-size: 1.35rem;
+    }
+    .productos-cta__descripcion {
+        font-size: 0.88rem;
     }
 }
 
@@ -414,4 +449,23 @@
 
 .btn-fav.pulsando {
     animation: fav-pulse 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Grid de productos en catálogo (complementa grilla-productos del global.css) */
+.catalogo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+}
+@media (max-width: 768px) {
+    .catalogo-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+}
+@media (max-width: 480px) {
+    .catalogo-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
 }

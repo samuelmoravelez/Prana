@@ -77,7 +77,7 @@ img {
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: var(--sombra-neon);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
     backdrop-filter: blur(10px);
 }
 
@@ -484,7 +484,7 @@ img {
 }
 
 .tarjeta-producto:hover {
-    transform: translateY(-8px);
+    transform: translateY(-4px);
     box-shadow: var(--sombra-vinotinto);
     border-color: var(--vinotinto);
 }
@@ -492,7 +492,7 @@ img {
 .imagen-producto-wrapper {
     position: relative;
     background: linear-gradient(135deg, #1a1a1a 0%, var(--vinotinto-oscuro) 100%);
-    height: 320px;
+    height: 280px;
     overflow: hidden;
 }
 
@@ -901,4 +901,93 @@ img {
         flex-direction: column;
         text-align: center;
     }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
 }
+
+/* ==========================================================================
+   12. RESPONSIVE — PANTALLAS MUY PEQUEÑAS (360px – 414px)
+   ========================================================================== */
+@media (max-width: 414px) {
+    .contenedor {
+        width: 95%;
+        padding: 0 12px;
+    }
+    .grilla-productos {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .btn {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .barra-anuncio {
+        font-size: 0.72rem;
+        padding: 7px 8px;
+        letter-spacing: 0.5px;
+    }
+    .logo h1 {
+        font-size: 0.9rem;
+    }
+}
+
+/* ==========================================================================
+   13. BOTONES DE ACCIÓN DE PRODUCTOS (CARRITO Y FAVORITOS)
+   ========================================================================== */
+.tarjeta-btns {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.tarjeta-btns .btn-carrito-principal {
+    flex: 1;
+    min-width: 0;
+}
+.btn-fav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: 1.5px solid #C0C0C0;
+    border-radius: 8px;
+    background: #FFFFFF;
+    color: #8A8A8A;
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+.btn-fav:hover {
+    border-color: #5C0A1B;
+    color: #5C0A1B;
+    background: rgba(92, 10, 27, 0.05);
+    transform: scale(1.08);
+}
+.btn-fav.activo {
+    background: linear-gradient(135deg, #5C0A1B, #7A1429);
+    border-color: #5C0A1B;
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(92, 10, 27, 0.32);
+}
+.btn-fav.activo:hover {
+    background: linear-gradient(135deg, #7A1429, #9A1F38);
+    transform: scale(1.08);
+}
+@keyframes fav-pulse {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.38); }
+    70%  { transform: scale(0.93); }
+    100% { transform: scale(1); }
+}
+.btn-fav.pulsando {
+    animation: fav-pulse 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+

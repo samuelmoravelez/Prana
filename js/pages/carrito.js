@@ -522,22 +522,22 @@
     // MODAL DE CONFIRMACIÓN DE COMPRA (solo se alcanza si hay sesión activa)
     // ══════════════════════════════════════════════════════════════════════════
 
-    function abrirModal() {
+    function abrirModal(pedidoGenerado) {
         var overlay = document.getElementById('carr-modal-overlay');
         if (!overlay) return;
 
-        // Llenar datos del modal
-        var numeroPedido = generarNumeroPedido();
+        // Llenar datos del modal con el pedido real
+        var numeroPedido = pedidoGenerado ? pedidoGenerado.id : generarNumeroPedido();
         var numEl = document.getElementById('carr-modal-num-pedido');
         if (numEl) numEl.textContent = 'Pedido #' + numeroPedido;
 
         var totalEl = document.getElementById('carr-modal-total');
-        if (totalEl) totalEl.textContent = formatoCOP(CarritoService.obtenerTotal());
+        if (totalEl) totalEl.textContent = formatoCOP(pedidoGenerado ? pedidoGenerado.total : CarritoService.obtenerTotal());
 
         // Construir enlace de WhatsApp
         var enlaceWA = document.getElementById('carr-modal-btn-wa');
         if (enlaceWA) {
-            var items   = CarritoService.obtenerItems();
+            var items   = pedidoGenerado ? pedidoGenerado.items : CarritoService.obtenerItems();
             var mensaje = construirMensajeWA(items);
             enlaceWA.href = 'https://wa.me/573332359677?text=' + mensaje;
         }
@@ -567,9 +567,10 @@
         // Si sí hay sesión → procede con el modal de confirmación de pedido.
         var btnPagar = document.getElementById('carr-btn-pagar');
         if (btnPagar) {
-            btnPagar.addEventListener('click', function () {
+            btnPagar.addEventListener('click', async function () {
+                var items = CarritoService.obtenerItems();
                 // Guardia 1: carrito vacío
-                if (CarritoService.obtenerItems().length === 0) return;
+                if (items.length === 0) return;
 
                 // Guardia 2: sin sesión activa → modal de auth
                 if (!haySessionActiva()) {
@@ -577,9 +578,115 @@
                     return;
                 }
 
+                // Obtener usuario autenticado
+                var usuario = null;
+                if (typeof AuthService !== 'undefined') {
+                    usuario = AuthService.getCurrentUser();
+                }
+                if (!usuario) {
+                    try {
+                        var ses = JSON.parse(localStorage.getItem('prana_sesion') || '{}');
+                        usuario = ses.usuario || null;
+                    } catch (e) {}
+                }
+
+                var uid = (usuario && usuario.id) ? usuario.id : 'usr_anon';
+                var uNombre = (usuario && usuario.nombre) ? usuario.nombre : 'Cliente Prana';
+                var uEmail = (usuario && usuario.email) ? usuario.email : '';
+                var numPedido = generarNumeroPedido();
+                var total = CarritoService.obtenerTotal();
+                var costoEnvio = CarritoService.obtenerCostoEnvio();
+
+                var itemsJson = items.map(function(i){
+                    return {
+                        id: i.id,
+                        nombre: i.nombre,
+                        precio: i.precio,
+                        cantidad: i.cantidad,
+                        imagen: i.imagen,
+                        categoria: i.categoria
+                    };
+                });
+
+                // Feedback visual en el botón de pago
+                btnPagar.disabled = true;
+                var htmlOriginal = btnPagar.innerHTML;
+                btnPagar.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Registrando pedido...';
+
+                var idPedidoGenerado = numPedido;
+
+                // ── Inserción directa en la tabla 'orders' de Supabase ───────────
+                try {
+                    if (window.obtenerClienteSupabase) {
+                        await window.obtenerClienteSupabase();
+                    }
+
+                    if (window.supabaseClient) {
+                        var ordenPayload = {
+                            user_id: uid,
+                            items: itemsJson,
+                            total: total,
+                            status: 'pendiente'
+                        };
+
+                        // Compatibilidad total: intentar con total_amount y fallback a total según el esquema
+                        var res = await window.supabaseClient.from('orders').insert({
+                            ...ordenPayload,
+                            total_amount: total
+                        }).select();
+
+                        if (res.error) {
+                            res = await window.supabaseClient.from('orders').insert(ordenPayload).select();
+                        }
+
+                        if (!res.error && Array.isArray(res.data) && res.data[0]) {
+                            idPedidoGenerado = res.data[0].id;
+                        }
+                    }
+                } catch (eSupabase) {
+                    console.error('[Carrito] Error al registrar orden en Supabase:', eSupabase);
+                }
+
+                // Crear objeto de pedido persistente para UI
+                var nuevoPedido = {
+                    id:            idPedidoGenerado,
+                    userId:        uid,
+                    clienteNombre: uNombre,
+                    clienteEmail:  uEmail,
+                    productos:     items.map(function(i){ return i.nombre + ' × ' + i.cantidad; }).join(' · '),
+                    items:         itemsJson,
+                    total:         total,
+                    total_amount:  total,
+                    costoEnvio:    costoEnvio,
+                    estado:        'pendiente',
+                    status:        'pendiente',
+                    fecha:         new Date().toISOString(),
+                    updatedAt:     new Date().toISOString()
+                };
+
+                // Guardar pedido en 'prana_orders' (caché local)
+                try {
+                    var rawOrders = localStorage.getItem('prana_orders');
+                    var orders = rawOrders ? JSON.parse(rawOrders) : [];
+                    if (!Array.isArray(orders)) orders = [];
+                    orders.unshift(nuevoPedido);
+                    localStorage.setItem('prana_orders', JSON.stringify(orders));
+                } catch (e) {
+                    console.error('[Carrito] Error al persistir orden en prana_orders:', e);
+                }
+
+                // Descontar stock del catálogo
+                if (typeof ProductosStore !== 'undefined' && ProductosStore.descontarStock) {
+                    ProductosStore.descontarStock(items);
+                }
+
+                btnPagar.disabled = false;
+                btnPagar.innerHTML = htmlOriginal;
+
                 // Sesión válida → continuar con la confirmación del pedido
-                abrirModal();
-                // Vaciar carrito al confirmar (simula compra completada)
+                abrirModal(nuevoPedido);
+
+                // Vaciar carrito al confirmar
                 CarritoService.vaciar();
             });
         }

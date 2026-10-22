@@ -3,21 +3,19 @@
 //
 // DISEÑO PARA ESCALABILIDAD:
 // Este módulo expone una API PÚBLICA estable (register, login, logout,
-// getCurrentUser, isAuthenticated, onChange). Internamente usa un adaptador
-// de almacenamiento que actualmente es localStorage (a través de la utilidad
-// Storage). Para migrar a Supabase / Firebase / API REST, basta con reemplazar
-// la implementación interna manteniendo la misma API pública: el resto de la
-// aplicación (modal, guard, navbar) no necesita cambios.
+// getCurrentUser, isAuthenticated, onChange). Funciona 100% con Supabase.
 //
-// Dependencias: utils/storage.js, utils/hash.js
-// Debe cargarse DESPUÉS de ambas.
+// Dependencias: utils/storage.js, utils/hash.js, services/supabaseClient.js
+// Debe cargarse DESPUÉS de todas.
+//
+// NOTA: Este servicio funciona exclusivamente con Supabase. No hay fallback a localStorage.
+// El token de sesión se guarda en localStorage solo para persistencia de sesión entre recargas.
 
 var AuthService = (function () {
 
     'use strict';
 
     // ── Claves de almacenamiento ────────────────────────────────────────────
-    var KEY_USUARIOS  = 'prana_usuarios';   // Array de usuarios registrados
     var KEY_SESION    = 'prana_sesion';     // Sesión actual (token + usuario)
 
     // ── Duración de la sesión ───────────────────────────────────────────────
@@ -27,27 +25,6 @@ var AuthService = (function () {
     var suscriptores = [];
 
     // ── Helpers internos ────────────────────────────────────────────────────
-
-    /**
-     * Lee el array de usuarios del almacenamiento.
-     * @returns {Array}
-     */
-    function obtenerUsuarios() {
-        var crudos = Storage.obtener(KEY_USUARIOS, null);
-        if (!crudos) return [];
-        try {
-            return JSON.parse(crudos);
-        } catch (e) {
-            return [];
-        }
-    }
-
-    /**
-     * Guarda el array de usuarios.
-     */
-    function guardarUsuarios(usuarios) {
-        Storage.guardar(KEY_USUARIOS, JSON.stringify(usuarios));
-    }
 
     /**
      * Genera un token simulado tipo JWT (header.payload.signature en base64).
@@ -113,6 +90,10 @@ var AuthService = (function () {
      * @returns {Promise<{ok: boolean, mensaje?: string, usuario?: Object}>}
      */
     async function registrar(datos) {
+        if (!window.supabaseClient) {
+            return { ok: false, mensaje: 'Error: Supabase no está inicializado. Verifica tu conexión a internet.' };
+        }
+
         var nombre = String(datos.nombre || '').trim();
         var email = normalizarEmail(datos.email);
         var password = String(datos.password || '');
@@ -128,38 +109,66 @@ var AuthService = (function () {
             return { ok: false, mensaje: 'La contraseña debe tener al menos 6 caracteres.' };
         }
 
-        var usuarios = obtenerUsuarios();
+        try {
+            console.log('[AuthService] Registrando usuario en Supabase:', email);
 
-        // Verificar email duplicado
-        var existe = usuarios.some(function (u) { return u.email === email; });
-        if (existe) {
-            return { ok: false, mensaje: 'Ya existe una cuenta con este correo electrónico.' };
+            // Verificar si ya existe en Supabase
+            var { data: existe, error: errorCheck } = await window.supabaseClient
+                .from('users')
+                .select('email')
+                .eq('email', email)
+                .single();
+
+            if (existe) {
+                console.error('[AuthService] Email ya existe en Supabase');
+                return { ok: false, mensaje: 'Ya existe una cuenta con este correo electrónico.' };
+            }
+
+            // Hashear la contraseña
+            var hashData = await Hash.crearHash(password);
+
+            // Insertar en Supabase
+            var { data, error } = await window.supabaseClient
+                .from('users')
+                .insert({
+                    name: nombre,
+                    email: email,
+                    password_hash: hashData.hash,
+                    salt: hashData.salt,
+                    role: 'cliente'
+                })
+                .select()
+                .single();
+
+            if (error) {
+                console.error('[AuthService] Error al registrar en Supabase:', error);
+                return { ok: false, mensaje: 'Error al crear la cuenta: ' + error.message };
+            }
+
+            console.log('[AuthService] Usuario registrado en Supabase:', data.email);
+
+            var usuarioCreado = {
+                id: data.id,
+                nombre: data.name,
+                email: data.email,
+                role: data.role || 'cliente',
+                creadoEn: data.created_at
+            };
+
+            // Retornar el usuario SIN los campos sensibles
+            var usuarioSeguro = {
+                id: usuarioCreado.id,
+                nombre: usuarioCreado.nombre,
+                email: usuarioCreado.email,
+                role: usuarioCreado.role,
+                creadoEn: usuarioCreado.creadoEn
+            };
+
+            return { ok: true, mensaje: 'Cuenta creada exitosamente. ¡Bienvenido a Prana!', usuario: usuarioSeguro };
+        } catch (e) {
+            console.error('[AuthService] Excepción al registrar usuario:', e);
+            return { ok: false, mensaje: 'Error inesperado al crear la cuenta. Por favor, inténtalo de nuevo.' };
         }
-
-        // Hashear la contraseña
-        var hashData = await Hash.crearHash(password);
-
-        var nuevoUsuario = {
-            id: generarId(),
-            nombre: nombre,
-            email: email,
-            salt: hashData.salt,
-            hash: hashData.hash,
-            creadoEn: new Date().toISOString()
-        };
-
-        usuarios.push(nuevoUsuario);
-        guardarUsuarios(usuarios);
-
-        // Retornar el usuario SIN los campos sensibles
-        var usuarioSeguro = {
-            id: nuevoUsuario.id,
-            nombre: nuevoUsuario.nombre,
-            email: nuevoUsuario.email,
-            creadoEn: nuevoUsuario.creadoEn
-        };
-
-        return { ok: true, mensaje: 'Cuenta creada exitosamente. ¡Bienvenido a Prana!', usuario: usuarioSeguro };
     }
 
     /**
@@ -169,6 +178,10 @@ var AuthService = (function () {
      * @returns {Promise<{ok: boolean, mensaje?: string, usuario?: Object, token?: string}>}
      */
     async function iniciarSesion(email, password) {
+        if (!window.supabaseClient) {
+            return { ok: false, mensaje: 'Error: Supabase no está inicializado. Verifica tu conexión a internet.' };
+        }
+
         email = normalizarEmail(email);
         password = String(password || '');
 
@@ -176,34 +189,70 @@ var AuthService = (function () {
             return { ok: false, mensaje: 'Ingresa tu correo y contraseña.' };
         }
 
-        var usuarios = obtenerUsuarios();
-        var usuario = usuarios.find(function (u) { return u.email === email; });
+        try {
+            console.log('[AuthService] Buscando usuario en Supabase:', email);
+            var { data, error } = await window.supabaseClient
+                .from('users')
+                .select('*')
+                .eq('email', email)
+                .single();
 
-        if (!usuario) {
-            return { ok: false, mensaje: 'No existe una cuenta con este correo electrónico.' };
+            if (error) {
+                console.error('[AuthService] Error de Supabase al buscar usuario:', error);
+                if (error.code === 'PGRST116') {
+                    // No rows returned - usuario no existe
+                    return { ok: false, mensaje: 'No existe una cuenta con este correo electrónico.' };
+                }
+                return { ok: false, mensaje: 'Error al buscar usuario: ' + error.message };
+            }
+
+            if (!data) {
+                console.error('[AuthService] Usuario no encontrado en Supabase');
+                return { ok: false, mensaje: 'No existe una cuenta con este correo electrónico.' };
+            }
+
+            console.log('[AuthService] Usuario encontrado en Supabase:', data.email);
+
+            // Verificar contraseña usando el hash almacenado
+            if (!data.password_hash || !data.salt) {
+                console.error('[AuthService] Usuario en Supabase no tiene hash/salt');
+                return { ok: false, mensaje: 'Error en la configuración del usuario. Contacta al soporte.' };
+            }
+
+            var coincide = await Hash.verificarPassword(password, data.salt, data.password_hash);
+            if (!coincide) {
+                console.error('[AuthService] Contraseña incorrecta (Supabase)');
+                return { ok: false, mensaje: 'Contraseña incorrecta. Inténtalo de nuevo.' };
+            }
+
+            console.log('[AuthService] Contraseña verificada correctamente en Supabase');
+
+            var usuario = {
+                id: data.id,
+                nombre: data.name,
+                email: data.email,
+                role: data.role || 'cliente'
+            };
+
+            var token = generarToken(usuario);
+            var usuarioSeguro = {
+                id:     usuario.id,
+                nombre: usuario.nombre,
+                email:  usuario.email,
+                role:   usuario.role || 'cliente'
+            };
+
+            // Persistir sesión en localStorage (solo para persistencia entre recargas)
+            Storage.guardar(KEY_SESION, JSON.stringify({ token: token, usuario: usuarioSeguro }));
+
+            notificarCambio();
+
+            console.log('[AuthService] Sesión iniciada exitosamente para:', usuarioSeguro.email);
+            return { ok: true, usuario: usuarioSeguro, token: token };
+        } catch (e) {
+            console.error('[AuthService] Excepción al iniciar sesión:', e);
+            return { ok: false, mensaje: 'Error inesperado al iniciar sesión. Por favor, inténtalo de nuevo.' };
         }
-
-        var coincide = await Hash.verificarPassword(password, usuario.salt, usuario.hash);
-        if (!coincide) {
-            return { ok: false, mensaje: 'Contraseña incorrecta. Inténtalo de nuevo.' };
-        }
-
-        var token = generarToken(usuario);
-        var usuarioSeguro = {
-            id:     usuario.id,
-            nombre: usuario.nombre,
-            email:  usuario.email,
-            // IMPORTANTE: el rol debe viajar en la sesión para que el dashboard
-            // pueda leerlo sin acceder de nuevo a prana_usuarios.
-            role:   usuario.role || 'cliente'
-        };
-
-        // Persistir sesión
-        Storage.guardar(KEY_SESION, JSON.stringify({ token: token, usuario: usuarioSeguro }));
-
-        notificarCambio();
-
-        return { ok: true, usuario: usuarioSeguro, token: token };
     }
 
     /**

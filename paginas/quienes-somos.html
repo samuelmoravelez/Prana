@@ -35,94 +35,10 @@
 <body>
 
     <!-- ==========================================================================
-         BARRA DE ANUNCIO SUPERIOR
-         Promoción visible en todas las páginas
+         HEADER GLOBAL (componente reutilizable)
+         Se inyecta dinámicamente desde js/components/header-footer.js
          ========================================================================== -->
-    <div class="barra-anuncio bg-success text-white text-center py-2">
-        <p class="mb-0"><i class="ri-flashlight-fill me-2"></i> ¡Envíos gratis a todo el país desde $150.000! Escríbenos directamente a nuestro WhatsApp <i class="ri-flashlight-fill ms-2"></i></p>
-    </div>
-
-    <!-- ==========================================================================
-         HEADER + NAVBAR RESPONSIVA DE BOOTSTRAP
-         Contiene logo, menú de navegación completo (6 páginas) e iconos
-         ========================================================================== -->
-    <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
-        <div class="container">
-            <!-- Logo y nombre de la empresa -->
-            <a class="navbar-brand fw-bold" href="../index.html">
-                <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" alt="Logo de la marca fitness" width="44" height="44" class="logo-imagen d-inline-block align-text-top me-2">
-            </a>
-
-            <!-- Botón hamburguesa para dispositivos móviles -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Menú de navegación completo con las 6 páginas requeridas -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="quienes-somos.html">Quiénes Somos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="productos.html">Productos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="servicios.html">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="blog.html">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contactanos.html">Contáctanos</a>
-                    </li>
-                </ul>
-
-                <!-- Iconos de búsqueda y carrito con badge Bootstrap -->
-                <ul class="navbar-nav ms-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" aria-label="Buscar"><i class="ri-search-line fs-5"></i></a>
-                    </li>
-                    <li class="nav-item position-relative">
-                        <a class="nav-link" href="#" aria-label="Carrito"><i class="ri-shopping-cart-fill fs-5"></i>
-                            <span class="badge bg-danger position-absolute top-0 start-100 translate-middle contador-carrito">0</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <!-- Acceso / Cuenta de usuario (Módulo de Autenticación) -->
-                <ul class="navbar-nav ms-3 align-items-center">
-                    <li class="nav-item" data-require-guest>
-                        <a href="../login.html" class="auth-boton-acceso">
-                            <i class="ri-user-line"></i>
-                            <span class="d-none d-sm-inline">Ingresar</span>
-                        </a>
-                    </li>
-                    <li class="nav-item auth-usuario-menu" data-require-auth style="display:none;">
-                        <div class="auth-avatar" data-auth-avatar id="auth-avatar-btn" role="button" tabindex="0" aria-label="Menú de usuario"></div>
-                        <div class="auth-dropdown" id="auth-dropdown">
-                            <div class="auth-dropdown-header">
-                                <p class="auth-dropdown-nombre" data-auth-nombre></p>
-                                <p class="auth-dropdown-email" data-auth-email></p>
-                            </div>
-                            <a href="../dashboard.html" class="auth-dropdown-item" data-auth-perfil>
-                                <i class="ri-dashboard-line"></i> Mi Panel
-                            </a>
-                            <div class="auth-dropdown-divider"></div>
-                            <button class="auth-dropdown-item auth-dropdown-item--logout" data-auth-logout>
-                                <i class="ri-logout-box-r-line"></i> Cerrar Sesión
-                            </button>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    </header>
+    <div id="global-header"></div>
 
     <!-- ==========================================================================
          MAIN: CONTENIDO PRINCIPAL DE QUIÉNES SOMOS
@@ -174,11 +90,11 @@
                         <!-- Lista ORDENADA ol con los hitos de la empresa (etiqueta obligatoria) -->
                         <h3 class="h5 fw-bold mb-3">Nuestros hitos principales:</h3>
                         <ol class="list-group list-group-numbered mb-4">
-                            <li class="list-group-item"><strong>2019:</strong> Apertura de la tienda física en Medellín</li>
-                            <li class="list-group-item"><strong>2021:</strong> Lanzamiento de la tienda virtual y envíos a todo Colombia</li>
-                            <li class="list-group-item"><strong>2022:</strong> Alianza con más de 10 marcas premium de suplementos</li>
-                            <li class="list-group-item"><strong>2023:</strong> Comunidad de +5.000 clientes y atletas activos</li>
-                            <li class="list-group-item"><strong>2024:</strong> Servicios de coaching, asesoría nutricional y planes personalizados</li>
+                            <li class="list-group-item"><strong>2021:</strong> Apertura de la tienda física en Medellín</li>
+                            <li class="list-group-item"><strong>2022:</strong> Lanzamiento de la tienda virtual y envíos a todo Colombia</li>
+                            <li class="list-group-item"><strong>2023:</strong> Alianza con más de 10 marcas premium de suplementos</li>
+                            <li class="list-group-item"><strong>2024:</strong> Comunidad de +5.000 clientes y atletas activos</li>
+                            <li class="list-group-item"><strong>2025:</strong> Servicios de coaching, asesoría nutricional y planes personalizados</li>
                         </ol>
                     </article>
                 </div>
@@ -345,82 +261,10 @@
     </main><!-- Fin del contenido principal -->
 
     <!-- ==========================================================================
-         FOOTER: Pie de página común en todas las páginas
-         Incluye contacto, navegación, redes sociales y copyright
+         FOOTER GLOBAL (componente reutilizable)
+         Se inyecta dinámicamente desde js/components/header-footer.js
          ========================================================================== -->
-    <footer class="bg-dark text-light py-5">
-        <div class="container">
-            <div class="row g-4 mb-4">
-                <!-- Columna 1: Información de marca -->
-                <div class="col-lg-3 col-md-6">
-                    <a href="../index.html" class="d-flex align-items-center text-decoration-none mb-3">
-                        <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" alt="Logo de la marca fitness" width="40" height="40" class="logo-imagen me-2">
-                        <h4 class="fw-bold mb-0 text-light">Prana</h4>
-                    </a>
-                    <p class="text-muted small">Tu tienda fitness de confianza en Medellín. Alto rendimiento deportivo.</p>
-                    <!-- Redes sociales con iconos -->
-                    <div class="d-flex gap-3 mt-3">
-                        <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" class="text-light text-decoration-none fs-5 hover-text-success transition">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.tiktok.com/" target="_blank" aria-label="TikTok" class="text-light text-decoration-none fs-5 hover-text-success transition">
-                            <i class="fab fa-tiktok"></i>
-                        </a>
-                        <a href="https://wa.me/573332359677" target="_blank" aria-label="WhatsApp" class="text-light text-decoration-none fs-5 hover-text-success transition">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Columna 2: Navegación completa (6 páginas) -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Navegación</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="../index.html" class="text-light text-decoration-none hover-text-success transition">Inicio</a></li>
-                        <li class="mb-2"><a href="quienes-somos.html" class="text-light text-decoration-none hover-text-success transition">Quiénes Somos</a></li>
-                        <li class="mb-2"><a href="productos.html" class="text-light text-decoration-none hover-text-success transition">Productos</a></li>
-                        <li class="mb-2"><a href="servicios.html" class="text-light text-decoration-none hover-text-success transition">Servicios</a></li>
-                        <li class="mb-2"><a href="blog.html" class="text-light text-decoration-none hover-text-success transition">Blog</a></li>
-                        <li><a href="contactanos.html" class="text-light text-decoration-none hover-text-success transition">Contáctanos</a></li>
-                    </ul>
-                </div>
-
-                <!-- Columna 3: Información de contacto -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Contacto</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="ri-map-pin-fill text-success me-2"></i><span class="text-muted small">Medellín, Colombia</span></li>
-                        <li class="mb-2"><i class="ri-phone-fill text-success me-2"></i><a href="tel:+573332359677" class="text-light text-decoration-none hover-text-success transition small">+57 300 309 1641</a></li>
-                        <li class="mb-2"><i class="ri-mail-fill text-success me-2"></i><a href="mailto:contacto@marcafitness.co" class="text-light text-decoration-none hover-text-success transition small">contacto@marcafitness.co</a></li>
-                        <li><i class="ri-time-fill text-success me-2"></i><span class="text-muted small">Lun–Sáb: 8am – 8pm</span></li>
-                    </ul>
-                </div>
-
-                <!-- Columna 4: Newsletter (suscripción) -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="fw-bold mb-3 text-success">Newsletter Fitness</h5>
-                    <p class="text-muted small mb-3">Suscríbete para tips, descuentos y lanzamientos.</p>
-                    <div class="input-group mb-2">
-                        <input type="email" class="form-control" placeholder="Tu email" aria-label="Tu email">
-                        <button class="btn btn-success" type="button"><i class="ri-send-plane-fill"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Línea divisoria -->
-            <hr class="bg-secondary">
-
-            <!-- Copyright y año de desarrollo (requisito obligatorio) -->
-            <div class="row text-center text-md-start">
-                <div class="col-md-6 mb-2 mb-md-0">
-                    <p class="text-muted small mb-0">© 2026 De Prana. Todos los derechos reservados.</p>
-                </div>
-                <div class="col-md-6">
-                    <p class="text-muted small mb-0">Hecho con <i class="ri-heart-fill text-danger"></i> en Medellín — Año 2026</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div id="global-footer"></div>
 
     <!-- ==========================================================================
          BOTÓN FLOTANTE DE WHATSAPP
@@ -437,12 +281,15 @@
     <!-- Utilidades de almacenamiento -->
     <script src="../js/utils/storage.js"></script>
     <script src="../js/utils/hash.js"></script>
+    <script src="../js/services/supabaseClient.js"></script>
     <script src="../js/services/auth.js"></script>
     <!-- Componentes compartidos -->
     <script src="../js/components/menu.js"></script>
     <script src="../js/components/carrito.js"></script>
     <script src="../js/components/auth-modal.js"></script>
     <script src="../js/components/auth-guard.js"></script>
+    <!-- Componente global de cabecera y pie (debe cargar ANTES de main.js) -->
+    <script src="../js/components/header-footer.js"></script>
     <!-- Inicializador global -->
     <script src="../js/main.js"></script>
     <!-- Bootstrap JS Bundle (incluye Popper.js) -->
