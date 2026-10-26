@@ -17,10 +17,11 @@ export async function getFavoritos(uid) {
     if (!supabase) return [];
 
     try {
+        var usuarioId = uid;
         var { data, error } = await supabase
             .from('favorites')
-            .select('product_id, products(*)')
-            .eq('user_id', uid)
+            .select('*, products(*)')
+            .eq('user_id', usuarioId)
             .order('created_at', { ascending: false });
 
         if (error || !Array.isArray(data)) return [];
@@ -118,10 +119,11 @@ export async function renderFavoritos(usuario) {
 
     var favs = [];
     try {
+        var usuarioId = usuarioActual.id;
         var res = await supabase
             .from('favorites')
-            .select('product_id, products(*)')
-            .eq('user_id', usuarioActual.id);
+            .select('*, products(*)')
+            .eq('user_id', usuarioId);
 
         if (res && !res.error && Array.isArray(res.data)) {
             favs = res.data;

@@ -126,7 +126,7 @@ export function getServicios() {
         _sincronizandoSolicitudes = true;
         window.supabaseClient
             .from('service_requests')
-            .select('*, services(*)')
+            .select('*, services(*), users(name, email)')
             .order('created_at', { ascending: false })
             .then(function (res) {
                 _sincronizandoSolicitudes = false;
@@ -134,8 +134,8 @@ export function getServicios() {
                     var usuarios = getUsuarios();
                     _solicitudesServiciosCache = res.data.map(function (s) {
                         var srv = s.services || {};
-                        var usr = Array.isArray(usuarios) ? usuarios.find(function (u) { return String(u.id) === String(s.user_id); }) : null;
-                        var clienteNombre = usr ? (usr.nombre || usr.name) : 'Cliente';
+                        var usr = s.users || (Array.isArray(usuarios) ? usuarios.find(function (u) { return String(u.id) === String(s.user_id); }) : null);
+                        var clienteNombre = usr ? (usr.name || usr.nombre) : 'Cliente';
                         var clienteEmail = usr ? usr.email : '';
 
                         if (s.notes) {
@@ -319,15 +319,15 @@ export async function renderSolicitudesServiciosAdmin() {
         if (supabase) {
             var res = await supabase
                 .from('service_requests')
-                .select('*, services(*)')
+                .select('*, services(*), users(name, email)')
                 .order('created_at', { ascending: false });
 
             if (res && !res.error && Array.isArray(res.data)) {
                 var usuarios = getUsuarios();
                 servicios = res.data.map(function (s) {
                     var srv = s.services || {};
-                    var usr = Array.isArray(usuarios) ? usuarios.find(function (u) { return String(u.id) === String(s.user_id); }) : null;
-                    var clienteNombre = usr ? (usr.nombre || usr.name) : 'Cliente';
+                    var usr = s.users || (Array.isArray(usuarios) ? usuarios.find(function (u) { return String(u.id) === String(s.user_id); }) : null);
+                    var clienteNombre = usr ? (usr.name || usr.nombre) : 'Cliente';
                     var clienteEmail = usr ? usr.email : '';
 
                     if (s.notes) {

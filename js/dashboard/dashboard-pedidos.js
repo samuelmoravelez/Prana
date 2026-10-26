@@ -50,15 +50,15 @@ export function getPedidos() {
         _sincronizandoPedidos = true;
         window.supabaseClient
             .from('orders')
-            .select('*')
+            .select('*, users(name, email)')
             .order('created_at', { ascending: false })
             .then(function (res) {
                 _sincronizandoPedidos = false;
                 if (res && !res.error && Array.isArray(res.data)) {
                     var usuarios = getUsuarios();
                     _pedidosCache = res.data.map(function (p) {
-                        var u = Array.isArray(usuarios) ? usuarios.find(function (usr) { return String(usr.id) === String(p.user_id); }) : null;
-                        var clienteNom = u ? (u.nombre || u.name) : (p.user_name || p.cliente_nombre || 'Cliente');
+                        var u = p.users || (Array.isArray(usuarios) ? usuarios.find(function (usr) { return String(usr.id) === String(p.user_id); }) : null);
+                        var clienteNom = u ? (u.name || u.nombre) : (p.user_name || p.cliente_nombre || 'Cliente');
                         var clienteMail = u ? u.email : (p.cliente_email || '');
                         var tot = Number(p.total_amount !== undefined ? p.total_amount : p.total) || 0;
                         var prodsStr = Array.isArray(p.items) 
@@ -149,7 +149,7 @@ export async function renderTablaPedidos() {
         if (supabase) {
             var res = await supabase
                 .from('orders')
-                .select('*, users(*)')
+                .select('*, users(name, email)')
                 .order('created_at', { ascending: false });
 
             if (res && !res.error && Array.isArray(res.data)) {
@@ -199,7 +199,7 @@ export async function renderTablaPedidos() {
 
     tbody.innerHTML = pedidos.map(function (p) {
         var userObj = p.users || {};
-        var clienteNom = userObj.nombre || userObj.name || p.clienteNombre || p.user_name || p.cliente_nombre || 'Cliente';
+        var clienteNom = userObj.name || userObj.nombre || p.clienteNombre || p.user_name || p.cliente_nombre || 'Cliente';
         var initials = avatarIniciales(clienteNom);
         var total = Number(p.total !== undefined ? p.total : p.total_amount) || 0;
         var estadoActual = p.status || p.estado || 'pendiente';
