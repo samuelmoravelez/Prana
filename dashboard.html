@@ -11,7 +11,7 @@
     <meta name="robots" content="noindex, nofollow">
 
     <!-- Favicon -->
-    <link rel="icon" href="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png" type="image/png">
+    <link rel="icon" href="https://res.cloudinary.com/dae5jx2m/image/upload/f_auto,q_auto/logo_prana" type="image/png">
 
     <!-- Remix Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css">
@@ -50,8 +50,11 @@
 
         <!-- Cabecera: logo + nombre de marca -->
         <div class="d-sidebar__head">
-            <img src="https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png"
-                 alt="Logo Prana" class="d-sidebar__logo">
+            <button class="d-sidebar__logo-toggle" id="d-sidebar-logo-toggle" type="button"
+                    aria-label="Logo Prana" title="Logo Prana" disabled>
+                <img src="https://res.cloudinary.com/dae5jx2m/image/upload/f_auto,q_auto/logo_prana"
+                     alt="" class="d-sidebar__logo">
+            </button>
             <span class="d-sidebar__brand">Prana</span>
             <!-- Botón colapsar/expandir -->
             <button class="d-sidebar__toggle" id="d-sidebar-toggle" aria-label="Colapsar menú" title="Colapsar">
@@ -91,11 +94,6 @@
         </div>
 
         <div class="d-topbar__right">
-            <!-- Badge de rol activo -->
-            <div class="d-badge-rol" id="d-badge-rol">
-                <i class="ri-shield-star-line"></i>
-                <span id="d-badge-rol-text">Rol</span>
-            </div>
 
             <!-- Volver a la tienda -->
             <a href="index.html" class="d-topbar__btn d-topbar__btn--tienda">
@@ -877,4 +875,3 @@
 
 </body>
 </html>
-

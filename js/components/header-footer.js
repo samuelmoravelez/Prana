@@ -33,7 +33,7 @@ var GlobalLayout = (function () {
 
     // ── Datos de marca y contacto (fuente única de verdad) ──────────────────
     var MARCA = {
-        logo:      'https://res.cloudinary.com/atexcbli/image/upload/f_auto/q_auto/logo.png',
+        logo:      'https://res.cloudinary.com/dae5jx2m/image/upload/f_auto,q_auto/logo_prana',
         instagram: 'https://www.instagram.com/',
         tiktok:    'https://www.tiktok.com/',
         whatsapp:  'https://wa.me/573332359677',
@@ -123,14 +123,15 @@ var GlobalLayout = (function () {
         var email     = logueado ? (usuario.email  || '') : '';
 
         return '' +
-        '<!-- Barra de anuncio global -->' +
-        '<div class="barra-anuncio bg-success text-white text-center py-2">' +
-          '<p class="mb-0"><i class="ri-flashlight-fill me-2"></i> ¡Envíos gratis a todo el país desde $150.000! Escríbenos a nuestro WhatsApp <i class="ri-flashlight-fill ms-2"></i></p>' +
-        '</div>' +
-
+        '<style>' +
+          '#global-header { position: sticky; top: 0; z-index: 1020; }' +
+          '.navbar.navbar-compact { padding-top: .4rem; padding-bottom: .4rem; }' +
+          '.navbar.navbar-compact .navbar-brand img { width: 38px; height: 38px; }' +
+          '.navbar .navbar-brand img { transition: width .2s ease, height .2s ease; }' +
+        '</style>' +
         '<!-- Header / Navbar global -->' +
         '<header>' +
-        '<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">' +
+        '<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">' +
           '<div class="container">' +
             '<!-- Logo (enlace al inicio) -->' +
             '<a class="navbar-brand fw-bold" href="' + P + 'index.html">' +
@@ -236,12 +237,25 @@ var GlobalLayout = (function () {
 
     // ── Inyección ───────────────────────────────────────────────────────────
 
+    function _actualizarNavbar() {
+        var navbar = document.querySelector('#global-header .navbar');
+        if (navbar) navbar.classList.toggle('navbar-compact', window.scrollY > 20);
+    }
+
+    var scrollNavbarInstalado = false;
+
     function inyectar() {
         var headerEl = document.getElementById('global-header');
         var footerEl = document.getElementById('global-footer');
 
         if (headerEl) headerEl.innerHTML = _headerHTML();
         if (footerEl) footerEl.innerHTML = _footerHTML();
+
+        if (!scrollNavbarInstalado) {
+            window.addEventListener('scroll', _actualizarNavbar, { passive: true });
+            scrollNavbarInstalado = true;
+        }
+        _actualizarNavbar();
 
         // Sincronizar el badge del carrito con los elementos ya inyectados
         if (typeof CarritoService !== 'undefined' && CarritoService.iniciar) {

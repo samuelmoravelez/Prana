@@ -268,10 +268,16 @@ export var DSidebar = (function () {
         var topbar   = document.getElementById('d-topbar');
         var content  = document.getElementById('d-content');
         var icon     = document.querySelector('#d-sidebar-toggle i');
+        var logoToggle = document.getElementById('d-sidebar-logo-toggle');
         if (sidebar) sidebar.classList.toggle('colapsado', _colapsado);
         if (topbar)  topbar.classList.toggle('sidebar-colapsado', _colapsado);
         if (content) content.classList.toggle('sidebar-colapsado', _colapsado);
         if (icon) icon.style.transform = _colapsado ? 'rotate(180deg)' : '';
+        if (logoToggle) {
+            logoToggle.disabled = !_colapsado;
+            logoToggle.setAttribute('aria-label', _colapsado ? 'Expandir menú' : 'Logo Prana');
+            logoToggle.title = _colapsado ? 'Expandir menú' : 'Logo Prana';
+        }
     }
 
     function abrirMovil() {
@@ -292,7 +298,18 @@ export var DSidebar = (function () {
 
     function configurarEventos() {
         var toggleBtn = document.getElementById('d-sidebar-toggle');
-        if (toggleBtn) toggleBtn.addEventListener('click', toggle);
+        if (toggleBtn) toggleBtn.addEventListener('click', function () {
+            if (window.innerWidth <= 768) {
+                cerrarMovil();
+            } else {
+                toggle();
+            }
+        });
+
+        var logoToggle = document.getElementById('d-sidebar-logo-toggle');
+        if (logoToggle) logoToggle.addEventListener('click', function () {
+            if (_colapsado) toggle();
+        });
 
         var mobileBtn = document.getElementById('d-mobile-toggle');
         if (mobileBtn) mobileBtn.addEventListener('click', abrirMovil);
