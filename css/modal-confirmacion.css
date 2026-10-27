@@ -1,0 +1,217 @@
+/* ==========================================================================
+   css/modal-confirmacion.css
+   Estilos para las ventanas de confirmación de eliminación y cierre de sesión.
+   Integrado con Bootstrap 5 y la identidad visual de Prana Fitness:
+   Vinotinto #5C0A1B · Plateado #C0C0C0 · Blanco #FFFFFF
+   ========================================================================== */
+
+.modal-confirmacion.modal {
+    z-index: 10060 !important;
+}
+
+.modal-confirmacion .modal-dialog {
+    max-width: 480px;
+    margin: 1.75rem auto;
+}
+
+.modal-confirmacion .modal-content {
+    border: none !important;
+    border-radius: 16px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35) !important;
+    overflow: hidden;
+    background-color: #FFFFFF !important;
+}
+
+.modal-confirmacion .modal-header {
+    border-bottom: 2px solid #5C0A1B !important;
+    background: linear-gradient(180deg, rgba(92, 10, 27, 0.08) 0%, rgba(255, 255, 255, 0) 100%) !important;
+    padding: 16px 20px !important;
+}
+
+.modal-confirmacion .modal-title {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+    color: #3D0712 !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+.modal-confirmacion .modal-body {
+    padding: 20px 22px !important;
+    font-family: 'Inter', sans-serif !important;
+    color: #1A1A1A;
+}
+
+.modal-confirmacion .modal-footer {
+    border-top: 1px solid #E2E4E8 !important;
+    padding: 14px 20px !important;
+    background-color: #F8F9FA !important;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Tarjeta informativa del elemento */
+.modal-confirmacion .modal-info-card {
+    background: #F8F9FA;
+    border: 1px solid #E2E4E8;
+    border-left: 4px solid #5C0A1B;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 14px 0;
+}
+
+.modal-confirmacion .modal-info-card__tag {
+    font-size: 0.72rem;
+    color: #5C0A1B;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 4px;
+}
+
+.modal-confirmacion .modal-info-card__nombre {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #1A1A2E;
+    margin-bottom: 4px;
+    word-break: break-word;
+}
+
+.modal-confirmacion .modal-info-card__id {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: #5C0A1B;
+    font-weight: 600;
+    font-family: monospace;
+    background: rgba(92, 10, 27, 0.08);
+    border: 1px solid rgba(92, 10, 27, 0.15);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    word-break: break-all;
+}
+
+.modal-confirmacion .modal-info-card__detalle-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem;
+    padding: 5px 0;
+    border-top: 1px dashed #E2E4E8;
+    color: #4A4A6A;
+}
+
+.modal-confirmacion .modal-info-card__detalle-label {
+    font-weight: 600;
+    color: #6B7280;
+}
+
+.modal-confirmacion .modal-info-card__detalle-val {
+    font-weight: 600;
+    color: #111827;
+    text-align: right;
+    max-width: 60%;
+    word-break: break-word;
+}
+
+/* Alerta de advertencia */
+.modal-confirmacion .modal-alerta-adv {
+    background: #FEF2F2;
+    border: 1px solid #FCA5A5;
+    border-left: 4px solid #DC2626;
+    border-radius: 8px;
+    color: #991B1B;
+    padding: 12px 14px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.45;
+}
+
+.modal-confirmacion .modal-alerta-adv i {
+    font-size: 1.25rem;
+    line-height: 1;
+    color: #DC2626;
+    flex-shrink: 0;
+}
+
+/* Botones */
+.modal-confirmacion .btn-modal-cancelar {
+    background-color: #E2E4E8 !important;
+    color: #374151 !important;
+    border: none !important;
+    font-weight: 600 !important;
+    font-size: 0.88rem !important;
+    padding: 9px 18px !important;
+    border-radius: 8px !important;
+    cursor: pointer;
+    transition: all 0.2s ease !important;
+}
+
+.modal-confirmacion .btn-modal-cancelar:hover {
+    background-color: #CBD5E1 !important;
+    color: #111827 !important;
+}
+
+.modal-confirmacion .btn-modal-eliminar {
+    background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    font-weight: 700 !important;
+    font-size: 0.88rem !important;
+    padding: 9px 20px !important;
+    border-radius: 8px !important;
+    cursor: pointer;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease !important;
+}
+
+.modal-confirmacion .btn-modal-eliminar:hover:not(:disabled) {
+    background: linear-gradient(135deg, #B91C1C 0%, #7F1D1D 100%) !important;
+    box-shadow: 0 4px 14px rgba(220, 38, 38, 0.4) !important;
+    transform: translateY(-1px);
+}
+
+.modal-confirmacion .btn-modal-eliminar:disabled {
+    background: #94A3B8 !important;
+    color: #F1F5F9 !important;
+    opacity: 0.75 !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+.modal-confirmacion .btn-modal-logout {
+    background: linear-gradient(135deg, #5C0A1B 0%, #7A1429 100%) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    font-weight: 700 !important;
+    font-size: 0.88rem !important;
+    padding: 9px 20px !important;
+    border-radius: 8px !important;
+    cursor: pointer;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease !important;
+}
+
+.modal-confirmacion .btn-modal-logout:hover {
+    background: linear-gradient(135deg, #3D0712 0%, #5C0A1B 100%) !important;
+    box-shadow: 0 4px 14px rgba(92, 10, 27, 0.4) !important;
+    transform: translateY(-1px);
+}
+
+/* Backdrop */
+.modal-backdrop.modal-confirmacion-backdrop {
+    z-index: 10050 !important;
+    background-color: rgba(28, 4, 10, 0.7) !important;
+}

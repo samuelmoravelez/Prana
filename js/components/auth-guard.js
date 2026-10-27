@@ -92,9 +92,18 @@ var AuthGuard = (function () {
         // Botones de logout (cualquier elemento con data-auth-logout)
         document.querySelectorAll('[data-auth-logout]').forEach(function (el) {
             el.addEventListener('click', function (e) {
-                e.preventDefault();
-                logout();
                 cerrarDropdown();
+                e.preventDefault();
+
+
+                if (typeof ModalConfirmacion !== 'undefined' && ModalConfirmacion.confirmarLogout) {
+                    ModalConfirmacion.confirmarLogout(function () {
+                        logout();
+                    });
+                } else {
+                    logout();
+                }
+
             });
         });
 
@@ -109,6 +118,7 @@ var AuthGuard = (function () {
             avatarBtn.addEventListener('keydown', function (e) {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
+
                     dropdown.classList.toggle('auth-dropdown--abierto');
                 }
             });
@@ -126,17 +136,19 @@ var AuthGuard = (function () {
         var perfilLinks = document.querySelectorAll('[data-auth-perfil]');
         perfilLinks.forEach(function (el) {
             el.addEventListener('click', function (e) {
+                cerrarDropdown();
                 var href = (el.getAttribute('href') || '').trim();
 
                 // href real y distinto de "#" → dejar que el navegador maneje el clic
                 if (href && href !== '#') {
-                    cerrarDropdown();
+    
                     return; // navegación nativa del <a>
                 }
 
                 // href="#" (subpáginas): calcular la ruta relativa al dashboard
                 e.preventDefault();
-                cerrarDropdown();
+
+
 
                 // Detectar si estamos dentro de /paginas/ para ajustar la ruta
                 var path      = window.location.pathname;

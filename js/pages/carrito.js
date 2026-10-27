@@ -274,7 +274,30 @@
                 var nueva = qty - 1;
 
                 if (nueva <= 0) {
-                    eliminarItemConAnimacion(id);
+                    var itemsMenos = CarritoService.obtenerItems() || [];
+                    var itemMenos = itemsMenos.find(function (it) { return String(it.id) === String(id); });
+                    var nombreMenos = itemMenos ? itemMenos.nombre : 'Producto del carrito';
+
+
+                    var precioMenos = itemMenos ? itemMenos.precio : 0;
+
+                    if (typeof ModalConfirmacion !== 'undefined' && ModalConfirmacion.confirmarEliminacion) {
+                        ModalConfirmacion.confirmarEliminacion({
+                            titulo: 'Quitar producto del carrito',
+                            nombre: nombreMenos,
+                            identificador: id,
+                            detalles: [
+                                { etiqueta: 'Precio unitario', valor: '$' + Number(precioMenos).toLocaleString('es-CO') + ' COP' },
+                                { etiqueta: 'Cantidad actual', valor: '1 unidad' }
+                            ],
+                            advertencia: 'Reducir la cantidad a cero quitará este producto de tu carrito de compras.',
+                            onConfirmar: function () {
+                                eliminarItemConAnimacion(id);
+                            }
+                        });
+                    } else {
+                        eliminarItemConAnimacion(id);
+                    }
                 } else {
                     if (input) input.value = nueva;
                     CarritoService.setCantidad(id, nueva);
@@ -303,6 +326,29 @@
             var btnElim = e.target.closest('.carr-item__eliminar');
             if (btnElim) {
                 var id = btnElim.getAttribute('data-id');
+                var items = CarritoService.obtenerItems() || [];
+                var item = items.find(function (it) { return String(it.id) === String(id); });
+                var nombre = item ? item.nombre : 'Producto del carrito';
+                var precio = item ? item.precio : 0;
+                var cant = item ? item.cantidad : 1;
+
+                if (typeof ModalConfirmacion !== 'undefined' && ModalConfirmacion.confirmarEliminacion) {
+                    ModalConfirmacion.confirmarEliminacion({
+                        titulo: 'Quitar producto del carrito',
+                        nombre: nombre,
+                        identificador: id,
+                        detalles: [
+                            { etiqueta: 'Precio unitario', valor: '$' + Number(precio).toLocaleString('es-CO') + ' COP' },
+                            { etiqueta: 'Cantidad', valor: cant + ' unidad' + (cant !== 1 ? 'es' : '') },
+                            { etiqueta: 'Subtotal del producto', valor: '$' + Number(precio * cant).toLocaleString('es-CO') + ' COP' }
+                        ],
+                        advertencia: '¿Deseas quitar este producto de tu carrito de compras?',
+                        onConfirmar: function () {
+                            eliminarItemConAnimacion(id);
+                        }
+                    });
+                    return;
+                }
                 eliminarItemConAnimacion(id);
                 return;
             }
@@ -358,9 +404,38 @@
 
         btn.addEventListener('click', function () {
             // Confirmar antes de vaciar
-            if (!window.confirm('¿Estás seguro de que quieres vaciar el carrito?')) return;
+            var items = CarritoService.obtenerItems() || [];
+            if (items.length === 0) return;
 
-            CarritoService.vaciar();
+            var subtotal = CarritoService.obtenerSubtotal();
+            var totalUnidades = CarritoService.obtenerCantidadTotal();
+
+            var ejecutarVaciar = function () {
+                CarritoService.vaciar();
+    
+                renderizarLista();
+                actualizarResumen();
+            };
+
+            if (typeof ModalConfirmacion !== 'undefined' && ModalConfirmacion.confirmarEliminacion) {
+                ModalConfirmacion.confirmarEliminacion({
+                    titulo: 'Vaciar carrito de compras',
+                    nombre: 'Todos los productos (' + items.length + ' ref.)',
+                    identificador: 'CARRITO-COMPLETO',
+                    detalles: [
+                        { etiqueta: 'Total de artículos', valor: totalUnidades + ' unidades' },
+                        { etiqueta: 'Subtotal acumulado', valor: '$' + Number(subtotal).toLocaleString('es-CO') + ' COP' }
+                    ],
+                    advertencia: '¿Estás seguro de que deseas vaciar completamente el carrito? Se eliminarán todos los artículos agregados.',
+                    onConfirmar: ejecutarVaciar
+                });
+                return;
+            }
+
+            ejecutarVaciar();
+            return;
+
+
             renderizarLista();
             actualizarResumen();
         });
@@ -688,6 +763,7 @@
 
                 // Vaciar carrito al confirmar
                 CarritoService.vaciar();
+    
             });
         }
 

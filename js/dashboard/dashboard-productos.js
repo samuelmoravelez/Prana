@@ -276,7 +276,32 @@ export async function eliminarProductoUI(id) {
     var prods = getProductos();
     var p = Array.isArray(prods) ? prods.find(function (x) { return x && String(x.id) === String(id); }) : null;
     if (!p) return;
-    if (!confirm('¿Eliminar "' + (p.nombre || p.name) + '" del catálogo? Se actualizará inmediatamente en la tienda.')) return;
+    var ejecutarEliminacion = async function () {
+        var ok = await eliminarProducto(id);
+        if (ok) {
+            renderProductosAdmin();
+            DSidebar.actualizarBadges();
+            DToast.ok('Producto eliminado del catálogo.');
+        } else {
+            DToast.error('No se pudo eliminar el producto.');
+        }
+    };
+
+    if (typeof ModalConfirmacion !== 'undefined' && ModalConfirmacion.confirmarEliminacion) {
+        ModalConfirmacion.confirmarEliminacion({
+            titulo: 'Eliminar producto del catálogo',
+            nombre: p.nombre || p.name || 'Producto sin nombre',
+            identificador: p.id,
+            detalles: [
+                { etiqueta: 'Categoría', valor: p.categoria || p.category || 'Sin categoría' },
+                { etiqueta: 'Precio', valor: formatoCOP(p.precio || p.price || 0) },
+                { etiqueta: 'Stock disponible', valor: (p.stock !== undefined ? p.stock : 'N/A') + ' unidades' }
+            ],
+            advertencia: '¿Eliminar este producto del catálogo? Se actualizará inmediatamente en la tienda y los usuarios ya no podrán adquirirlo. Esta acción no se puede deshacer.',
+            onConfirmar: ejecutarEliminacion
+        });
+        return;
+    }
 
     var ok = await eliminarProducto(id);
     if (ok) {

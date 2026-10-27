@@ -182,6 +182,62 @@ export async function renderFavoritos(usuario) {
  * @param {string} uid 
  */
 export async function quitarFavorito(favId, uid) {
+    var usuarioActual = (typeof AuthService !== 'undefined' && AuthService.getCurrentUser ? AuthService.getCurrentUser() : null);
+    if (!usuarioActual && typeof window.Dashboard !== 'undefined' && window.Dashboard.getUsuario) {
+        usuarioActual = window.Dashboard.getUsuario();
+    }
+    var targetUid = uid || (usuarioActual ? usuarioActual.id : null);
+
+    var prods = (typeof getProductos === 'function') ? getProductos() : [];
+    var p = Array.isArray(prods) ? prods.find(function(x) { return x && String(x.id) === String(favId); }) : null;
+    var nombreProd = p ? (p.nombre || p.name) : 'Producto de favoritos';
+    var catProd = p ? (p.categoria || p.category) : '';
+    var precioProd = p ? (p.precio || p.price) : 0;
+
+    var detalles = [];
+    if (catProd) detalles.push({ etiqueta: 'Categoría', valor: catProd });
+    if (precioProd > 0) detalles.push({ etiqueta: 'Precio', valor: formatoCOP(precioProd) });
+
+    var ejecutarEliminacion = async function () {
+        var supabase = await obtenerClienteSupabase();
+        if (!supabase) {
+            DToast.error('Conexión con Supabase no disponible.');
+            return;
+        }
+
+        if (!targetUid) {
+            DToast.error('No se pudo identificar la sesión del usuario.');
+            return;
+        }
+
+        try {
+            var { error } = await supabase
+                .from('favorites')
+                .delete()
+                .eq('user_id', targetUid)
+                .eq('product_id', favId);
+
+            if (error) throw error;
+
+            DToast.ok('Eliminado de favoritos.');
+            renderFavoritos(usuarioActual || { id: targetUid });
+        } catch (e) {
+            console.error('[dashboard-favoritos] Error al eliminar favorito de Supabase:', e);
+            DToast.error('No se pudo eliminar el favorito.');
+        }
+    };
+
+    if (typeof ModalConfirmacion !== 'undefined' && ModalConfirmacion.confirmarEliminacion) {
+        ModalConfirmacion.confirmarEliminacion({
+            titulo: 'Quitar de favoritos',
+            nombre: nombreProd,
+            identificador: favId,
+            detalles: detalles,
+            advertencia: '¿Deseas quitar este producto de tu lista de favoritos?',
+            onConfirmar: ejecutarEliminacion
+        });
+        return;
+    }
     var supabase = await obtenerClienteSupabase();
     if (!supabase) {
         DToast.error('Conexión con Supabase no disponible.');

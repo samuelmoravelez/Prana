@@ -668,7 +668,39 @@ export async function eliminarUsuarioUI(uid) {
     var usuarios = getUsuarios();
     var u = usuarios.find(function (x) { return x && String(x.id) === String(uid); });
     if (!u) return;
-    if (!confirm('¿Eliminar al usuario "' + u.nombre + '"? Esta acción no se puede deshacer.')) return;
+    var sesion = JSON.parse(localStorage.getItem('prana_sesion') || '{}');
+    var uidActivo = (sesion.usuario && sesion.usuario.id) ? sesion.usuario.id : '';
+
+    if (String(uid) === String(uidActivo)) {
+        DToast.error('No puedes eliminar tu propio usuario');
+        return;
+    }
+
+    var ejecutarEliminacion = async function () {
+        try {
+            await eliminarUsuario(uid, uidActivo);
+            renderUsuariosAdmin();
+            DSidebar.actualizarBadges();
+            DToast.ok('Usuario eliminado.');
+        } catch (e) {
+            DToast.error(e.message || 'No se puede eliminar este usuario.');
+        }
+    };
+
+    if (typeof ModalConfirmacion !== 'undefined' && ModalConfirmacion.confirmarEliminacion) {
+        ModalConfirmacion.confirmarEliminacion({
+            titulo: 'Eliminar usuario del sistema',
+            nombre: u.nombre || u.name || 'Usuario',
+            identificador: u.id,
+            detalles: [
+                { etiqueta: 'Correo electrónico', valor: u.email || 'Sin correo' },
+                { etiqueta: 'Rol de acceso', valor: (u.role || u.rol || 'cliente').toUpperCase() }
+            ],
+            advertencia: '¿Eliminar al usuario "' + (u.nombre || u.name) + '"? Esta acción no se puede deshacer y perderá todos sus accesos.',
+            onConfirmar: ejecutarEliminacion
+        });
+        return;
+    }
 
     var sesion = JSON.parse(localStorage.getItem('prana_sesion') || '{}');
     var uidActivo = (sesion.usuario && sesion.usuario.id) ? sesion.usuario.id : '';

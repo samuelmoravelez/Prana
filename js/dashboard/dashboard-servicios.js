@@ -501,7 +501,32 @@ export async function eliminarServicioCatalogoUI(id) {
     var cat = getCatalogoServicios();
     var s = Array.isArray(cat) ? cat.find(function (x) { return x && String(x.id) === String(id); }) : null;
     if (!s) return;
-    if (!confirm('¿Eliminar el servicio "' + (s.name || s.nombre) + '" del catálogo?')) return;
+    var ejecutarEliminacion = async function () {
+        try {
+            await eliminarServicioCatalogo(id);
+            await renderTablaServiciosCatalog();
+            DToast.ok('Servicio eliminado del catálogo.');
+        } catch (e) {
+            DToast.error('No se pudo eliminar el servicio.');
+        }
+    };
+
+    if (typeof ModalConfirmacion !== 'undefined' && ModalConfirmacion.confirmarEliminacion) {
+        ModalConfirmacion.confirmarEliminacion({
+            titulo: 'Eliminar servicio del catálogo',
+            nombre: s.name || s.nombre || 'Servicio sin nombre',
+            identificador: s.id,
+            detalles: [
+                { etiqueta: 'Categoría', valor: s.category || s.categoria || 'Sin categoría' },
+                { etiqueta: 'Precio', valor: formatoCOP(s.price !== undefined ? s.price : (s.precio || 0)) },
+                { etiqueta: 'Duración', valor: s.duration || s.duracion || 'No especificada' },
+                { etiqueta: 'Coach', valor: s.coach || 'No asignado' }
+            ],
+            advertencia: '¿Eliminar este servicio del catálogo? Los clientes ya no podrán solicitarlo. Esta acción no se puede deshacer.',
+            onConfirmar: ejecutarEliminacion
+        });
+        return;
+    }
 
     try {
         await eliminarServicioCatalogo(id);

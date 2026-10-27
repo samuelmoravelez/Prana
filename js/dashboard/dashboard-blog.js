@@ -351,7 +351,35 @@ export async function editarPost(id) {
  * @param {string} id
  */
 export async function eliminarPostUI(id) {
-    if (!confirm('¿Eliminar este artículo? Esta acción no se puede deshacer.')) return;
+    var post = Array.isArray(_blogCache) ? _blogCache.find(function (p) { return p && String(p.id) === String(id); }) : null;
+    var postTitulo = post ? (post.title || post.titulo || 'Artículo') : 'Artículo';
+    var postCat = post ? (post.category || post.categoria || 'General') : 'General';
+    var postAutor = post ? (post.author || post.autor || 'Admin Prana') : 'Admin Prana';
+
+    var ejecutarEliminacion = async function () {
+        try {
+            await eliminarPost(id);
+            await renderBlogAdmin();
+            DToast.ok('Artículo eliminado.');
+        } catch (e) {
+            DToast.error('No se pudo eliminar el artículo.');
+        }
+    };
+
+    if (typeof ModalConfirmacion !== 'undefined' && ModalConfirmacion.confirmarEliminacion) {
+        ModalConfirmacion.confirmarEliminacion({
+            titulo: 'Eliminar artículo del blog',
+            nombre: postTitulo,
+            identificador: id,
+            detalles: [
+                { etiqueta: 'Categoría', valor: postCat },
+                { etiqueta: 'Autor', valor: postAutor }
+            ],
+            advertencia: '¿Eliminar este artículo del blog? Esta acción no se puede deshacer y se borrará permanentemente de la base de datos.',
+            onConfirmar: ejecutarEliminacion
+        });
+        return;
+    }
     try {
         await eliminarPost(id);
         await renderBlogAdmin();

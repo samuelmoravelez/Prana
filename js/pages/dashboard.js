@@ -1601,7 +1601,32 @@ var DRender = (function () {
         var prods = DStore.getProductos();
         var p = Array.isArray(prods) ? prods.find(function (x) { return x && x.id === id; }) : null;
         if (!p) return;
-        if (!confirm('¿Eliminar "' + p.nombre + '" del catálogo? Se actualizará inmediatamente en la tienda.')) return;
+        var ejecutarEliminacion = async function () {
+            var ok = DStore.eliminarProducto(id);
+            if (ok) {
+                renderProductosAdmin();
+                DSidebar.actualizarBadges();
+                DToast.ok('Producto eliminado del catálogo.');
+            } else {
+                DToast.error('No se pudo eliminar el producto.');
+            }
+        };
+
+        if (typeof ModalConfirmacion !== 'undefined' && ModalConfirmacion.confirmarEliminacion) {
+            ModalConfirmacion.confirmarEliminacion({
+                titulo: 'Eliminar producto del catálogo',
+                nombre: p.nombre || p.name || 'Producto',
+                identificador: p.id,
+                detalles: [
+                    { etiqueta: 'Categoría', valor: p.categoria || p.category || 'Sin categoría' },
+                    { etiqueta: 'Precio', valor: DStore.formatoCOP ? DStore.formatoCOP(p.precio) : ('$' + p.precio) },
+                    { etiqueta: 'Stock disponible', valor: (p.stock !== undefined ? p.stock : 'N/A') + ' unidades' }
+                ],
+                advertencia: '¿Eliminar este producto del catálogo? Se actualizará inmediatamente en la tienda. Esta acción no se puede deshacer.',
+                onConfirmar: ejecutarEliminacion
+            });
+            return;
+        }
 
         var ok = DStore.eliminarProducto(id);
         if (ok) {
@@ -1913,7 +1938,31 @@ var DRender = (function () {
         var cat = DStore.getCatalogoServicios();
         var s = Array.isArray(cat) ? cat.find(function (x) { return x && x.id === id; }) : null;
         if (!s) return;
-        if (!confirm('¿Eliminar el servicio "' + (s.name || s.nombre) + '" del catálogo?')) return;
+        var ejecutarEliminacion = async function () {
+            try {
+                await DStore.eliminarServicioCatalogo(id);
+                await renderTablaServiciosCatalog();
+                DToast.ok('Servicio eliminado del catálogo.');
+            } catch (e) {
+                DToast.error('No se pudo eliminar el servicio.');
+            }
+        };
+
+        if (typeof ModalConfirmacion !== 'undefined' && ModalConfirmacion.confirmarEliminacion) {
+            ModalConfirmacion.confirmarEliminacion({
+                titulo: 'Eliminar servicio del catálogo',
+                nombre: s.name || s.nombre || 'Servicio',
+                identificador: s.id,
+                detalles: [
+                    { etiqueta: 'Categoría', valor: s.category || s.categoria || 'Sin categoría' },
+                    { etiqueta: 'Precio', valor: DStore.formatoCOP ? DStore.formatoCOP(s.price || s.precio) : ('$' + (s.price || s.precio)) },
+                    { etiqueta: 'Duración', valor: s.duration || s.duracion || 'No especificada' }
+                ],
+                advertencia: '¿Eliminar este servicio del catálogo? Esta acción no se puede deshacer.',
+                onConfirmar: ejecutarEliminacion
+            });
+            return;
+        }
 
         try {
             await DStore.eliminarServicioCatalogo(id);
@@ -1979,7 +2028,31 @@ var DRender = (function () {
     }
 
     function eliminarPostUI(id) {
-        if (!confirm('¿Eliminar este artículo? Esta acción no se puede deshacer.')) return;
+        var postsRaw = DStore.getBlog();
+        var posts = Array.isArray(postsRaw) ? postsRaw : [];
+        var post = posts.find(function (p) { return p && String(p.id) === String(id); });
+        var postTitulo = post ? (post.title || post.titulo || 'Artículo') : 'Artículo';
+        var postCat = post ? (post.category || post.categoria || 'General') : 'General';
+
+        var ejecutarEliminacion = async function () {
+            await DStore.eliminarPost(id);
+            renderBlogAdmin();
+            DToast.ok('Artículo eliminado.');
+        };
+
+        if (typeof ModalConfirmacion !== 'undefined' && ModalConfirmacion.confirmarEliminacion) {
+            ModalConfirmacion.confirmarEliminacion({
+                titulo: 'Eliminar artículo del blog',
+                nombre: postTitulo,
+                identificador: id,
+                detalles: [
+                    { etiqueta: 'Categoría', valor: postCat }
+                ],
+                advertencia: '¿Eliminar este artículo del blog? Esta acción no se puede deshacer y se borrará permanentemente.',
+                onConfirmar: ejecutarEliminacion
+            });
+            return;
+        }
         DStore.eliminarPost(id);
         renderBlogAdmin();
         DToast.ok('Artículo eliminado.');
@@ -2305,6 +2378,64 @@ var DRender = (function () {
     }
 
     async function quitarFavorito(favId, uid) {
+        var usuarioActual = (typeof AuthService !== 'undefined' && AuthService.getCurrentUser ? AuthService.getCurrentUser() : null);
+        if (!usuarioActual && typeof Dashboard !== 'undefined' && Dashboard.getUsuario) {
+            usuarioActual = Dashboard.getUsuario();
+        }
+        var targetUid = uid || (usuarioActual ? usuarioActual.id : null);
+
+        var prods = (typeof DStore !== 'undefined' && DStore.getProductos) ? DStore.getProductos() : [];
+        var p = Array.isArray(prods) ? prods.find(function(x) { return x && String(x.id) === String(favId); }) : null;
+        var nombreProd = p ? (p.nombre || p.name) : 'Producto de favoritos';
+        var catProd = p ? (p.categoria || p.category) : '';
+        var precioProd = p ? (p.precio || p.price) : 0;
+
+        var detalles = [];
+        if (catProd) detalles.push({ etiqueta: 'Categoría', valor: catProd });
+        if (precioProd > 0) detalles.push({ etiqueta: 'Precio', valor: DStore.formatoCOP ? DStore.formatoCOP(precioProd) : ('$' + precioProd) });
+
+        var ejecutarEliminacion = async function () {
+            if (!window.supabaseClient) {
+                DToast.error('Conexión con Supabase no disponible.');
+                return;
+            }
+
+            if (!targetUid) {
+                DToast.error('No se pudo identificar la sesión del usuario.');
+                return;
+            }
+
+            try {
+                var { error } = await window.supabaseClient
+                    .from('favorites')
+                    .delete()
+                    .eq('user_id', targetUid)
+                    .eq('product_id', favId);
+
+                if (error) throw error;
+
+                DToast.ok('Eliminado de favoritos.');
+                renderFavoritos(usuarioActual || { id: targetUid });
+            } catch (e) {
+                console.error('[Dashboard] Error al eliminar favorito de Supabase:', e);
+                DToast.error('No se pudo eliminar el favorito.');
+            }
+        };
+
+        if (typeof ModalConfirmacion !== 'undefined' && ModalConfirmacion.confirmarEliminacion) {
+            ModalConfirmacion.confirmarEliminacion({
+                titulo: 'Quitar de favoritos',
+                nombre: nombreProd,
+                identificador: favId,
+                detalles: detalles,
+                advertencia: '¿Deseas quitar este producto de tu lista de favoritos?',
+                onConfirmar: ejecutarEliminacion
+            });
+            return;
+        }
+
+        await ejecutarEliminacion();
+        return;
         if (!window.supabaseClient) {
             DToast.error('Conexión con Supabase no disponible.');
             return;
@@ -2471,7 +2602,39 @@ var DRender = (function () {
         var usuarios = Array.isArray(usuariosRaw) ? usuariosRaw : [];
         var u = usuarios.find(function (x) { return x && x.id === uid; });
         if (!u) return;
-        if (!confirm('¿Eliminar al usuario "' + u.nombre + '"? Esta acción no se puede deshacer.')) return;
+        var sesion = JSON.parse(localStorage.getItem('prana_sesion') || '{}');
+        var uidActivo = (sesion.usuario && sesion.usuario.id) ? sesion.usuario.id : '';
+
+        if (String(uid) === String(uidActivo)) {
+            DToast.error('No puedes eliminar tu propio usuario');
+            return;
+        }
+
+        var ejecutarEliminacion = async function () {
+            var ok = await DStore.eliminarUsuario(uid, uidActivo);
+            if (ok) {
+                renderUsuariosAdmin();
+                DSidebar.actualizarBadges();
+                DToast.ok('Usuario eliminado.');
+            } else {
+                DToast.error('No se puede eliminar este usuario.');
+            }
+        };
+
+        if (typeof ModalConfirmacion !== 'undefined' && ModalConfirmacion.confirmarEliminacion) {
+            ModalConfirmacion.confirmarEliminacion({
+                titulo: 'Eliminar usuario del sistema',
+                nombre: u.nombre || u.name || 'Usuario',
+                identificador: u.id,
+                detalles: [
+                    { etiqueta: 'Correo electrónico', valor: u.email || 'Sin correo' },
+                    { etiqueta: 'Rol de acceso', valor: (u.role || u.rol || 'cliente').toUpperCase() }
+                ],
+                advertencia: '¿Eliminar al usuario "' + (u.nombre || u.name) + '"? Esta acción no se puede deshacer.',
+                onConfirmar: ejecutarEliminacion
+            });
+            return;
+        }
 
         // Obtener uid del usuario activo para la protección
         var sesion = JSON.parse(localStorage.getItem('prana_sesion') || '{}');
@@ -2717,10 +2880,22 @@ var Dashboard = (function () {
         // Botón logout
         var logoutBtn = document.getElementById('d-btn-logout');
         if (logoutBtn) {
-            logoutBtn.addEventListener('click', function () {
-                AuthService.cerrarSesion();
-                DToast.info('Sesión cerrada. Hasta pronto.');
-                setTimeout(function () { window.location.replace('login.html'); }, 800);
+            logoutBtn.addEventListener('click', function (e) {
+                if (e) e.preventDefault();
+                var ejecutarCerrar = function () {
+                    AuthService.cerrarSesion();
+                    DToast.info('Sesión cerrada. Hasta pronto.');
+                    setTimeout(function () { window.location.replace('login.html'); }, 800);
+                };
+                if (typeof ModalConfirmacion !== 'undefined' && ModalConfirmacion.confirmarLogout) {
+                    ModalConfirmacion.confirmarLogout(ejecutarCerrar);
+                } else {
+                    ejecutarCerrar();
+                }
+                return;
+
+
+
             });
         }
     }

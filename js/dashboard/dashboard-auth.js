@@ -104,8 +104,17 @@ export function construirTopbar(usuario, rol) {
     // Botón logout
     var logoutBtn = document.getElementById('d-btn-logout');
     if (logoutBtn) {
-        logoutBtn.onclick = function () {
+        logoutBtn.onclick = function (e) {
+            if (e) e.preventDefault();
+            if (typeof ModalConfirmacion !== 'undefined' && ModalConfirmacion.confirmarLogout) {
+                ModalConfirmacion.confirmarLogout(cerrarSesion);
+        
+
+                return;
+            }
+
             cerrarSesion();
+
         };
     }
 }
